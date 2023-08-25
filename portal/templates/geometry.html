@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title> Geometry</title>
+        
+        <link rel="stylesheet" type="text/css" href="/uncg_math/static/Geometry_files/mystyle.css">
+        <meta name="description" content="Regular polygon, Trangle, 
+              Quadrilateral, Rectangle, Rombus, Trapezoid, 
+              Circle, Circular Segment/Sector, Prism, Pyramid, 
+              Cylinder, Cone, Sperical Cap/Sector">
+<script src="/uncg_math/static/Geometry_files/geometry.js"></script>
+</head>
+
+
+<body>
+    <div class="example">
+        <div id="nav" style="clear:both;">
+        <h1> Geometry </h1>
+        
+        <ul>
+<li><a href="/uncg_math">Home</a></li>
+<li><a href="#Quadr">Quadrilat.</a></li>
+<li><a href="#Circle">Circle </a></li>
+<li><a href="#Solid">Solid Shape</a></li>
+
+</ul> 
+        </div>
+    <h2> <a id="Geo">Regular Polygons, Triangles </a></h2>
+
+<form> 
+<table border="0" width="100%" bgcolor="seaGreen">
+    <tbody><tr> <td> <br> </td> </tr>
+    <tr> <td> <br> </td> </tr>
+    <tr align="left">
+        <td align="left">Side</td>
+        <td align="LEFT">Tri.</td>
+        <td align="LEFT">Sq.</td>
+        <td align="LEFT">Penta.</td>
+        <td align="LEFT">Hexa.</td>
+        <td align="LEFT">Cirumference</td>
+        <td align="left">Area</td>
+    </tr><tr align="left">
+        <td><input type="TEXT" name="val1" size="6" onfocus="clear056(this.form)"></td>
+        <td><input type="button" class="smallbutton" value="3" onclick="op = &#39;3&#39;; eqside(this.form)"> </td>
+        <td><input type="button" class="smallbutton" value="4" onclick="op = &#39;4&#39;; eqside(this.form)"> </td>
+        <td><input type="button" class="smallbutton" value="5" onclick="op = &#39;5&#39;; eqside(this.form)"> </td>
+        <td><input type="button" class="smallbutton" value="6" onclick="op = &#39;6&#39;; eqside(this.form)"> </td>
+
+        <td><input type="TEXT" name="val2" size="6" onfocus="clear056(this.form)"></td>
+        <td><input type="TEXT" name="val3" size="6" onfocus="clear056(this.form)"></td>
+    </tr>
+    <tr> <td> <br> </td> </tr>
+    <tr> <td> <br> </td> </tr>
+    
+</tbody></table>
+</form> 
+
+<form>
+<table border="0" width="100%" bgcolor="seaGreen">
+    <tbody><tr>
+         <td></td> <td></td>
+        <td colspan="3" align="center">
+            <img src="/uncg_math/static/Geometry_files/isosceles.jpg" alt="Isocles" style="width:100px;height:75px;"></td>
+    </tr>
+    <tr align="left">
+        <td align="left">Base b</td>
+        <td align="left"> Height h</td> <td></td>
+        <td align="LEFT">Circumference</td>
+        <td align="left">Area</td>
+    </tr><tr align="left">
+        <td><input type="TEXT" name="val4" size="7" onfocus="value=&#39;&#39;;"></td>
+        <td><input type="TEXT" name="val5" size="7" onfocus="value=&#39;&#39;;"></td>
+        <td><input type="button" class="widebutton" value="Isoceles" onclick="isocles(this.form)"> </td>
+        <td><input type="TEXT" name="val6" size="7" onfocus="value=&#39;&#39;;"></td>
+        <td><input type="TEXT" name="val7" size="7" onfocus="value=&#39;&#39;;"></td>
+    </tr>
+    <tr align="left">
+    </tr>
+</tbody></table>
+</form>  
+
+<form>
+<table border="0" width="100%" bgcolor="seaGreen">
+     <tbody><tr> <td> <br> </td> </tr>
+<tr align="left">
+<td colspan="7" align="LEFT" valign="MIDDLE"><br><br>(For right triangle, fill in any 2 of first 3 boxes;
+for triangle, fill in 3 sides first:)<br> </td>
+</tr><tr align="left">
+<td align="left">Leg1</td>
+<td align="left"> Leg2</td> 
+<td align="left"> Hypothenuse</td> 
+<td align="left">Circumference</td>
+<td align="left">Area</td>
+
+</tr><tr align="left">
+<td><input type="TEXT" name="val1" size="7" onfocus="value=&#39;&#39;;"></td>
+<td><input type="TEXT" name="val2" size="7" onfocus="value=&#39;&#39;;"></td>
+<td><input type="TEXT" name="val3" size="7" onfocus="value=&#39;&#39;;"></td>
+<td><input type="TEXT" name="val4" size="7" onfocus="value=&#39;&#39;;"></td>
+<td><input type="TEXT" name="val5" size="7" onfocus="value=&#39;&#39;;"></td>
+</tr><tr align="left">
+<td align="left"> (Side1)</td>
+<td align="left"> (Side2)</td> 
+<td align="left"> (Side3)</td> 
+<td><input type="button" class="widebutton" value="R. Tri." onclick=" op = &#39;R.Triangle&#39;;rtri(this.form)"> </td>
+<td><input type="button" class="widebutton" value="Triangle" onclick="op = &#39;tr&#39;;rtri(this.form)"> </td>
+</tr>
+<tr> <td> <br> </td> </tr>
+    <tr> <td> <br> </td> </tr>
+</tbody></table>
+</form>  
+
+    <h2> <a id="Quadr"> Quadrilaterals </a> </h2>    
+
+<form>
+<table border="0" width="100%" bgcolor="seaGreen">
+    <tbody><tr> <td> <br> </td> </tr>
+    <tr> <td> <br> </td> </tr>
+    <tr align="left">
+        <td align="left">Length a</td>
+        <td align="left"> Width b</td> <td></td>
+        <td align="LEFT">Circumference</td>
+        <td align="left">Area</td>
+    </tr><tr align="left">
+        <td><input type="TEXT" name="val4" size="7" onfocus="value=&#39;&#39;;"></td>
+        <td><input type="TEXT" name="val5" size="7" onfocus="value=&#39;&#39;;"></td> 
+        <td><input type="button" class="widebutton" value="Rectangle" onclick="rect(this.form)"> </td>
+        <td><input type="TEXT" name="val6" size="7" onfocus="value=&#39;&#39;;"></td>
+        <td><input type="TEXT" name="val7" size="7" onfocus="value=&#39;&#39;;"></td>
+    </tr>
+</tbody></table>
+</form>
+    
+<form>
+<table border="0" width="100%" bgcolor="seaGreen">
+
+    <tbody><tr>
+        <td></td>
+        <td colspan="2"><img src="/uncg_math/static/Geometry_files/rect.png" alt="rectangle" style="width:150px;height:80px;"></td>
+        <td colspan="2"><img src="/uncg_math/static/Geometry_files/parallel.png" alt="parallelogram" style="width:150px;height:80px;"></td>
+    </tr>
+    <tr align="left">
+        <td align="left">Base b</td>
+        <td align="left"> Height h</td> 
+        <td align="left"> Ramp a </td>
+    
+    </tr><tr align="left">
+        <td><input type="TEXT" name="val4" size="7" onfocus="value=&#39;&#39;;"></td>
+        <td><input type="TEXT" name="val5" size="7" onfocus="value=&#39;&#39;;"></td> 
+        <td><input type="TEXT" name="val5" size="7" onfocus="value=&#39;&#39;;"></td> 
+        
+        
+    </tr><tr align="right"> 
+        <td></td>
+        <td align="left">Circumference</td>
+        <td align="left">Area</td>
+    
+    </tr><tr align="left">
+        <td><input type="button" class="widerbutton" value="Parallelogram" onclick="parallel(this.form)"> </td>
+        
+        <td><input type="TEXT" name="val6" size="7" onfocus="value=&#39;&#39;;"></td>
+        <td><input type="TEXT" name="val7" size="7" onfocus="value=&#39;&#39;;"></td>
+        
+    </tr>
+</tbody></table>
+</form>
+
+    
+<form>
+<table border="0" width="100%" bgcolor="seaGreen">    
+    <tbody><tr> <td> <br> </td> </tr>
+    <tr align="right">
+    <td colspan="7" align="right"> <a href="http://bookcenter.uncg.edu/geometry.html#nav">Top </a> </td>
+    </tr>
+    <tr> <td> <br> </td> </tr>
+    <tr align="right">
+        <td></td> <td></td>
+        <td> <img src="/uncg_math/static/Geometry_files/trapezoid.png" alt="Trapezoid" style="width:100px;height:60px;"></td>
+        <td> <img src="/uncg_math/static/Geometry_files/Rtrapezoid.png" alt="RTrapezoid" style="width:100px;height:60px;"></td>
+        <td> <img src="/uncg_math/static/Geometry_files/conefrustum.jpg" alt="Cone Frustum" style="width:100px;height:60px;"></td>
+    </tr>
+    <tr align="left">
+        <td colspan="5" align="LEFT" valign="MIDDLE"> Fill in any 3 of the following 4 boxes.
+        When click Rt. Trapezoid button, a conical frustum is also calculated.</td>
+    </tr>
+    <tr align="left">
+        <td align="left">Short Side a</td>
+        <td align="left">Long Side b</td> 
+        <td align="left">Height h</td>
+        <td align="left">Ramp Side s</td>
+    </tr><tr align="left">
+        <td><input type="TEXT" name="val4" size="7" onfocus="value=&#39;&#39;;"></td>
+        <td><input type="TEXT" name="val5" size="7" onfocus="value=&#39;&#39;;"></td> 
+        <td><input type="TEXT" name="val6" size="7" onfocus="value=&#39;&#39;;"></td>
+        <td><input type="TEXT" name="val7" size="7" onfocus="value=&#39;&#39;;"></td>
+    </tr>
+    <tr> <td> </td> <td></td>
+        <td align="LEFT">Circumference</td>
+        <td align="left">Area</td>
+    </tr>
+    <tr align="left">
+        <td colspan="2"><input type="button" class="widerbutton" value="Iso. Trapezoid" onclick="isotrape(this.form)"> </td>
+        <td><input type="TEXT" size="7" onfocus="value=&#39;&#39;;"></td>
+        <td><input type="TEXT" size="7" onfocus="value=&#39;&#39;;"></td> 
+       
+        
+    </tr>
+    <tr> <td> </td> <td></td>
+        <td align="LEFT">Frustum Surf.</td>
+        <td align="left">Frustum Vol.</td>
+    </tr>
+    <tr align="left">
+         <td colspan="2"><input type="button" class="widerbutton" value="Rt. Trapezoid" onclick="rtrape(this.form)"> </td>
+        <td><input type="TEXT" size="7" onfocus="value=&#39;&#39;;"></td>
+        <td><input type="TEXT" size="7" onfocus="value=&#39;&#39;;"></td> 
+    </tr>
+</tbody></table>
+</form>      
+    
+<form>
+<table border="0" width="100%" bgcolor="seaGreen">
+
+    <tbody><tr> <td> <br> </td> </tr>
+    <tr> <td> <br> </td> </tr>
+    <tr>
+        <td colspan="2" align="LEFT" valign="MIDDLE"> Fill in any 2 of the following 5 boxes:</td>
+        <td colspan="2" align="right"><img src="/uncg_math/static/Geometry_files/rhombus.gif" alt="Rhombus" style="width:120px;height:60px;"></td>
+    </tr>
+    <tr align="left">
+        <td align="left">Side a</td>
+        <td align="left">Height h</td> 
+        <td align="left"> Diag. p</td> 
+        <td align="left">Diag. q</td>
+        <td align="left">Area S</td>
+    
+    </tr><tr align="left">
+        <td><input type="TEXT" name="val1" size="7" onfocus="value=&#39;&#39;;"></td>
+        <td><input type="TEXT" name="val2" size="7" onfocus="value=&#39;&#39;;"></td>
+        <td><input type="TEXT" name="val3" size="7" onfocus="value=&#39;&#39;;"></td>
+        <td><input type="TEXT" name="val4" size="7" onfocus="value=&#39;&#39;;"></td>
+        <td><input type="TEXT" name="val5" size="7" onfocus="value=&#39;&#39;;"></td>
+        
+    </tr><tr align="left"> 
+        <td></td> 
+        <td align="left">Circumference</td>
+        <td align="left">In-radius r</td>
+    </tr><tr align="left"> 
+        
+        <td><input type="button" class="widebutton" value="Rhombus" onclick="rhombus(this.form)"> </td>
+        <td><input type="TEXT" name="val6" size="7" onfocus="value=&#39;&#39;;"></td>
+        <td><input type="TEXT" name="val7" size="7" onfocus="value=&#39;&#39;;"></td>
+        
+    </tr>
+    <tr> <td> <br> </td> </tr>
+    <tr> <td> <br> </td> </tr>
+</tbody></table>
+</form>
+
+    <!-- *********************************************** -->
+    <h2> <a id="Circle"> Circle, Sphere, Circular Segment/Sector </a> </h2>    
+    
+<form> 
+<table border="0" width="100%" bgcolor="seaGreen">
+
+<tbody><tr>
+         <td></td> <td></td>
+        <td colspan="3" align="left">
+            <img src="/uncg_math/static/Geometry_files/sphere.jpg" alt="Circle Sphere" style="width:100px;height:90px;"></td>
+</tr>       
+<tr align="left">
+
+<td>Radius <input type="TEXT" name="val1" size="7" onfocus="value=&#39;&#39;;"></td>
+<td><input type="button" class="widebutton" value="Circle" onclick="circle(this.form)"> </td>
+</tr><tr align="left">
+<td align="LEFT">Circumference</td>
+<td align="left">Area</td>
+<td align="LEFT">Surface Area</td>
+<td align="LEFT">Volume</td>
+</tr><tr align="left">
+<td><input type="TEXT" name="val2" size="7" onfocus="value=&#39;&#39;;"></td>
+<td><input type="TEXT" name="val3" size="7" onfocus="value=&#39;&#39;;"></td>
+<td><input type="TEXT" name="val4" size="7" onfocus="value=&#39;&#39;;"></td>
+<td><input type="TEXT" name="val5" size="7" onfocus="value=&#39;&#39;;"></td>
+
+</tr>
+</tbody></table>
+</form> 
+    
+<form>
+<table border="0" width="100%" bgcolor="seaGreen">
+
+     <tbody><tr>
+       
+        <td colspan="3" align="right">
+            <img src="/uncg_math/static/Geometry_files/cirseg.gif" alt="Circular Segment" style="width:100px;height:75px;"></td>
+        <td colspan="2" align="center">
+            <img src="/uncg_math/static/Geometry_files/tanker.png" alt="Circular Segment" style="width:100px;height:75px;"></td>
+    </tr>
+    <tr> <td> <br> </td> </tr>
+    <tr align="right">
+    <td colspan="7" align="right"> <a href="http://bookcenter.uncg.edu/geometry.html#nav">Top </a> </td>
+    </tr>
+    <tr> <td> <br> </td> </tr>
+    <tr>
+        <td colspan="5" align="LEFT" valign="MIDDLE"> 
+            Fill in first box and then any one of the next four boxes. 
+            Also fill in the 1st box of last row if you want to compute tanker.
+            Then click the button.
+            The second row is for circular segment (cols 2&amp;3) and
+            circular sector (cols 4&amp;5).
+            The 3rd row is data for spherical cap and spherical sector. 
+            The last row is for tanker surface area and volume.
+        </td>
+    </tr>
+    <tr align="left">
+        <td align="left">Radius r</td>
+        <td align="left">Height h</td> 
+        <td align="left">Arc s</td> 
+        <td align="left">Chord c</td>
+        <td align="left">Angle theta</td>
+    
+    </tr><tr align="left">
+        <td><input type="TEXT" name="val1" size="7" onfocus="value=&#39;&#39;;"></td>
+        <td><input type="TEXT" name="val2" size="7" onfocus="value=&#39;&#39;;"></td>
+        <td><input type="TEXT" name="val3" size="7" onfocus="value=&#39;&#39;;"></td>
+        <td><input type="TEXT" name="val4" size="7" onfocus="value=&#39;&#39;;"></td>
+        <td><input type="TEXT" name="val5" size="7" onfocus="value=&#39;&#39;;"></td>
+        
+    </tr><tr align="left"> 
+        <td></td> 
+        <td align="left">Circumference</td>
+        <td align="left">Area</td>
+        <td align="left">Sec. Circum.</td>
+        <td align="left">Sector Area</td>
+    </tr><tr align="left"> 
+        
+        <td><input type="button" class="widerbutton" value="Cir. Segment" onclick="cirseg(this.form)"> </td>
+        <td><input type="TEXT" name="val6" size="7" onfocus="value=&#39;&#39;;"></td>
+        <td><input type="TEXT" name="val7" size="7" onfocus="value=&#39;&#39;;"></td>
+        <td><input type="TEXT" name="val6" size="7" onfocus="value=&#39;&#39;;"></td>
+        <td><input type="TEXT" name="val7" size="7" onfocus="value=&#39;&#39;;"></td>
+        
+    </tr>
+    <tr align="left">
+        <td align="left">Curve Area</td>
+        <td align="left">Surface Area</td> 
+        <td align="left">Volume</td> 
+        <td align="left">Sec. Surface</td>
+        <td align="left">Sec. Volume</td>
+    
+    </tr><tr align="left">
+        <td><input type="TEXT" name="val1" size="7" onfocus="value=&#39;&#39;;"></td>
+        <td><input type="TEXT" name="val2" size="7" onfocus="value=&#39;&#39;;"></td>
+        <td><input type="TEXT" name="val3" size="7" onfocus="value=&#39;&#39;;"></td>
+        <td><input type="TEXT" name="val4" size="7" onfocus="value=&#39;&#39;;"></td>
+        <td><input type="TEXT" name="val5" size="7" onfocus="value=&#39;&#39;;"></td>
+        
+    </tr>
+    <tr> <td> <br> </td> </tr>
+    <tr align="left">
+        <td>Tanker Width L</td>  <td></td> <td></td> 
+        <td align="left">Tank Surface</td>
+        <td align="left">Tank Volume</td>
+    
+    </tr><tr align="left">
+        <td><input type="TEXT" name="val4" size="7" onfocus="value=&#39;&#39;;"></td>  <td></td> <td></td>
+        <td><input type="TEXT" name="val4" size="7" onfocus="value=&#39;&#39;;"></td>
+        <td><input type="TEXT" name="val5" size="7" onfocus="value=&#39;&#39;;"></td>
+        
+    </tr>
+    
+    <tr> <td> <br> </td> </tr>
+    <tr> <td> <br> </td> </tr>
+</tbody></table>
+</form>
+
+ <!-- *********************************************** -->
+ <h2> <a id="Solid"> Solid Geometry </a> </h2>    
+<form>
+<table border="0" width="100%" bgcolor="seaGreen">
+
+<tbody><tr>
+    <td></td> <td></td>
+        <td colspan="2" align="right">
+            <img src="/uncg_math/static/Geometry_files/prism.jpg" alt="Prism" style="width:110px;height:80px;"></td>
+        <td colspan="2" align="right">
+            <img src="/uncg_math/static/Geometry_files/pyramid.png" alt="Pyramid" style="width:110px;height:80px;"></td>
+</tr>
+    
+<tr align="left">
+<td colspan="7" align="LEFT" valign="MIDDLE">(Fill in first 3 boxes:)<br> </td>
+</tr><tr align="left">
+<td align="left">Length l</td>
+<td align="left"> Width w</td> 
+<td align="left"> Height h</td> 
+<td align="left">Surface Area</td>
+<td align="left">Volume</td>
+
+</tr><tr align="left">
+<td><input type="TEXT" name="val1" size="7" onfocus="value=&#39;&#39;;"></td>
+<td><input type="TEXT" name="val2" size="7" onfocus="value=&#39;&#39;;"></td>
+<td><input type="TEXT" name="val3" size="7" onfocus="value=&#39;&#39;;"></td>
+<td><input type="TEXT" name="val4" size="7" onfocus="value=&#39;&#39;;"></td>
+<td><input type="TEXT" name="val5" size="7" onfocus="value=&#39;&#39;;"></td>
+</tr><tr align="left">
+<td><input type="button" class="widebutton" value="Rect. Prism" onclick=" op = &#39;prism&#39;;prism(this.form)"> </td>
+<td><input type="button" class="widebutton" value="Pyramid" onclick="op = &#39;pyramid&#39;;prism(this.form)"> </td>
+</tr>
+</tbody></table>
+</form>  
+
+<form>
+<table border="0" width="100%" bgcolor="seaGreen">
+
+<tbody><tr>
+         <td></td> 
+        <td colspan="2" align="right">
+            <img src="/uncg_math/static/Geometry_files/cylinder.jpg" alt="Cylinder" style="width:100px;height:75px;"></td>
+        <td colspan="2" align="right">
+            <img src="/uncg_math/static/Geometry_files/cone.jpg" alt="Cone" style="width:100px;height:75px;"></td>
+</tr>    
+<tr align="left">
+<td colspan="7" align="LEFT" valign="MIDDLE"><br> (Fill in first 2 boxes:)<br> </td>
+</tr><tr align="left">
+<td align="left">Radius</td>
+<td align="left"> Height</td> 
+<td align="left">Surface Area</td>
+<td align="left">Volume</td>
+
+</tr><tr align="left">
+<td><input type="TEXT" name="val1" size="7" onfocus="value=&#39;&#39;;"></td>
+<td><input type="TEXT" name="val3" size="7" onfocus="value=&#39;&#39;;"></td>
+<td><input type="TEXT" name="val4" size="7" onfocus="value=&#39;&#39;;"></td>
+<td><input type="TEXT" name="val5" size="7" onfocus="value=&#39;&#39;;"></td>
+</tr><tr align="left">
+<td><input type="button" class="widebutton" value="Cylinder" onclick=" op = &#39;cyl&#39;;cylinder(this.form)"> </td>
+<td><input type="button" class="widebutton" value="Cone" onclick="op = &#39;pyramid&#39;;cylinder(this.form)"> </td>
+</tr>
+<tr align="right">
+<td colspan="7" align="right"> <a href="http://bookcenter.uncg.edu/geometry.html#nav">Top </a> </td>
+</tr>
+</tbody></table>
+</form>  
+    
+<form>
+<table border="0" width="100%" bgcolor="seaGreen">
+<tbody><tr> <td> <br> </td> </tr>
+<tr>
+    <td></td>
+        <td colspan="2" align="right">
+            <img src="/uncg_math/static/Geometry_files/hollowcyl.jpg" alt="Hollow Cylinder" style="width:130px;height:90px;"></td>
+        <td colspan="3" align="right">
+            <img src="/uncg_math/static/Geometry_files/hollowform.png" alt="Hollow Cylinder Formula" style="width:130px;height:90px;"></td>
+</tr>
+    
+<tr align="left">
+<td colspan="7" align="LEFT" valign="MIDDLE">(Fill in first 3 boxes:)<br> </td>
+</tr><tr align="left">
+<td align="left">Big Radius r1</td>
+<td align="left"> Radius r2</td> 
+<td align="left"> Height h</td> 
+<td align="left">Surface Area</td>
+<td align="left">Volume</td>
+
+</tr><tr align="left">
+<td><input type="TEXT" name="val1" size="7" onfocus="value=&#39;&#39;;"></td>
+<td><input type="TEXT" name="val2" size="7" onfocus="value=&#39;&#39;;"></td>
+<td><input type="TEXT" name="val3" size="7" onfocus="value=&#39;&#39;;"></td>
+<td><input type="TEXT" name="val4" size="7" onfocus="value=&#39;&#39;;"></td>
+<td><input type="TEXT" name="val5" size="7" onfocus="value=&#39;&#39;;"></td>
+</tr>
+
+<tr align="left"> 
+        <td></td> <td></td> <td></td>
+        <td align="left">Circumference</td>
+        <td align="left">Area</td>
+    </tr><tr align="left"> 
+        
+        <td><input type="button" class="widerbutton" value="HollowCylinder" onclick="hollowcyl(this.form)"> </td>
+        <td colspan="2" align="right">For 2-D annulus data: </td>
+        <td><input type="TEXT" name="val6" size="7" onfocus="value=&#39;&#39;;"></td>
+        <td><input type="TEXT" name="val7" size="7" onfocus="value=&#39;&#39;;"></td>
+        
+    </tr>
+    <tr> <td> <br> </td> </tr>
+    <tr> <td> <br> </td> </tr>
+
+<tr align="left">
+
+</tr>
+</tbody></table>
+</form> 
+        
+        </div>
+    
+
+</body></html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dynamically Create Input Fields in Two Columns</title>
+	<style>
+		/* display the input divs side by side */
+		.input-columns {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			margin-bottom: 10px;
+		}
+		/* set the width of each input div */
+		.input-columns div {
+			width: calc(50% - 5px);
+		}
+		/* add some padding and a border to the input fields */
+		input[type=text] {
+			padding: 5px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			width: 100%;
+			box-sizing: border-box;
+		}
+	</style>
+	<form>
+		<br><table border="0" width="100%" bgcolor="moccasin">
+
+			 <tbody><tr>
+				 <td>Choose the number of questions</td>
+				 <td>
+					 <input type="radio" name="option" value="1" onclick="storeNQues(this.value)"> 1
+					 <input type="radio" name="option" value="2" onclick="storeNQues(this.value)"> 2
+					 <input type="radio" name="option" value="5" onclick="storeNQues(this.value)"> 5
+					 <input type="radio" name="option" value="10" onclick="storeNQues(this.value)"> 10
+					 <input type="radio" name="option" value="20" onclick="storeNQues(this.value)"> 20
+				 </td>
+			 </tr>
+			 <tr>
+				 <td>Choose format of first Decimal Number</td> 
+				 <td>
+					 <input type="TEXT" name="fNumberFormat" id="fNumberFormat" style="padding: 2px;width: 60px;">
+				 </td>
+			 </tr>
+			 
+			 <tr>
+				 <td>Choose format of Second Decimal Number</td>
+				 <td>
+					 <input type="TEXT" name="sNumberFormat" id="sNumberFormat" style="padding: 2px;width: 60px;">
+
+				 </td>
+			 </tr>
+			 <tr>
+				<td> <br> </td>
+			</tr>
+			 <tr>
+				 <td>
+					 Example Format: 3.2, which indicates three 
+				 </td>
+			 </tr>
+			 <tr>
+				 <td>
+					 digits to the left of the decimal and two 
+				 </td>
+			 </tr>
+			 <tr>
+				 <td>
+					 digits to the right.
+				 </td>
+			 </tr>
+			 <tr>
+				<td> <br> </td>
+			</tr>
+
+
+			<tr>
+				<td>Choose the Operation</td>
+			</tr>
+			<tr>
+				<td><input type="button" class="bigbutton" value="Add" onclick="generate_questions('+')"></td>
+				<td><input type="button" class="bigbutton" value="Subtract" onclick="generate_questions('-')" style="margin-top: 8px;width: 88px;"></td>
+			</tr>
+			<tr>
+				
+				<td><input type="button" class="bigbutton" value="Multiply" onclick="generate_questions('*')" style="margin-top: 8px;width: 109px;"></td>
+				<td><input type="button" class="bigbutton" value="Divide" onclick="generate_questions('/')" style="margin-top: 8px;"></td>
+			</tr>
+			
+			<tr>
+				<td> <br> </td>
+			</tr>
+			</table>
+</form>
+	<script>
+		function createInputs() {
+			// get the number of input fields to create
+			var radios = document.getElementsByName('option');
+			for (var i = 0; i < radios.length; i++) {
+			// Check if the radio button is checked
+			if (radios[i].checked) {
+				// Get the value of the checked radio button
+				var count = radios[i].value;
+				console.log(count);
+				break; // Exit the loop since we found the selected radio button
+			}
+			}
+			// get the container for the input fields
+			var container = document.getElementById('input-container');
+			// clear any existing input fields
+			container.innerHTML = '';
+			// create the input fields
+			for (var i = 1; i <= count; i++) {
+				// create a div element to hold the input fields
+				var inputDiv = document.createElement('div');
+				inputDiv.classList.add('input-columns');
+				// create an input label element
+				var label = document.createElement('label');
+				// add some text to the label
+				label.appendChild(document.createTextNode('Input ' + i + ': '));
+				// create an input element
+				var input = document.createElement('input');
+				input.type = 'text';
+				input.name = 'input-' + i;
+				input.id = 'input-' + i;
+				// add the input to the label
+				label.appendChild(input);
+				// add the label to the input div
+				inputDiv.appendChild(label);
+				// create a second input label element
+				var label2 = document.createElement('label');
+				// add some text to the label
+				label2.appendChild(document.createTextNode('Input ' + (i+1) + ': '));
+				// create a second input element
+				var input2 = document.createElement('input');
+				input2.type = 'text';
+				input2.name = 'input-' + (i+1);
+				input2.id = 'input-' + (i+1);
+				// add the second input to the label
+				label2.appendChild(input2);
+				// add the second label to the input div
+				inputDiv.appendChild(label2);
+				// add the input div to the container
+				container.appendChild(inputDiv);
+				// add a line break after each input div
+				container.appendChild(document.createElement('br'));
+				// increment i by 1 to skip the second input in the next iteration
+				i++;
+			}
+		}
+	</script>
+</head>
+<body>
+	<label for="count">Number of Input Pairs:</label>
+	<input type="text" id="count" name="count">
+	<button onclick="createInputs()">Create Input Pairs</button>
+	<div id="input-container"></div>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title> **Calculus NUMBERS**</title>
+
+    <link rel="stylesheet" type="text/css" href="/uncg_math/static/Geometry_files/mystyle.css">
+    <meta name="description" content="Regular polygon, Trangle,
+              Quadrilateral, Rectangle, Rombus, Trapezoid,
+              Circle, Circular Segment/Sector, Prism, Pyramid,
+              Cylinder, Cone, Sperical Cap/Sector">
+    <script src="/uncg_math/static/Geometry_files/geometry.js"></script>
+<style>
+    .text_box_st {
+        padding: 1px !important;
+        width: 90px !important;
+    }
+
+    .text_box_st2 {
+        padding: 3px !important;
+        width: 90px !important;
+    }
+</style>
+<style>
+        .container {
+            background-color: moccasin;
+            padding: 20px; /* Add some padding to the container for spacing */
+        }
+    </style>
+
+</head>
+
+
+<body>
+    <div class="example" style="height: 100% !important;">
+        <div id="nav" style="clear:both;">
+            <h1 style="color: white;text-align: center;"> Calculus Numbers </h1>
+
+            <ul style="margin-top: -20px;">
+                <li style="padding-left: 179px;"><a href="/uncg_math">Home</a></li>
+                <li style="padding-left: 179px;"><a href="/uncg_math/random_tests">Back</a></li>
+
+            </ul>
+            
+        </div>
+        <h2> <a id="ComplexExpressions">Calculus Operations</a></h2>
+
+
+
+        <FORM>
+            <TABLE border=0 width=100% bgcolor=moccasin>
+ 
+                 <tr>
+                     <td>Choose the number of questions</td>
+                     <td align=left>
+                         <input type="radio" name="option"  value="1" onclick="storeNQues(this.value)"> 1
+                         <input type="radio" name="option"  value="2" onclick="storeNQues(this.value)"> 2
+                         <input type="radio" name="option"  value="5" onclick="storeNQues(this.value)"> 5
+                         <input type="radio" name="option"  value="10" onclick="storeNQues(this.value)"> 10
+                         <input type="radio" name="option"  value="20" onclick="storeNQues(this.value)"> 20
+                     </td>
+                 </tr>
+                 <tr>
+                     <td>Choose number of digits in First Number</td>
+                     <td>
+                         <input type="radio" name="option1" value="1" onclick="storefdigits(this.value)"> 1
+                         <input type="radio" name="option1" value="2" onclick="storefdigits(this.value)"> 2
+                         <input type="radio" name="option1" value="3" onclick="storefdigits(this.value)"> 3
+                         <input type="radio" name="option1" value="4" onclick="storefdigits(this.value)"> 4
+                         <input type="radio" name="option1" value="5" onclick="storefdigits(this.value)"> 5
+                     </td>
+                 </tr>
+                 <tr>
+                     <td>Choose number of digits in Second Number</td>
+                     <td>
+                         <input type="radio" name="option2" value="1" onclick="storesdigits(this.value)"> 1
+                         <input type="radio" name="option2" value="2" onclick="storesdigits(this.value)"> 2
+                         <input type="radio" name="option2" value="3" onclick="storesdigits(this.value)"> 3
+                         <input type="radio" name="option2" value="4" onclick="storesdigits(this.value)"> 4
+                         <input type="radio" name="option2" value="5" onclick="storesdigits(this.value)"> 5 
+ 
+                     </td>
+                 </tr>
+
+
+                <tr>
+                    <td>Choose the Operation</td>
+                </tr>
+                <tr>
+                    <td><INPUT TYPE="button"  class="bigbutton"  VALUE="Add" onclick="generate_questions('+')" ></td>
+                    <td><INPUT TYPE="button"  class="bigbutton"  VALUE="Subtract" onclick="generate_questions('-')" style="margin-top: 8px;width: 88px;"></td>
+                </tr>
+                <tr>
+                    
+                    <td><INPUT TYPE="button"  class="bigbutton"  VALUE="Multiply" onclick="generate_questions('*')" style="margin-top: 8px;width: 109px;"></td>
+                    <td><INPUT TYPE="button"  class="bigbutton"  VALUE="Divide" onclick="generate_questions('/')" style="margin-top: 8px;"></td>
+                </tr>
+                
+                <tr>
+                    <td> <br> </td>
+                </tr>
+                <tr>
+        </table>
+    </form>
+            
+</form>
+<div class="container">
+            <FORM>
+                
+                
+                <table id="inputTable"></table>
+                <input id="submitbutton" type="button" class="bigbutton" value="Submit" onclick="check_answer()" disabled></td>
+                <p id="resultSummary"></p>
+                
+                
+                
+        </FORM>
+
+
+
+
+
+    </div>
+ </div>   
+    
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<script>
+
+        var numOfQues = ""; // variable to store the selected option value
+        console.log(numOfQues);
+        function storeNQues(value) {
+        numOfQues = value; // store the selected value in the variable
+        
+        }
+        
+        function generateInputBoxes() {
+        var inputTable = document.getElementById("inputTable");
+        for (var i = 0; i < numOfQues; i++) {
+          var row = inputTable.insertRow();
+          var cell1 = row.insertCell(0);
+          var cell2 = row.insertCell(1);
+          var cell3 = row.insertCell(2);
+          cell1.innerHTML = '<span id="question_' + (i + 1) + '"></span>';
+          cell2.innerHTML = '<input type="text" id="input_' + (i + 1) + '">';
+          cell3.innerHTML = '<span id="result_' + (i + 1) + '"></span>';
+          var cell4 = row.insertCell(3);
+          cell4.innerHTML = '<span id="result2_' + (i + 1) + '"></span>';
+        }
+      }
+      
+        
+     
+        
+        
+        var fnumDigits = ""; // variable to store the selected option value
+
+        function storefdigits(value) {
+        fnumDigits = value; // store the selected value in the variable
+        }
+        
+        var sNumDigits = ""; // variable to store the selected option value
+
+        function storesdigits(value) {
+        sNumDigits = value; // store the selected value in the variable
+        }
+    
+    
+        let response;
+    
+        function generate_questions(ASMD) {
+        
+    generateInputBoxes();
+    document.getElementById("submitbutton").disabled = false;
+    let details_ = { "numOfQues": numOfQues,"fnumDigits": fnumDigits, "sNumDigits" : sNumDigits,"ASMD": ASMD };
+     // declare a variable to store response data
+
+    $.ajax({
+        url: '/uncg_math/integer',
+        data: JSON.stringify(details_),
+        type: 'POST',
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (data2) {
+            for (let i = 0; i < data2['questions'].length; i++) {
+                document.getElementById("question_" + (i + 1)).innerHTML = data2['questions'][i];
+            }
+            response = data2; // assign response data to the variable
+            // You can access response data here or call another function passing response data as an argument
+        },
+        error: function (data2) {
+            console.log(data2);
+        }
+    });
+
+}
+
+        
+        function check_answer(){
+        var correctCount = 0;
+        var answerDict = {};
+            for(let i =0;i<response['questions'].length;i++){
+            var sub = document.getElementById("input_" + (i + 1)).value;
+                answerDict["Q" + (i+1)] = {"Answer":response['answers'][i],"Submission":sub}
+            }
+        
+        $.ajax({
+                url: '/uncg_math/check_answers',
+                data: JSON.stringify(answerDict),
+                type: 'POST',
+                contentType: "application/json",
+                dataType: 'json',
+                success: function (data2) {
+
+                for (let i = 0; i < response['questions'].length; i++) {
+                if(data2["Q" + (i + 1)] == 'WRONG'){
+                    console.log(answerDict["Q" + (i+1)]["Answer"])
+                    document.getElementById("result_" + (i + 1)).innerHTML = data2["Q" + (i + 1)] ;
+                    document.getElementById("result_" + (i + 1)).style.color = 'red';
+                    document.getElementById("result2_" + (i + 1)).innerHTML = "The correct answer is "+  answerDict["Q" + (i+1)]["Answer"];
+                    document.getElementById("result2_" + (i + 1)).style.color = 'green'; 
+                    } else{
+                        document.getElementById("result_" + (i + 1)).innerHTML = data2["Q" + (i + 1)];
+                        document.getElementById("result_" + (i + 1)).style.color = 'green'; 
+                        correctCount++;
+                    }
+            }
+            var resultSummary = document.getElementById("resultSummary");
+        var percentage = (correctCount / response['questions'].length) * 100;
+        resultSummary.innerHTML = 'Total Correct: ' + correctCount + '/' + response['questions'].length + ' (' + percentage.toFixed(2) + '%)';
+        resultSummary.style.display = "block";
+                    return true;
+                },
+                error: function (data2) {
+                    console.log(data2);
+                    return false;
+                }
+            });
+        
+        }
+        
+</script>
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title> Fourth Grade EOG</title>
+
+    <link rel="stylesheet" type="text/css" href="/uncg_math/static/Geometry_files/mystyle.css">
+    <meta name="description" content="Regular polygon, Trangle,
+              Quadrilateral, Rectangle, Rombus, Trapezoid,
+              Circle, Circular Segment/Sector, Prism, Pyramid,
+              Cylinder, Cone, Sperical Cap/Sector">
+    <script src="/uncg_math/static/Geometry_files/geometry.js"></script>
+<style>
+    .text_box_st {
+        padding: 1px !important;
+        width: 90px !important;
+    }
+
+    .text_box_st2 {
+        padding: 3px !important;
+        width: 90px !important;
+    }
+</style>
+<style>
+        .container {
+            background-color: moccasin;
+            padding: 20px; /* Add some padding to the container for spacing */
+        }
+    </style>
+</head>
+
+    
+     
+<h2 style="text-align:center">Fourth Grade EOG </h2>
+
+  <body>
+    <div class="container">
+    <p id="timer" style="display:none;"></p>
+    <table id="inputTable"></table>
+    <button id="submitBtn" onclick="checkInputs()">Submit</button>
+    <p id="resultSummary"></p>
+    
+    
+    <script>
+      var numInputBoxes = 44; // Number of input boxes to generate
+      var expectedValues = ['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry']; // Expected values for comparison
+
+      // Function to generate input boxes
+      function generateInputBoxes() {
+        var inputTable = document.getElementById("inputTable");
+        for (var i = 0; i < expectedValues.length; i++) {
+          var row = inputTable.insertRow();
+          var cell1 = row.insertCell(0);
+          var cell2 = row.insertCell(1);
+          var cell3 = row.insertCell(2);
+          cell1.innerHTML = 'Question ' + (i + 1) + ': ';
+          cell2.innerHTML = '<input type="text" id="input_' + (i + 1) + '">';
+          cell3.innerHTML = '<span id="result_' + (i + 1) + '"></span>';
+        }
+      }
+      generateInputBoxes();
+
+      // Function to start the timer
+      var timerInterval;
+      function startTimer() {
+        var seconds = 0;
+        document.getElementById("timer").innerHTML = "Time elapsed: " + seconds + " seconds";
+        document.getElementById("timer").style.display = "block";
+        timerInterval = setInterval(function() {
+          seconds++;
+          document.getElementById("timer").innerHTML = "Time elapsed: " + seconds + " seconds";
+        }, 1000);
+        document.getElementById("submitBtn").disabled = false;
+      }
+
+      // Function to check input values and display results
+      function checkInputs() {
+        var correctCount = 0;
+        for (var i = 0; i < expectedValues.length; i++) {
+          var inputBox = document.getElementById('input_' + (i + 1));
+          var resultSpan = document.getElementById('result_' + (i + 1));
+          if (inputBox.value === expectedValues[i]) {
+            resultSpan.innerHTML = 'Result: Correct';
+            resultSpan.style.color = 'green';
+            correctCount++;
+          } else {
+            resultSpan.innerHTML = 'Wrong  Expected: ' + expectedValues[i];
+            resultSpan.style.color = 'red';
+          }
+        }
+        var resultSummary = document.getElementById("resultSummary");
+        var percentage = (correctCount / expectedValues.length) * 100;
+        resultSummary.innerHTML = 'Total Correct: ' + correctCount + '/' + expectedValues.length + ' (' + percentage.toFixed(2) + '%)';
+        resultSummary.style.display = "block";
+        clearInterval(timerInterval);
+      }
+      
+      // Function to enable Questions button
+        function enableQuestionsButton() {
+            document.getElementById("questionsBtn").disabled = false;
+            startTimer();
+        }
+        
+        
+    </script>
+
+    </div>
+  </body>
+
+
+
+
+
+
+</html>

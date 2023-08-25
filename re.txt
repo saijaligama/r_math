@@ -1,0 +1,5 @@
+pip install Flask
+pip install Flask-Cors
+pip install SQLAlchemy
+pip install pycryptodome
+pip install openpyxl

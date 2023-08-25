@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Eighth Grade</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+
+    <link rel="stylesheet" type="text/css" href="/uncg_math/static/Geometry_files/mystyle.css">
+    <meta name="description" content="Regular polygon, Trangle,
+              Quadrilateral, Rectangle, Rombus, Trapezoid,
+              Circle, Circular Segment/Sector, Prism, Pyramid,
+              Cylinder, Cone, Sperical Cap/Sector">
+    <script src="/uncg_math/static/Geometry_files/geometry.js"></script>
+	<style>
+		.grid-container {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			grid-gap: 10px;
+		}
+		
+		iframe {
+			height: 500%;
+			width: 100%;
+		}
+	</style>
+	<div id="nav" style="clear:both;">
+	<h1 style="color: white;text-align: center;"> Eighth Grade </h1>
+    
+            <ul style="margin-top: -20px;">
+                <li style="text-align: right;"><a href="/uncg_math">Home</a></li>
+                <li style="text-align: right;"><a href="/uncg_math/eogmath">Back</a></li>
+
+            </ul>
+       </div>     
+</head>
+<body>
+<button id="starttimer" onclick="enableQuestionsButton()">Start Timer</button>
+<button id="endtimer" onclick="stopTimer()" disabled>End Timer</button>
+<button id="questionsBtn" onclick="toShow();" disabled>Questions</button>
+<p id="timer" style="display:none;"></p>
+
+	<div class="grid-container">
+		<div>
+    		
+			<iframe src="/uncg_math/eighthmain"></iframe>
+			
+			
+		</div>
+		<div>
+			<iframe src="{{ url_for('static', filename='g8mathnokey.html') }}" id= 'pdf'></iframe>
+			
+            <p id="resultSummary"></p>
+		</div>
+	</div>
+	
+
+	
+<script>
+
+
+var expectedValues = ["48,49,50,51,52","44", "<","<", "=", ">","6","7", "2","5", "6", "true","false", "true", "no","no","yes","no","yes","no","no","yes"];
+
+window.onload = function() {
+    var iframe = document.getElementById('pdf');
+    iframe.style.display = 'none';
+}
+
+function toShow(){
+   var iframe = document.getElementById('pdf');
+    iframe.style.display = 'inline';
+}
+
+
+function stopTimer() {
+  clearInterval(timerInterval);
+}
+
+
+    var timerInterval;
+      function startTimer() {
+  var hours = 0;
+  var minutes = 0;
+  var seconds = 0;
+  document.getElementById("timer").innerHTML = "Time elapsed: 00:00:00";
+  document.getElementById("timer").style.display = "block";
+  timerInterval = setInterval(function() {
+    seconds++;
+    if (seconds >= 60) {
+      seconds = 0;
+      minutes++;
+    }
+    if (minutes >= 60) {
+      minutes = 0;
+      hours++;
+    }
+    var formattedTime = pad(hours) + ":" + pad(minutes) + ":" + pad(seconds);
+    document.getElementById("timer").innerHTML = "Time elapsed: " + formattedTime;
+  }, 1000);
+  document.getElementById("submitBtn").disabled = false;
+}
+
+function pad(num) {
+  return ("0" + num).slice(-2);
+}
+      
+      
+function enableQuestionsButton() {
+            document.getElementById("questionsBtn").disabled = false;
+            document.getElementById("starttimer").disabled = true;
+            document.getElementById("endtimer").disabled = false;
+            startTimer();
+            document.getElementById("starttimer").disabled = true;
+            
+        }
+
+        
+function checkInputs() {
+        clearInterval(timerInterval);
+        var correctCount = 0;
+        for (var i = 0; i < expectedValues.length; i++) {
+          var inputBox = document.getElementById('input_' + (i+1));
+          var resultSpan = document.getElementById('result_' + (i + 1));
+          if (inputBox.value === expectedValues[i]) {
+            resultSpan.innerHTML = 'Result: Correct';
+            resultSpan.style.color = 'green';
+            correctCount++;
+          } else {
+            resultSpan.innerHTML = 'Wrong  Expected: ' + expectedValues[i];
+            resultSpan.style.color = 'red';
+          }
+        }
+        var resultSummary = document.getElementById("resultSummary");
+        var percentage = (correctCount / expectedValues.length) * 100;
+        resultSummary.innerHTML = 'Total Correct: ' + correctCount + '/' + expectedValues.length + ' (' + percentage.toFixed(2) + '%)';
+        resultSummary.style.display = "block";
+        
+        }
+        
+
+</script>
+</body>
+</html>

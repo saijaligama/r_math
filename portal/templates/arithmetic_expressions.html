@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title> **Sequences**</title>
+
+    <link rel="stylesheet" type="text/css" href="/uncg_math/static/Geometry_files/mystyle.css">
+    <meta name="description" content="Regular polygon, Trangle,
+              Quadrilateral, Rectangle, Rombus, Trapezoid,
+              Circle, Circular Segment/Sector, Prism, Pyramid,
+              Cylinder, Cone, Sperical Cap/Sector">
+    <script src="/uncg_math/static/Geometry_files/geometry.js"></script>
+</head>
+<style>
+     .required_{
+     visibility:hidden;
+     }
+    .text_box_st {
+        padding: 1px !important;
+        width: 90px !important;
+    }
+
+    .text_box_st2 {
+        padding: 3px !important;
+        width: 90px !important;
+    }
+</style>
+
+
+<body>
+    <div class="example" style="height: 100% !important;">
+        <div id="nav" style="clear:both;">
+            <h1 style="color: white;text-align: center;"> Sequences </h1>
+
+            <ul style="margin-top: -20px;">
+                <li style="padding-left: 179px;"><a href="/uncg_math">Home</a></li>
+                <li style="padding-left: 179px;"><a href="/uncg_math/algebra">Back</a></li>
+
+            </ul>
+<!--  
+
+
+        <h2> <a id="Get_Arithmetic_Geometric">Get Arithmetic Or Geometric Sequence.</a></h2>
+
+
+        <FORM>
+            <TABLE border=0 width=100% bgcolor=moccasin>
+                <tr>
+                    <td> <br> </td>
+                </tr>
+                <TR>
+                    <TD COLSPAN=7 ALIGN=LEFT VALIGN=MIDDLE>
+                        1).a1: first term of the sequence <br>
+                        2).n:the term number you want to find <br>
+                        3).d or r:common difference/ratio between consecutive terms<br>
+                        4).A(n):nth term of the sequence<br>
+                        5).S(n):Sum of n numbers in sequence<br>
+                        <br>
+                        <span id="first_sequence">Fill any three of first four boxes :</span><br>
+                        <!--<INPUT TYPE="button"  class="widebutton"  VALUE="Calculate" onclick="">-->
+                    </TD>
+
+                </TR>
+
+                <TR>
+                    <TD ALIGN=CENTER>a1</TD>
+                    <TD ALIGN=CENTER>n</TD>
+                    <TD ALIGN=CENTER>d or r</TD>
+                    <TD ALIGN=CENTER>a(n)</TD>
+                    <TD ALIGN=CENTER>S(n)</TD>
+                </TR>
+                <TR ALIGN=CENTER>
+                    <TD><INPUT CLASS="text_box_st2" TYPE=TEXT NAME=a1_inputval12 ID=a1_inputval12 data-my-input></TD>
+                    <TD><INPUT CLASS="text_box_st2" TYPE=TEXT NAME=n_inputval12 ID=n_inputval12 data-my-input></TD>
+                    <TD><INPUT CLASS="text_box_st2" TYPE=TEXT NAME=d_or_r_inputval12 ID=d_or_r_inputval12 data-my-input></TD>
+                    <TD><INPUT CLASS="text_box_st2" TYPE=TEXT NAME=a_n_inputval12 ID=a_n_inputval12 data-my-input></TD>
+                    <TD><INPUT CLASS="text_box_st2" TYPE=TEXT NAME=S_n_inputval12 ID=S_n_inputval12 data-my-input></TD>
+
+                </TR>
+<!--                <tr>-->
+<!--                    <TD COLSPAN=7 ALIGN=LEFT VALIGN=MIDDLE>-->
+<!--                    <span id="">Results :</span>-->
+<!--                    </TD>-->
+<!--                </tr>-->
+<!--                <TR ALIGN=CENTER>-->
+<!--                    <TD><INPUT CLASS="text_box_st2" TYPE=TEXT NAME=a1_inputval12 ID=a1_inputval12_Results disabled></TD>-->
+<!--                    <TD><INPUT CLASS="text_box_st2" TYPE=TEXT NAME=n_inputval12 ID=n_inputval12_Results disabled></TD>-->
+<!--                    <TD><INPUT CLASS="text_box_st2" TYPE=TEXT NAME=d_or_r_inputval12 ID=d_or_r_inputval12_Results disabled></TD>-->
+<!--                    <TD><INPUT CLASS="text_box_st2" TYPE=TEXT NAME=a_n_inputval12 ID=a_n_inputval12_Results disabled></TD>-->
+<!--                    <TD><INPUT CLASS="text_box_st2" TYPE=TEXT NAME=S_n_inputval12 ID=S_n_inputval12_Results disabled></TD>-->
+<!--                </TR>-->
+                <tr>
+                    <TD ALIGN=CENTER>Errors message :</TD>
+                    <TD><span id="error_message_alert2"class="required_" style="font-size: small;">-------------------</span></TD>
+                </tr>
+                <TR>
+                    <TD COLSPAN=7 ALIGN=LEFT VALIGN=MIDDLE>
+
+                        <INPUT TYPE="button" class="widebutton"
+                            style="width: 165px;margin-left: 85px;margin-top: 4px;height: 23px;font-size: initial;"
+                            VALUE="Arithmetic Sequence" onclick="Generate_sequence('Arithmetic Sequence')">
+                        <INPUT TYPE="button" class="widebutton" VALUE="Geometric Sequence"
+                            style="width: 167px;margin-top: 4px;height: 23px;font-size: initial;" onclick="Generate_sequence('Geometric Sequence')">
+                        <!--<span id="first_sequence">Fill any three of first four boxes :</span><br>-->
+                        <!--<INPUT TYPE="button"  class="widebutton"  VALUE="Calculate" onclick="">-->
+                    </TD>
+
+                </TR>
+
+                <TR align=right>
+                    <TD COLSPAN=7 ALIGN=right> <a href="#nav">Top </a> </TD>
+                </TR>
+                <tr>
+                    <td> <br> </td>
+                </tr>
+
+            </TABLE>
+        </FORM>
+
+
+
+    </div>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<script>
+        function Get_Data() {
+            document.getElementById("a1_val12").value = "";
+            document.getElementById("d_or_r_val12").value = "";
+            document.getElementById("a_n_val13").value = "";
+            document.getElementById("s_n_val14").value = "";
+            document.getElementById("type_of_sequence").innerHTML = "";
+            var ARITH_OR_GEO_INPUT = document.getElementById("arith_or_geo_input").value
+            let myArray2 =[];
+
+            if (ARITH_OR_GEO_INPUT == "") {
+                document.getElementById("error_message_alert").innerHTML = "Please enter the sequence"
+                document.getElementById("error_message_alert").className = '';
+                return false;
+            }
+            else {
+                document.getElementById("error_message_alert").className = 'required_';
+            }
+
+            if(ARITH_OR_GEO_INPUT.includes("..."))
+            {
+                document.getElementById("error_message_alert").className = 'required_';
+                myArray2=ARITH_OR_GEO_INPUT.split("...");
+                console.log(myArray2)
+                if (isNaN(parseInt(myArray2[myArray2.length - 1]))){
+                    document.getElementById("error_message_alert").className = '';
+                    document.getElementById("error_message_alert").innerHTML = "Syntax Error"
+                    return false;
+                }
+                
+            }
+            else {
+                document.getElementById("error_message_alert").className = '';
+                document.getElementById("error_message_alert").innerHTML = "Syntax Error"
+                return false;
+            }
+
+            const last_value = myArray2[myArray2.length - 1];
+            const arith_or_geo_input_s_n = last_value;
+            myArray2.pop();
+
+            const myArray=myArray2[0].split(",")
+
+            if (arith_or_geo_input_s_n == "") {
+                document.getElementById("error_message_alert").innerHTML = "Please enter the (n)"
+                document.getElementById("error_message_alert").className = '';
+                return false;
+            }
+            else {
+                document.getElementById("error_message_alert").className = 'required_';
+            }
+            if ( parseInt(arith_or_geo_input_s_n)) {
+                document.getElementById("error_message_alert").className = 'required_';
+            }
+            else {
+                document.getElementById("error_message_alert").className = '';
+                document.getElementById("error_message_alert").innerHTML = "The (n)th Value Must be integer"
+                return false;
+
+            }
+
+            const resultArray = myArray.map(value => {
+                if (parseInt(value)) {
+                    return parseInt(value);
+                }
+                else if (parseFloat(value)) {
+                    return parseFloat(value);
+                }
+                else {
+                    return value;
+                }
+            });
+            const containsString = resultArray.some(element => typeof element === "string");
+            if (containsString) {
+                document.getElementById("error_message_alert").className = '';
+                document.getElementById("error_message_alert").innerHTML = "Syntax Error"
+                return false;
+
+            }
+            else {
+                document.getElementById("error_message_alert").className = 'required_';
+            }
+
+            if (myArray.length < 3) {
+                document.getElementById("error_message_alert").className = '';
+                document.getElementById("error_message_alert").innerHTML = "The Sequence has less than 3 elements."
+                return false;
+            }
+            else {
+                document.getElementById("error_message_alert").className = 'required_';
+            }
+            console.log(myArray)
+            let details_ = { "arith_or_geo_input": myArray, "type": 'a_or_g_output', "a_n_term": parseInt(arith_or_geo_input_s_n) }
+            $.ajax({
+                url: '/uncg_math/sequences',
+                data: JSON.stringify(details_),
+                type: 'POST',
+                contentType: "application/json",
+                dataType: 'json',
+                success: function (data2) {
+                    document.getElementById("d_or_r_val12").value = data2['common_difference'];
+                    document.getElementById("a_n_val13").value = data2['nth_number'];
+                    document.getElementById("s_n_val14").value = data2['sum_of_nth_number'];
+                    document.getElementById("type_of_sequence").innerHTML = data2['type'];
+                    document.getElementById("a1_val12").value = data2['first_term'];
+                    return true;
+                },
+                error: function (data2) {
+                    console.log(data2);
+                    return false;
+                }
+            });
+        }
+    </script>
+
+<!--    <script>-->
+<!--        function Get_Data() {-->
+<!--            document.getElementById("a1_val12").value = "";-->
+<!--            document.getElementById("d_or_r_val12").value = "";-->
+<!--            document.getElementById("a_n_val13").value = "";-->
+<!--            document.getElementById("s_n_val14").value = "";-->
+<!--            document.getElementById("type_of_sequence").innerHTML = "";-->
+<!--            var ARITH_OR_GEO_INPUT = document.getElementById("arith_or_geo_input").value-->
+<!--            -->
+<!--            if (ARITH_OR_GEO_INPUT == "") {-->
+<!--                document.getElementById("error_message_alert").innerHTML = "Please enter the sequence"-->
+<!--                document.getElementById("error_message_alert").className = '';-->
+<!--                return false;-->
+<!--            }-->
+<!--            else {-->
+<!--                document.getElementById("error_message_alert").className = 'required_';-->
+<!--            }-->
+<!--            -->
+<!--            if(ARITH_OR_GEO_INPUT.includes("..."))-->
+<!--            {-->
+<!--                document.getElementById("error_message_alert").className = 'required_';-->
+<!--                const myArray2=ARITH_OR_GEO_INPUT.split("...");-->
+<!--                console.log(myArray2)-->
+<!--            }-->
+<!--            else {-->
+<!--                document.getElementById("error_message_alert").className = '';-->
+<!--                document.getElementById("error_message_alert").innerHTML = "Invalid sequence, Please check sequence format"-->
+<!--                return false;-->
+<!--            }-->
+
+<!--            const myArray = ARITH_OR_GEO_INPUT.split(",");-->
+
+
+<!--            const last_value = myArray2[myArray2.length - 1];-->
+<!--&lt;!&ndash;            const lastsecondValue = myArray[myArray.length - 2];&ndash;&gt;-->
+<!--            const arith_or_geo_input_s_n = last_value;-->
+<!--            myArray2.pop();-->
+<!--            -->
+<!--            if (arith_or_geo_input_s_n == "") {-->
+<!--                document.getElementById("error_message_alert").innerHTML = "Please enter the (n)"-->
+<!--                document.getElementById("error_message_alert").className = '';-->
+<!--                return false;-->
+<!--            }-->
+<!--            else {-->
+<!--                document.getElementById("error_message_alert").className = 'required_';-->
+<!--            }-->
+<!--            if ( parseInt(arith_or_geo_input_s_n)) {-->
+<!--                document.getElementById("error_message_alert").className = 'required_';-->
+<!--            }-->
+<!--            else {-->
+<!--                document.getElementById("error_message_alert").className = '';-->
+<!--                document.getElementById("error_message_alert").innerHTML = "The (n)th Value Must be integer"-->
+<!--                return false;-->
+
+<!--            }-->
+<!--            if (typeof lastsecondValue === "string" && lastsecondValue.includes(".")) {-->
+<!--                document.getElementById("error_message_alert").className = 'required_';-->
+
+<!--            }-->
+<!--            else {-->
+<!--                document.getElementById("error_message_alert").className = '';-->
+<!--                document.getElementById("error_message_alert").innerHTML = "Invalid sequence"-->
+<!--                return false;-->
+<!--            }-->
+<!--            myArray.splice(myArray.length - 1, 1);-->
+<!--            const resultArray = myArray.map(value => {-->
+<!--                if (parseInt(value)) {-->
+<!--                    return parseInt(value);-->
+<!--                }-->
+<!--                else if (parseFloat(value)) {-->
+<!--                    return parseFloat(value);-->
+<!--                }-->
+<!--                else {-->
+<!--                    return value;-->
+<!--                }-->
+<!--            });-->
+<!--            const containsString = resultArray.some(element => typeof element === "string");-->
+<!--            if (containsString) {-->
+<!--                document.getElementById("error_message_alert").className = '';-->
+<!--                document.getElementById("error_message_alert").innerHTML = "All values must be integers"-->
+<!--                return false;-->
+
+<!--            }-->
+<!--            else {-->
+<!--                document.getElementById("error_message_alert").className = 'required_';-->
+<!--            }-->
+
+<!--            if (myArray.length < 3) {-->
+<!--                document.getElementById("error_message_alert").className = '';-->
+<!--                document.getElementById("error_message_alert").innerHTML = "The Sequence has less than 3 elements."-->
+<!--                return false;-->
+<!--            }-->
+<!--            else {-->
+<!--                document.getElementById("error_message_alert").className = 'required_';-->
+<!--            }-->
+<!--            console.log(myArray)-->
+<!--            let details_ = { "arith_or_geo_input": myArray, "type": 'a_or_g_output', "a_n_term": parseInt(arith_or_geo_input_s_n) }-->
+<!--            $.ajax({-->
+<!--                url: '/uncg_math/sequences',-->
+<!--                data: JSON.stringify(details_),-->
+<!--                type: 'POST',-->
+<!--                contentType: "application/json",-->
+<!--                dataType: 'json',-->
+<!--                success: function (data2) {-->
+<!--                    document.getElementById("d_or_r_val12").value = data2['common_difference'];-->
+<!--                    document.getElementById("a_n_val13").value = data2['nth_number'];-->
+<!--                    document.getElementById("s_n_val14").value = data2['sum_of_nth_number'];-->
+<!--                    document.getElementById("type_of_sequence").innerHTML = data2['type'];-->
+<!--                    document.getElementById("a1_val12").value = data2['first_term'];-->
+<!--                    return true;-->
+<!--                },-->
+<!--                error: function (data2) {-->
+<!--                    console.log(data2);-->
+<!--                    return false;-->
+<!--                }-->
+<!--            });-->
+<!--        }-->
+<!--    </script>-->
+
+<script>
+        function Generate_sequence(type_) {
+<!--            document.getElementById("a1_inputval12_Results").value = "";-->
+<!--            document.getElementById("n_inputval12_Results").value = "";-->
+<!--            document.getElementById("d_or_r_inputval12_Results").value = "";-->
+<!--            document.getElementById("a_n_inputval12_Results").value = "";-->
+<!--            document.getElementById("S_n_inputval12_Results").value = "";-->
+            document.getElementById("error_message_alert2").innerHTML = "------------"
+
+            var a1 = document.getElementById("a1_inputval12").value
+            var n = document.getElementById("n_inputval12").value
+            var d_or_r = document.getElementById("d_or_r_inputval12").value
+            var a_n_ = document.getElementById("a_n_inputval12").value
+            var s_n_=document.getElementById("S_n_inputval12").value
+            let myList = [a1,n,d_or_r,a_n_];
+            let filteredList = myList.filter(function(value) {
+            return value !== "";
+            });
+            if (s_n_ == "") {
+                s_n_=n;
+            }
+            if (a1 == "" && n== "" && d_or_r== "" && a_n_ == "") {
+                document.getElementById("error_message_alert2").className = 'contact__label';
+                document.getElementById("error_message_alert2").innerHTML = "Fill any 3 of first 4 boxes"
+                return false;
+            }
+            else {
+                document.getElementById("error_message_alert2").className = 'required_12';
+            }
+            if (filteredList.length < 3)
+            {
+               document.getElementById("error_message_alert2").className = 'contact__label';
+                document.getElementById("error_message_alert2").innerHTML = "Fill any 3 of first 4 boxes"
+                return false;
+            }
+            else {
+                document.getElementById("error_message_alert2").className = 'required_12';
+            }
+
+            if ( a1!= "" && parseFloat(a1)) {
+                document.getElementById("error_message_alert2").className = 'required_12';
+            }
+            else if ( a1== "") {
+                document.getElementById("error_message_alert2").className = 'required_12';
+            }
+            else {
+                document.getElementById("error_message_alert2").className = 'contact__label';
+                document.getElementById("error_message_alert2").innerHTML = "The a1 Value Must be integer"
+                return false;
+
+            }
+            if ( n!= "" && parseInt(n)) {
+                document.getElementById("error_message_alert2").className = 'required_12';
+            }
+            else if ( n== "") {
+                document.getElementById("error_message_alert2").className = 'required_12';
+            }
+            else {
+                document.getElementById("error_message_alert2").className = 'contact__label';
+                document.getElementById("error_message_alert2").innerHTML = "The n Value Must be integer"
+                return false;
+
+            }
+            if ( d_or_r!= "" && parseFloat(d_or_r)) {
+                document.getElementById("error_message_alert2").className = 'required_12';
+            }
+            else if ( d_or_r== "") {
+                document.getElementById("error_message_alert2").className = 'required_12';
+            }
+            else {
+                document.getElementById("error_message_alert2").className = 'contact__label';
+                document.getElementById("error_message_alert2").innerHTML = "The d or r Value Must be integer"
+                return false;
+
+            }
+            if ( a_n_!= "" && parseFloat(a_n_)) {
+                document.getElementById("error_message_alert2").className = 'required_12';
+            }
+            else if ( a_n_== "") {
+                document.getElementById("error_message_alert2").className = 'required_12';
+            }
+            else {
+                document.getElementById("error_message_alert2").className = 'contact__label';
+                document.getElementById("error_message_alert2").innerHTML = "The A(n) Value Must be integer"
+                return false;
+
+            }
+<!--             if ( s_n_!= "" && parseFloat(s_n_)) {-->
+<!--                document.getElementById("error_message_alert2").className = 'required_12';-->
+<!--            }-->
+<!--            else {-->
+<!--                document.getElementById("error_message_alert2").className = 'contact__label';-->
+<!--                document.getElementById("error_message_alert2").innerHTML = "The S(n) Value Must be integer and not null"-->
+<!--                return false;-->
+
+<!--            }-->
+            let details_ = { "a1":parseFloat(a1),"n": parseInt(n),"d_or_r": parseFloat(d_or_r),"a_n_": parseFloat(a_n_),"s_n_": parseFloat(s_n_),"type": type_ }
+            $.ajax({
+                url: '/uncg_math/sequences',
+                data: JSON.stringify(details_),
+                type: 'POST',
+                contentType: "application/json",
+                dataType: 'json',
+                success: function (data2) {
+<!--                    document.getElementById("a1_inputval12").value = data2['first_term'];-->
+<!--                    document.getElementById("n_inputval12").value = data2['position'];-->
+<!--                    document.getElementById("d_or_r_inputval12").value = data2['common_difference'];-->
+<!--                    document.getElementById("a_n_inputval12").value =data2['nth_number'];-->
+<!--                    document.getElementById("S_n_inputval12").value = data2['sum_of_nth_number'];-->
+
+
+
+                    document.getElementById("a1_inputval12").value = data2['first_term'];
+                    document.getElementById("n_inputval12").value = data2['position'];
+                    document.getElementById("d_or_r_inputval12").value = data2['common_difference'];
+                    document.getElementById("a_n_inputval12").value =data2['nth_number'];
+                    document.getElementById("S_n_inputval12").value = data2['sum_of_nth_number'];
+
+<!--                    document.getElementById("a1_inputval12_Results").value = data2['first_term'];-->
+<!--                    document.getElementById("n_inputval12_Results").value = data2['position'];-->
+<!--                    document.getElementById("d_or_r_inputval12_Results").value = data2['common_difference'];-->
+<!--                    document.getElementById("a_n_inputval12_Results").value = data2['nth_number'];-->
+<!--                    document.getElementById("S_n_inputval12_Results").value = data2['sum_of_nth_number'];-->
+                    return true;
+                },
+                error: function (data2) {
+                    console.log(data2);
+                    return false;
+                }
+            });
+        }
+    </script>
+<script>
+function clearTextboxesIfThreeFilled() {
+  const inputs = document.querySelectorAll('[data-my-input]');
+  let filledCount = 0;
+  for (let i = 0; i < inputs.length; i++) {
+    if (inputs[i].value.trim() !== '') {
+      filledCount++;
+    }
+  }
+  if (filledCount >= 3) {
+    for (let i = 0; i < inputs.length; i++) {
+      inputs[i].value = '';
+    }
+  }
+}
+
+const inputs = document.querySelectorAll('[data-my-input]');
+for (let i = 0; i < inputs.length; i++) {
+  inputs[i].addEventListener('focus', clearTextboxesIfThreeFilled);
+}
+</script>
+
+</body>
+
+</html>

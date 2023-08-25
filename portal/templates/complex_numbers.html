@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title> **COMPLEX NUMBERS**</title>
+
+    <link rel="stylesheet" type="text/css" href="/uncg_math/static/Geometry_files/mystyle.css">
+    <meta name="description" content="Regular polygon, Trangle,
+              Quadrilateral, Rectangle, Rombus, Trapezoid,
+              Circle, Circular Segment/Sector, Prism, Pyramid,
+              Cylinder, Cone, Sperical Cap/Sector">
+    <script src="/uncg_math/static/Geometry_files/geometry.js"></script>
+</head>
+<style>
+    .text_box_st {
+        padding: 1px !important;
+        width: 90px !important;
+    }
+
+    .text_box_st2 {
+        padding: 3px !important;
+        width: 90px !important;
+    }
+</style>
+
+
+<body>
+    <div class="example" style="height: 100% !important;">
+        <div id="nav" style="clear:both;">
+            <h1 style="color: white;text-align: center;"> Complex Numbers </h1>
+
+            <ul style="margin-top: -20px;">
+                <li style="padding-left: 179px;"><a href="/uncg_math">Home</a></li>
+                <li style="padding-left: 179px;"><a href="/uncg_math/algebra">Back</a></li>
+
+            </ul>
+            <ul>
+                <li><a style="width: 209px;" href="#ComplexExpressions">Complex Expressions</a></li>
+                <li><a style="width: 197px;" href="#ComplexNumbers">Complex Numbers</a></li>
+            </ul>
+        </div>
+        <h2> <a id="ComplexExpressions">Complex Expressions.</a></h2>
+
+        <FORM>
+            <TABLE border=0 width=100% bgcolor=moccasin>
+                <tr>
+                    <td> <br> </td>
+                </tr>
+                <TR>
+                    <TD COLSPAN=7 ALIGN=LEFT VALIGN=MIDDLE>
+                        1).Complex Expressions Example 1:(1+i)^(-1)<--{ Matrix format } <br>
+                        2).Complex Expressions Example 2:3i*(1-i)^2<--{ Matrix format } <br>
+                        3).Complex Expressions Example 3:i^10+i^(-5)-(3+4i)+(i-1)<--{ Matrix format }<br>
+                        <br>
+                        <span>Please enter complex expression here.</span><br>
+                        <INPUT TYPE=TEXT NAME=matrix_expression_1 ID=matrix_expression_1 style="padding: 12px;width: 380px;">
+                        <INPUT TYPE="button" class="widebutton" VALUE="Calculate" onclick="get_complex_expression()"><br>
+                        <span>Errors message : </span><span id="error_message_alert"class="required_" style="font-size: small;">-------------------</span>
+                    </TD>
+
+                </TR>
+
+                <tr>
+                    <td>Results :</td>
+                </tr>
+                <tr>
+                    <TD ALIGN=CENTER>Message :</TD>
+                    <TD><span id="action_statu_result">-------------------</span></TD>
+                </tr>
+                <tr>
+                    <TD ALIGN=CENTER>Real :</TD>
+                    <TD><span id="add_sub_div_mut_result">-------------------</span></TD>
+                </tr>
+                <tr>
+                    <TD ALIGN=CENTER>Imaginary :</TD>
+                    <TD><span id="add_sub_div_mut_result2">-------------------</span></TD>
+                </tr>
+                <tr>
+                    <td> <br> </td>
+                </tr>
+                <TR align=right>
+                    <TD COLSPAN=7 ALIGN=right> <a href="#nav">Top </a> </TD>
+                </TR>
+                <tr>
+                    <td> <br> </td>
+                </tr>
+            </TABLE>
+        </FORM>
+
+
+        <h2> <a id="ComplexNumbers">Complex Numbers.</a></h2>
+
+
+        <FORM>
+            <TABLE border=0 width=100% bgcolor=moccasin>
+                <tr>
+                    <td> <br> </td>
+                </tr>
+                <TR>
+                    <TD COLSPAN=7 ALIGN=LEFT VALIGN=MIDDLE>
+                        1).Absolute,Angle,Conjunction,Real,Imaginary format: 1+2i <br>
+                        **Note::All are in same format as mentioned above**<br>
+                        <br>
+                        <span id="first_sequence">Please enter number here. :</span><br>
+                        <INPUT TYPE=TEXT NAME=matrix_matlab_Expression ID=matrix_matlab_Expression style="padding: 12px;width: 380px;">
+                    </TD>
+
+                </TR>
+
+                <tr>
+                    <td>Results :</td>
+                </tr>
+                <tr>
+                    <TD ALIGN=CENTER>Errors message :</TD>
+                    <TD><span id="error_message_alert2"class="required_" style="font-size: small;">-------------------</span></TD>
+                </tr>
+                <tr>
+                    <TD ALIGN=CENTER>Message :</TD>
+                    <TD><span id="matlab_function_Action_Status_result">-------------------</span></TD>
+                </tr>
+                <tr>
+                    <TD ALIGN=CENTER>Output :</TD>
+                    <TD><span id="matlab_function_result">-------------------</span></TD>
+                </tr>
+                <TR align = CENTER>
+<TD><INPUT TYPE="button"  class="bigbutton"  VALUE="Absolute" onclick="generate_complex_expression('Absolute')" style="margin-top: 8px;width: 88px;"></TD>
+<TD><INPUT TYPE="button"  class="bigbutton"  VALUE="Angle" onclick="generate_complex_expression('Angle')" style="margin-top: 8px;width: 88px;"></TD>
+<TD><INPUT TYPE="button"  class="bigbutton"  VALUE="Conjugate" onclick="generate_complex_expression('Conjugate')" style="margin-top: 8px;width: 109px;"></TD>
+<TD><INPUT TYPE="button"  class="bigbutton"  VALUE="Real" onclick="generate_complex_expression('Real')" style="margin-top: 8px;"></TD>
+<TD><INPUT TYPE="button"  class="bigbutton"  VALUE="Imaginary" onclick="generate_complex_expression('imagery')" style="margin-top: 8px;width: 88px;"></TD>
+
+</TR>
+
+                <TR align=right>
+                    <TD COLSPAN=7 ALIGN=right> <a href="#nav">Top </a> </TD>
+                </TR>
+                <tr>
+                    <td> <br> </td>
+                </tr>
+
+            </TABLE>
+        </FORM>
+
+
+
+    </div>
+
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<script>
+
+        function get_complex_expression() {
+            document.getElementById("action_statu_result").innerHTML = "-------------------";
+            document.getElementById("add_sub_div_mut_result").innerHTML = "-------------------";
+            document.getElementById("add_sub_div_mut_result2").innerHTML = "-------------------";
+
+            const matrix_expression_1 = document.getElementById("matrix_expression_1").value
+
+            if (matrix_expression_1 == "") {
+                document.getElementById("error_message_alert").innerHTML = "Complex expression is required"
+                document.getElementById("error_message_alert").className = '';
+                return false;
+            }
+            else {
+                document.getElementById("error_message_alert").className = 'required_';
+            }
+
+            let details_ = { "complex_expression_": matrix_expression_1, "type": "Complex Expressions"}
+            $.ajax({
+                url: '/uncg_math/complexnumbers',
+                data: JSON.stringify(details_),
+                type: 'POST',
+                contentType: "application/json",
+                dataType: 'json',
+                success: function (data2) {
+                   document.getElementById("action_statu_result").innerHTML = data2['message'];
+                   document.getElementById("add_sub_div_mut_result").innerHTML = data2['result_real'];
+                   document.getElementById("add_sub_div_mut_result2").innerHTML =data2['result_imagery'];
+                   return true;
+                },
+                error: function (data2) {
+                    console.log(data2);
+                    return false;
+                }
+            });
+        }
+    </script>
+
+<script>
+        function generate_complex_expression(type_) {
+             document.getElementById("matlab_function_Action_Status_result").innerHTML = "-------------------";
+            document.getElementById("matlab_function_result").innerHTML = "-------------------";
+
+            var matrix_matlab_Expression = document.getElementById("matrix_matlab_Expression").value
+
+            if (matrix_matlab_Expression == "") {
+                document.getElementById("error_message_alert2").className = 'contact__label';
+                document.getElementById("error_message_alert2").innerHTML = "number Is Required"
+                return false;
+            }
+            else {
+                document.getElementById("error_message_alert2").className = 'required_12';
+            }
+
+            let details_ = { "complex_expression_": matrix_matlab_Expression, "type": type_ }
+            $.ajax({
+                url: '/uncg_math/complexnumbers',
+                data: JSON.stringify(details_),
+                type: 'POST',
+                contentType: "application/json",
+                dataType: 'json',
+                success: function (data2) {
+                    document.getElementById("matlab_function_Action_Status_result").innerHTML = data2['message'];
+                    document.getElementById("matlab_function_result").innerHTML = data2['result'];
+                    return true;
+                },
+                error: function (data2) {
+                    console.log(data2);
+                    return false;
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

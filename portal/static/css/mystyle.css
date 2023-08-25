@@ -1,0 +1,117 @@
+/* 
+    Document   : mystyle.css
+    Created on : Dec 15, 2013, 5:41:47 PM
+    Author     : lfu
+    Description: the style sheet for ultra calculators index.html/home.html
+        
+*/
+
+html {overflow-y:scroll;}
+
+body {
+    background:#eee;
+    margin:0;
+    padding:0;
+}
+
+h1{color:red; font-size: 3em;}
+.smallbutton { text-align: center; width:50px; height : 30px; font-size:x-large; } 
+.bigbutton { text-align: left; width:70px; height : 27px; font-size:large; } 
+.widebutton { text-align: left; width:102px; height : 27px; font-size:large; } 
+.widerbutton { text-align: left; width:130px; height : 27px; font-size:large; }
+/*
+input {
+        width: 65px;
+        height: 20px;
+        font-size: 105%;
+    }*/
+
+.example {
+    background:#fff url(../images/clouds-in-blue-sky.jpg);
+    width:530px;
+    height:700px;
+    /*border:1px #000 solid;*/
+    margin:10px auto;
+    padding:5px;
+    border-radius:3px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+}
+
+#social-fb {
+font-size:105%;
+background: red;
+}
+
+/* main menu styles */
+#nav {
+    display:inline-block;
+    width:100%;
+    margin:0px auto;
+    padding:0;
+    background:#335599 url(../images/bg.png) repeat-x 0 -110px;
+
+    border-radius:10px; /*some css3*/
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    box-shadow:0 2px 2px rgba(0,0,0, .5);
+    -moz-box-shadow:0 2px 2px rgba(0,0,0, .5);
+    -webkit-box-shadow:0 2px 2px rgba(0,0,0, .5);
+}
+#nav li {
+    margin:8px;
+    float:center; /* center */
+    position:relative;
+    list-style:none;
+}
+#nav a {
+    font-weight:bold;
+    color:#e7e5e5;
+    text-decoration:none;
+    display:block;
+    padding:8px 20px;
+
+    border-radius:10px; /*some css3*/
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    text-shadow:0 2px 2px rgba(0,0,0, .7);
+}
+
+#content {
+    margin-top: 40px;
+}
+
+input[type="number"] {
+   width:80px;
+}
+
+ul
+{
+list-style-type:none;
+margin:0;
+padding:0;
+overflow:hidden;
+}
+li
+{
+float:left;
+}
+
+a:link,a:visited
+{
+display:block;
+width:113px;
+font-weight:bold;
+color:#FFFFFF;
+background-color:#98bf21;
+text-align:Center;
+padding:2px;
+text-decoration:none;
+text-transform:uppercase;
+}
+a:hover,a:active
+{
+background-color:#7A991A;
+}
+
+

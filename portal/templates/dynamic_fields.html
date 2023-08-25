@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dynamically Create Input Fields</title>
+	<script>
+		function createInputs() {
+			// get the number of input fields to create
+			var count = document.getElementById('count').value;
+			// get the container for the input fields
+			var container = document.getElementById('input-container');
+			// clear any existing input fields
+			container.innerHTML = '';
+			// create the input fields
+			for (var i = 1; i <= count; i++) {
+				// create a label element
+				var label = document.createElement('label');
+				// add some text to the label
+				label.appendChild(document.createTextNode('Input ' + i + ': '));
+				// create an input element
+				var input = document.createElement('input');
+				input.type = 'text';
+				input.name = 'input-' + i;
+				input.id = 'input-' + i;
+				// add the input to the label
+				label.appendChild(input);
+				// add the label to the container
+				container.appendChild(label);
+				// add a line break after each input
+				container.appendChild(document.createElement('br'));
+			}
+		}
+	</script>
+</head>
+<body>
+	<label for="count">Number of Inputs:</label>
+	<input type="text" id="count" name="count">
+	<button onclick="createInputs()">Create Inputs</button>
+	<div id="input-container"></div>
+</body>
+</html>
