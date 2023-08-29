@@ -24,10 +24,10 @@ bp = Blueprint('view', __name__, url_prefix='/uncg_math', template_folder="./tem
 #     if request.method == "GET":
 #         return render_template("index.html")
 
-@bp.route('/calculus', methods=["GET", "POST"])
-def calculus():
-    if request.method == "GET":
-        return render_template("calculus.html")
+# @bp.route('/calculus', methods=["GET", "POST"])
+# def calculus():
+#     if request.method == "GET":
+#         return render_template("calculus.html")
 
 
 @bp.route('/trigonometry', methods=["GET", "POST"])
@@ -36,22 +36,22 @@ def trigonometry():
         return render_template("trigonometry.html")
 
 
-@bp.route('/differentiation', methods=["GET", "POST"])
-def differentiation():
-    if request.method == "GET":
-        return render_template("differentiation.html")
+# @bp.route('/differentiation', methods=["GET", "POST"])
+# def differentiation():
+#     if request.method == "GET":
+#         return render_template("differentiation.html")
 
 
-@bp.route('/integration', methods=["GET", "POST"])
-def integration():
-    if request.method == "GET":
-        return render_template("integration.html")
+# @bp.route('/integration', methods=["GET", "POST"])
+# def integration():
+#     if request.method == "GET":
+#         return render_template("integration.html")
 
 
-@bp.route('/', methods=["GET", "POST"])
-def home():
-    if request.method == "GET":
-        return render_template("home.html")
+# @bp.route('/', methods=["GET", "POST"])
+# def home():
+#     if request.method == "GET":
+#         return render_template("home.html")
 
 
 # @bp.route('/', methods=["GET", "POST"])
@@ -60,28 +60,28 @@ def home():
 #        return render_template("home.html")
 
 
-@bp.route('/decimal_conversion', methods=["GET", "POST"])
-def decimal_conversion():
-    if request.method == "GET":
-        return render_template("decimal_conversion.html")
-
-
-@bp.route('/fraction_conversion', methods=["GET", "POST"])
-def fraction_conversion():
-    if request.method == "GET":
-        return render_template("fraction_conversion.html")
-
-
-@bp.route('/patterns', methods=["GET", "POST"])
-def patterns():
-    if request.method == "GET":
-        return render_template("patterns.html")
-
-
-@bp.route('/arithmetic_expressions', methods=["GET", "POST"])
-def arithmetic_expressions():
-    if request.method == "GET":
-        return render_template("arithmetic_expressions.html")
+# @bp.route('/decimal_conversion', methods=["GET", "POST"])
+# def decimal_conversion():
+#     if request.method == "GET":
+#         return render_template("decimal_conversion.html")
+#
+#
+# @bp.route('/fraction_conversion', methods=["GET", "POST"])
+# def fraction_conversion():
+#     if request.method == "GET":
+#         return render_template("fraction_conversion.html")
+#
+#
+# @bp.route('/patterns', methods=["GET", "POST"])
+# def patterns():
+#     if request.method == "GET":
+#         return render_template("patterns.html")
+#
+#
+# @bp.route('/arithmetic_expressions', methods=["GET", "POST"])
+# def arithmetic_expressions():
+#     if request.method == "GET":
+#         return render_template("arithmetic_expressions.html")
 
 
 @bp.route('/geometry', methods=["GET", "POST"])
@@ -90,10 +90,10 @@ def geometry():
         return render_template("geometry.html")
 
 
-@bp.route('/algebra', methods=["GET", "POST"])
-def Algebra():
-    if request.method == "GET":
-        return render_template("algebra.html")
+# @bp.route('/algebra', methods=["GET", "POST"])
+# def Algebra():
+#     if request.method == "GET":
+#         return render_template("algebra.html")
 
 
 @bp.route('/sequences', methods=["GET", "POST"])
