@@ -1,7 +1,7 @@
 import gc
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash, send_file, make_response, \
     Response, jsonify
-from portal.application.sequence import sequence_type, generat_arithmetic_sequence, generat_geometric_sequence
+# from portal.application.sequence import sequence_type, generat_arithmetic_sequence, generat_geometric_sequence
 from portal.application.matrix_operations import matrix_arithmetic, matrix_arithmetic_operations, get_matrix, \
     get_ones_zeros_eye, get_transpose_inv_det, get_Diagonal_Trace_Size, get_inverse
 # from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
@@ -96,91 +96,91 @@ def geometry():
 #         return render_template("algebra.html")
 
 
-@bp.route('/sequences', methods=["GET", "POST"])
-def sequences():
-    if request.method == "GET":
-        return render_template("sequences.html")
-    if request.method == "POST":
-        data = request.json
-        type = data["type"]
-        if type == 'a_or_g_output':
-            arith_or_geo = data["arith_or_geo_input"]
-            a_n_term = data["a_n_term"]
-            finl_out = sequence_type(arith_or_geo, a_n_term, a_n_term)
-            print(finl_out)
-            return finl_out
-        elif type == 'Arithmetic Sequence':
-            print('Geometric', data)
-            print("hi")
-            final_output_ = generat_arithmetic_sequence(data)
-            print('final_output_', final_output_)
-            return final_output_
-        elif type == 'Geometric Sequence':
-            final_output_ = generat_geometric_sequence(data)
-            return final_output_
-        Status = {"status": 'as,mna,sn,s'}
-        return jsonify(Status)
+# @bp.route('/sequences', methods=["GET", "POST"])
+# def sequences():
+#     if request.method == "GET":
+#         return render_template("sequences.html")
+#     if request.method == "POST":
+#         data = request.json
+#         type = data["type"]
+#         if type == 'a_or_g_output':
+#             arith_or_geo = data["arith_or_geo_input"]
+#             a_n_term = data["a_n_term"]
+#             finl_out = sequence_type(arith_or_geo, a_n_term, a_n_term)
+#             print(finl_out)
+#             return finl_out
+#         elif type == 'Arithmetic Sequence':
+#             print('Geometric', data)
+#             print("hi")
+#             final_output_ = generat_arithmetic_sequence(data)
+#             print('final_output_', final_output_)
+#             return final_output_
+#         elif type == 'Geometric Sequence':
+#             final_output_ = generat_geometric_sequence(data)
+#             return final_output_
+#         Status = {"status": 'as,mna,sn,s'}
+#         return jsonify(Status)
 
 
-@bp.route('/matrix_operation', methods=["GET", "POST"])
-def matrix_operation():
-    if request.method == "GET":
-        return render_template("matrix_operation.html")
-    if request.method == "POST":
-        data = request.json
-        match = re.search(r"(?<=})(.*?)(?={)", data['matrix_expression_1_input'])
-        if isinstance(match, type(None)):
-            return {'error_msg': "Syntax error", 'status': "Failed", 'result_': '-----'}
-        operation_ = match.group(1).strip()
-        if len(operation_) != 1:
-            return {'result_': '-----', 'status': "Failed", 'error_msg': "Syntax error"}
-        print(match, data['matrix_expression_1_input'])
-        ixx = match.group(1).index(operation_)
-        ix = match.span()
-        tmp_a = data['matrix_expression_1_input'][:ix[0] + ixx]
-        tmp_b = data['matrix_expression_1_input'][ix[1] - ixx:]
-        if tmp_a.count("{") != tmp_a.count("}") or tmp_a.count("{") == 0 or tmp_a.count("}") == 0:
-            return {'result_': '-----', 'status': "Failed", 'error_msg': "Syntax error"}
-        if tmp_b.count("{") != tmp_b.count("}") or tmp_b.count("{") == 0 or tmp_b.count("}") == 0:
-            return {'error_msg': "Syntax error", 'status': "Failed", 'result_': '-----'}
-        temp_matrix_a = tmp_a.replace('{', '').replace('}', '').strip().split(';')
-        temp_matrix_b = tmp_b.replace('{', '').replace('}', '').strip().split(';')
-
-        print('matrix_expression_1_input', temp_matrix_a)
-        print('matrix_expression_2_input', temp_matrix_b)
-        print('Matrix_Action', operation_)
-        # exit()
-        matrix_a = get_matrix(temp_matrix_a)
-        matrix_b = get_matrix(temp_matrix_b)
-        print('matrix_a', matrix_a)
-        print('matrix_b', matrix_b)
-
-        check_list_ = matrix_arithmetic(matrix_a, matrix_b)
-        print('check_list_', check_list_)
-        if check_list_['OutPut'] == 'Successful':
-            result_ = matrix_arithmetic_operations(matrix_a, matrix_b, operation_)
-            print("Result", result_, type(result_))
-            if isinstance(result_, type(None)):
-                return {'result_': '-----', 'status': "Failed", 'error_msg': "Syntax Error"}
-
-            if isinstance(result_, str):
-                return {'result_': '-----', 'status': "Failed", 'error_msg': result_}
-
-            str_final_ = get_final_out_1(result_)
-            # str_final_ = str_final_ + '}'
-            return {'result_': str_final_, 'status': str(check_list_['OutPut']), 'error_msg': '-----'}
-        else:
-            return {'result_': '-----', 'status': str(check_list_['OutPut']), 'error_msg': str(result_)}
-
-
-def get_final_out_1(res):
-    k = list(res)
-    string = ''
-    for z in k:
-        for z2 in str(z).replace('[', '').replace(']', '').split():
-            string += str(float(z2)) + ','
-        string = string[:-1] + ';'
-    return '{' + string[:-1] + '}'
+# @bp.route('/matrix_operation', methods=["GET", "POST"])
+# def matrix_operation():
+#     if request.method == "GET":
+#         return render_template("matrix_operation.html")
+#     if request.method == "POST":
+#         data = request.json
+#         match = re.search(r"(?<=})(.*?)(?={)", data['matrix_expression_1_input'])
+#         if isinstance(match, type(None)):
+#             return {'error_msg': "Syntax error", 'status': "Failed", 'result_': '-----'}
+#         operation_ = match.group(1).strip()
+#         if len(operation_) != 1:
+#             return {'result_': '-----', 'status': "Failed", 'error_msg': "Syntax error"}
+#         print(match, data['matrix_expression_1_input'])
+#         ixx = match.group(1).index(operation_)
+#         ix = match.span()
+#         tmp_a = data['matrix_expression_1_input'][:ix[0] + ixx]
+#         tmp_b = data['matrix_expression_1_input'][ix[1] - ixx:]
+#         if tmp_a.count("{") != tmp_a.count("}") or tmp_a.count("{") == 0 or tmp_a.count("}") == 0:
+#             return {'result_': '-----', 'status': "Failed", 'error_msg': "Syntax error"}
+#         if tmp_b.count("{") != tmp_b.count("}") or tmp_b.count("{") == 0 or tmp_b.count("}") == 0:
+#             return {'error_msg': "Syntax error", 'status': "Failed", 'result_': '-----'}
+#         temp_matrix_a = tmp_a.replace('{', '').replace('}', '').strip().split(';')
+#         temp_matrix_b = tmp_b.replace('{', '').replace('}', '').strip().split(';')
+#
+#         print('matrix_expression_1_input', temp_matrix_a)
+#         print('matrix_expression_2_input', temp_matrix_b)
+#         print('Matrix_Action', operation_)
+#         # exit()
+#         matrix_a = get_matrix(temp_matrix_a)
+#         matrix_b = get_matrix(temp_matrix_b)
+#         print('matrix_a', matrix_a)
+#         print('matrix_b', matrix_b)
+#
+#         check_list_ = matrix_arithmetic(matrix_a, matrix_b)
+#         print('check_list_', check_list_)
+#         if check_list_['OutPut'] == 'Successful':
+#             result_ = matrix_arithmetic_operations(matrix_a, matrix_b, operation_)
+#             print("Result", result_, type(result_))
+#             if isinstance(result_, type(None)):
+#                 return {'result_': '-----', 'status': "Failed", 'error_msg': "Syntax Error"}
+#
+#             if isinstance(result_, str):
+#                 return {'result_': '-----', 'status': "Failed", 'error_msg': result_}
+#
+#             str_final_ = get_final_out_1(result_)
+#             # str_final_ = str_final_ + '}'
+#             return {'result_': str_final_, 'status': str(check_list_['OutPut']), 'error_msg': '-----'}
+#         else:
+#             return {'result_': '-----', 'status': str(check_list_['OutPut']), 'error_msg': str(result_)}
+#
+#
+# def get_final_out_1(res):
+#     k = list(res)
+#     string = ''
+#     for z in k:
+#         for z2 in str(z).replace('[', '').replace(']', '').split():
+#             string += str(float(z2)) + ','
+#         string = string[:-1] + ';'
+#     return '{' + string[:-1] + '}'
 
 
 # def get_final_out(result_, action):
@@ -203,178 +203,178 @@ def get_final_out_1(res):
 #     return str_final_
 
 
-@bp.route('/matrix_matlab_operation', methods=["GET", "POST"])
-def matrix_matlab_operation():
-    if request.method == "POST":
-        data = request.json
-        result_ = ''
-        print(data['type'])
-        if data['type'] == "Zeros" or data['type'] == "Ones":
-            if str(data['matrix_matlab_Expression']).__contains__(','):
-                temp_matrix_a = str(data['matrix_matlab_Expression']).replace('(', '').replace(')', '').split(',')
-                final_ = []
-                for num in temp_matrix_a:
-                    if num.isdigit() and int(num) == 0:
-                        return {'result_': "Size cannot be zero.", 'status': "Failed"}
-                    elif num.isdigit():
-                        final_.append(int(num))
-                    else:
-                        return {'result_': "Size cannot be string.", 'status': "Failed"}
-                result_ = get_ones_zeros_eye(tuple(final_), data['type'])
-            else:
-                return {'result_': "Please check entered expression", 'status': "Failed"}
-        elif data['type'] == "Eyes":
-            temp_matrix_a = str(data['matrix_matlab_Expression']).replace('(', '').replace(')', '').strip()
-            if temp_matrix_a.isdigit() and int(temp_matrix_a) == 0:
-                return {'result_': "Size cannot be zero.", 'status': "Failed"}
-            elif temp_matrix_a.isdigit():
-                temp_matrix_a = int(temp_matrix_a)
-            else:
-                return {'result_': "Size cannot be string.", 'status': "Failed"}
-            result_ = get_ones_zeros_eye(temp_matrix_a, data['type'])
-        elif data['type'] == "Det" or data['type'] == "Inverse" or data['type'] == "Transpose":
-            if str(data['matrix_matlab_Expression']):
-                temp_matrix_a = str(data['matrix_matlab_Expression']).replace('{', '').replace('}', '').split(';')
-                matrix_a = get_matrix(temp_matrix_a)
-                result_ = get_transpose_inv_det(matrix_a, data['type'])
-                print("Inverse", result_)
-                if data['type'] == "Det" and not isinstance(result_, str):
-                    return {'result_': float(result_), 'status': "Successful"}
-            else:
-                return {'result_': "Please check entered expression", 'status': "Failed"}
-        elif data['type'] == "Diagonal" or data['type'] == "Size" or data['type'] == "Trace":
-            if str(data['matrix_matlab_Expression']):
-                temp_matrix_a = str(data['matrix_matlab_Expression']).replace('{', '').replace('}', '').split(';')
-                print("size of matrix:", temp_matrix_a)
-                matrix_a = get_matrix(temp_matrix_a)
-                result_ = get_Diagonal_Trace_Size(matrix_a, data['type'])
-                print("Result", result_)
-                if data['type'] == "Size" and not isinstance(result_, str):
-                    return {'result_': tuple(result_), 'status': "Successful"}
-                elif data['type'] == "Trace" and not isinstance(result_, str):
-                    return {'result_': float(result_), 'status': "Successful"}
-                elif data['type'] == 'Diagonal' and not isinstance(result_, str):
-                    return {'result_': get_final_out_1(result_), 'status': "Successful"}
-                else:
-                    return {'result_': "Please check matrix expression", 'status': "Failed"}
-        else:
-            return {'result_': "Operation not understood", 'status': "Failed"}
+# @bp.route('/matrix_matlab_operation', methods=["GET", "POST"])
+# def matrix_matlab_operation():
+#     if request.method == "POST":
+#         data = request.json
+#         result_ = ''
+#         print(data['type'])
+#         if data['type'] == "Zeros" or data['type'] == "Ones":
+#             if str(data['matrix_matlab_Expression']).__contains__(','):
+#                 temp_matrix_a = str(data['matrix_matlab_Expression']).replace('(', '').replace(')', '').split(',')
+#                 final_ = []
+#                 for num in temp_matrix_a:
+#                     if num.isdigit() and int(num) == 0:
+#                         return {'result_': "Size cannot be zero.", 'status': "Failed"}
+#                     elif num.isdigit():
+#                         final_.append(int(num))
+#                     else:
+#                         return {'result_': "Size cannot be string.", 'status': "Failed"}
+#                 result_ = get_ones_zeros_eye(tuple(final_), data['type'])
+#             else:
+#                 return {'result_': "Please check entered expression", 'status': "Failed"}
+#         elif data['type'] == "Eyes":
+#             temp_matrix_a = str(data['matrix_matlab_Expression']).replace('(', '').replace(')', '').strip()
+#             if temp_matrix_a.isdigit() and int(temp_matrix_a) == 0:
+#                 return {'result_': "Size cannot be zero.", 'status': "Failed"}
+#             elif temp_matrix_a.isdigit():
+#                 temp_matrix_a = int(temp_matrix_a)
+#             else:
+#                 return {'result_': "Size cannot be string.", 'status': "Failed"}
+#             result_ = get_ones_zeros_eye(temp_matrix_a, data['type'])
+#         elif data['type'] == "Det" or data['type'] == "Inverse" or data['type'] == "Transpose":
+#             if str(data['matrix_matlab_Expression']):
+#                 temp_matrix_a = str(data['matrix_matlab_Expression']).replace('{', '').replace('}', '').split(';')
+#                 matrix_a = get_matrix(temp_matrix_a)
+#                 result_ = get_transpose_inv_det(matrix_a, data['type'])
+#                 print("Inverse", result_)
+#                 if data['type'] == "Det" and not isinstance(result_, str):
+#                     return {'result_': float(result_), 'status': "Successful"}
+#             else:
+#                 return {'result_': "Please check entered expression", 'status': "Failed"}
+#         elif data['type'] == "Diagonal" or data['type'] == "Size" or data['type'] == "Trace":
+#             if str(data['matrix_matlab_Expression']):
+#                 temp_matrix_a = str(data['matrix_matlab_Expression']).replace('{', '').replace('}', '').split(';')
+#                 print("size of matrix:", temp_matrix_a)
+#                 matrix_a = get_matrix(temp_matrix_a)
+#                 result_ = get_Diagonal_Trace_Size(matrix_a, data['type'])
+#                 print("Result", result_)
+#                 if data['type'] == "Size" and not isinstance(result_, str):
+#                     return {'result_': tuple(result_), 'status': "Successful"}
+#                 elif data['type'] == "Trace" and not isinstance(result_, str):
+#                     return {'result_': float(result_), 'status': "Successful"}
+#                 elif data['type'] == 'Diagonal' and not isinstance(result_, str):
+#                     return {'result_': get_final_out_1(result_), 'status': "Successful"}
+#                 else:
+#                     return {'result_': "Please check matrix expression", 'status': "Failed"}
+#         else:
+#             return {'result_': "Operation not understood", 'status': "Failed"}
+#
+#         if isinstance(result_, str):
+#             if result_ == 'The matrix is singular':
+#                 return {'result_': "The matrix is singular", 'status': "Failed"}
+#             elif result_ == 'The matrix is not square':
+#                 return {'result_': "The matrix is not square", 'status': "Failed"}
+#             elif result_ == 'Please check matrix expression':
+#                 return {'result_': "Please check matrix expression", 'status': "Failed"}
+#
+#         if data['type'] == "Zeros" or data['type'] == "Ones" or data['type'] == "Eyes":
+#             str_final_ = get_final_out_1(result_)
+#         else:
+#             str_final_ = get_final_out_1(result_)
+#         if str_final_:
+#             str_final_ = str_final_
+#             return {'result_': str_final_, 'status': "Successful"}
+#         else:
+#             return {'result_': "Please check entered expression", 'status': "Failed"}
+#
 
-        if isinstance(result_, str):
-            if result_ == 'The matrix is singular':
-                return {'result_': "The matrix is singular", 'status': "Failed"}
-            elif result_ == 'The matrix is not square':
-                return {'result_': "The matrix is not square", 'status': "Failed"}
-            elif result_ == 'Please check matrix expression':
-                return {'result_': "Please check matrix expression", 'status': "Failed"}
-
-        if data['type'] == "Zeros" or data['type'] == "Ones" or data['type'] == "Eyes":
-            str_final_ = get_final_out_1(result_)
-        else:
-            str_final_ = get_final_out_1(result_)
-        if str_final_:
-            str_final_ = str_final_
-            return {'result_': str_final_, 'status': "Successful"}
-        else:
-            return {'result_': "Please check entered expression", 'status': "Failed"}
-
-
-@bp.route('/complexnumbers', methods=["GET", "POST"])
-def complexnumbers():
-    if request.method == "GET":
-        return render_template("complex_numbers.html")
-    if request.method == "POST":
-        data = request.json
-        type = data["type"]
-        complex_expression_ = data["complex_expression_"]
-        try:
-            message, result = evaluate_complex_expression(complex_expression_)
-        except Exception as e:
-            message = f'Error: Could not calculate the expression ({e})'
-            if type == 'Complex Expressions':
-                return jsonify(
-                    {"message": message, "result_real": "na.", "result_imagery": "na."})
-            else:
-                return jsonify(
-                    {"message": message, "result": "na."})
-        if type == 'Complex Expressions':
-            return jsonify({"message": message, "result_real": str(result.real), "result_imagery": str(result.imag)})
-        elif type == 'Absolute':
-            return jsonify({"message": message, "result": str(abs(result))})
-        elif type == 'Angle':
-            return jsonify({"message": message, "result": str(cmath.phase(result))})
-        elif type == 'Conjugate':
-            return jsonify({"message": message, "result": str(result.conjugate())})
-        elif type == 'Real':
-            return jsonify({"message": message, "result": str(result.real)})
-        elif type == 'imagery':
-            return jsonify({"message": message, "result": str(result.imag)})
-        Status = {"status": 'as,mna,sn,s'}
-        return jsonify(Status)
+# @bp.route('/complexnumbers', methods=["GET", "POST"])
+# def complexnumbers():
+#     if request.method == "GET":
+#         return render_template("complex_numbers.html")
+#     if request.method == "POST":
+#         data = request.json
+#         type = data["type"]
+#         complex_expression_ = data["complex_expression_"]
+#         try:
+#             message, result = evaluate_complex_expression(complex_expression_)
+#         except Exception as e:
+#             message = f'Error: Could not calculate the expression ({e})'
+#             if type == 'Complex Expressions':
+#                 return jsonify(
+#                     {"message": message, "result_real": "na.", "result_imagery": "na."})
+#             else:
+#                 return jsonify(
+#                     {"message": message, "result": "na."})
+#         if type == 'Complex Expressions':
+#             return jsonify({"message": message, "result_real": str(result.real), "result_imagery": str(result.imag)})
+#         elif type == 'Absolute':
+#             return jsonify({"message": message, "result": str(abs(result))})
+#         elif type == 'Angle':
+#             return jsonify({"message": message, "result": str(cmath.phase(result))})
+#         elif type == 'Conjugate':
+#             return jsonify({"message": message, "result": str(result.conjugate())})
+#         elif type == 'Real':
+#             return jsonify({"message": message, "result": str(result.real)})
+#         elif type == 'imagery':
+#             return jsonify({"message": message, "result": str(result.imag)})
+#         Status = {"status": 'as,mna,sn,s'}
+#         return jsonify(Status)
 
 
-@bp.route('/equationsandinequalities', methods=["GET", "POST"])
-def equationsandinequalities():
-    if request.method == "GET":
-        return render_template("equations_and_inequalities.html")
-    if request.method == "POST":
-        message = 'na.'
-        result = 'na.'
-        data = request.json
-        type_ = data["type"]
-        print("From views:,", data)
-        if type_ == 'get_equations':
-
-            Equation = data["Equations"]
-            Equation = Equation.split(',')
-            print(Equation)
-            Equations = Equation[0]
-            Value_1 = Equation[1]
-            Value_2 = Equation[2]
-            try:
-                Value_3 = Equation[3]
-                print('Value_3', Value_3)
-            except:
-                Value_3 = 'z=0'
-                pass
-
-            print('Equations', Equations)
-            print('Value_1', Value_1)
-            print('Value_2', Value_2)
-
-            result, message = evaluate_expression(Equations, x=str(Value_1), y=str(Value_2), z=str(Value_3))
-            return jsonify({"message": message, "result": str(result)})
-
-        elif type_ == '2nd_type_equations':
-
-            Equation = data["Equations1"]
-            Equation = Equation.split(',')
-            print(Equation)
-            Equations1 = Equation[0]
-            Equations2 = Equation[1]
-            Value_1 = Equation[2]
-            Value_2 = Equation[3]
-
-            # Equations1 = data["Equations1"]
-            # Equations2 = data["Equations2"]
-            # Value_1 = data["Value_1"]
-            # Value_2 = data["Value_2"]
-            result, message = find_variables(Equations1, Equations2, Value_1, Value_2)
-            return jsonify({"message": message, "result": str(result)})
-
-        elif type_ == 'Logarithm and Exponential':
-            Equations1 = data["Equations"]
-            result, message = calculate_logarithm(Equations1)
-            return jsonify({"message": message, "result": str(result)})
-
-        elif type_ == 'quad_equations':
-            Equations1 = data["Equations1"]
-            print("From init", Equations1)
-            result, message = quad_equation_solution(Equations1)
-            print("From result", result)
-            return jsonify({"message": message, "result": str(result[0]), "result2": str(result[1])})
-
-        return jsonify({"message": message, "result": str(result)})
+# @bp.route('/equationsandinequalities', methods=["GET", "POST"])
+# def equationsandinequalities():
+#     if request.method == "GET":
+#         return render_template("equations_and_inequalities.html")
+#     if request.method == "POST":
+#         message = 'na.'
+#         result = 'na.'
+#         data = request.json
+#         type_ = data["type"]
+#         print("From views:,", data)
+#         if type_ == 'get_equations':
+#
+#             Equation = data["Equations"]
+#             Equation = Equation.split(',')
+#             print(Equation)
+#             Equations = Equation[0]
+#             Value_1 = Equation[1]
+#             Value_2 = Equation[2]
+#             try:
+#                 Value_3 = Equation[3]
+#                 print('Value_3', Value_3)
+#             except:
+#                 Value_3 = 'z=0'
+#                 pass
+#
+#             print('Equations', Equations)
+#             print('Value_1', Value_1)
+#             print('Value_2', Value_2)
+#
+#             result, message = evaluate_expression(Equations, x=str(Value_1), y=str(Value_2), z=str(Value_3))
+#             return jsonify({"message": message, "result": str(result)})
+#
+#         elif type_ == '2nd_type_equations':
+#
+#             Equation = data["Equations1"]
+#             Equation = Equation.split(',')
+#             print(Equation)
+#             Equations1 = Equation[0]
+#             Equations2 = Equation[1]
+#             Value_1 = Equation[2]
+#             Value_2 = Equation[3]
+#
+#             # Equations1 = data["Equations1"]
+#             # Equations2 = data["Equations2"]
+#             # Value_1 = data["Value_1"]
+#             # Value_2 = data["Value_2"]
+#             result, message = find_variables(Equations1, Equations2, Value_1, Value_2)
+#             return jsonify({"message": message, "result": str(result)})
+#
+#         elif type_ == 'Logarithm and Exponential':
+#             Equations1 = data["Equations"]
+#             result, message = calculate_logarithm(Equations1)
+#             return jsonify({"message": message, "result": str(result)})
+#
+#         elif type_ == 'quad_equations':
+#             Equations1 = data["Equations1"]
+#             print("From init", Equations1)
+#             result, message = quad_equation_solution(Equations1)
+#             print("From result", result)
+#             return jsonify({"message": message, "result": str(result[0]), "result2": str(result[1])})
+#
+#         return jsonify({"message": message, "result": str(result)})
 
 
 @bp.route('/integer', methods=["GET", "POST"])
