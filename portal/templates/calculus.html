@@ -50,15 +50,15 @@
         <TR>
             <TD COLSPAN=7 ALIGN=LEFT VALIGN=MIDDLE>
                 <span>Function:</span><br>
-                <INPUT TYPE=TEXT NAME="limit_input" ID="limit_input" style="padding: 12px;width: 250px;">
+                <INPUT TYPE=TEXT NAME="limit_input" ID="differentiation_input" style="padding: 12px;width: 250px;">
                 <span>Variable</span>
-                <INPUT TYPE=TEXT NAME="limit_point" ID="limit_point" style="padding: 12px;width: 10px;">
-                <INPUT TYPE="button" class="widebutton" VALUE="Calculate" onclick="CalculateLimit()">
+                <INPUT TYPE=TEXT NAME="limit_point" ID="differentiation_point" style="padding: 12px;width: 10px;">
+                <INPUT TYPE="button" class="widebutton" VALUE="Calculate" onclick="get_differential()">
             </TD>
         </TR>
         <tr>
             <TD ALIGN=CENTER>Result :</TD>
-            <TD><span id="limit_result" style="font-size: small;">-------------------</span></TD>
+            <TD><span id="differentiation_result" style="font-size: small;">-------------------</span></TD>
         </tr>
     </TABLE>
 </FORM>
@@ -70,17 +70,35 @@
                 <tr>
                     <td> <br> </td>
                 </tr>
-                <TR>
-                    <TD COLSPAN=7 ALIGN=LEFT VALIGN=MIDDLE>
-                        <span>Please enter the function:</span><br>
-                        <INPUT TYPE=TEXT NAME="limit_input" ID="limit_input" style="padding: 12px;width: 380px;">
-                        <INPUT TYPE="button" class="widebutton" VALUE="Calculate Limits" onclick="CalculateLimit()">
-                    </TD>
-                </TR>
+                 <TR>
+            <TD COLSPAN=7 ALIGN=LEFT VALIGN=MIDDLE>
+                <span>Function:</span><br>
+                <INPUT TYPE=TEXT NAME="limit_input" ID="integration_input" style="padding: 12px;width: 250px;">
+                <span>Variable</span>
+                <INPUT TYPE=TEXT NAME="limit_point" ID="integration_point" style="padding: 12px;width: 10px;">
+            </TD>
+        </TR>
                 <tr>
-                    <TD ALIGN=CENTER>Result :</TD>
-                    <TD><span id="limit_result" style="font-size: small;">-------------------</span></TD>
+                    <td>
+                        <span>lower limit</span>
+                <INPUT TYPE=TEXT NAME="limit_point" ID="integration_lower" style="padding: 12px;width: 10px;">
+
+                    </td>
+
+                    <td>
+                        <span>upper limit</span>
+                <INPUT TYPE=TEXT NAME="limit_point" ID="integration_upper" style="padding: 12px;width: 10px;">
+
+                    </td>
                 </tr>
+
+        <tr>
+           <td>  <INPUT TYPE="button" class="widebutton" VALUE="Calculate" onclick="get_integration()">
+</td> </tr>
+                 <tr>
+            <TD ALIGN=CENTER>Result :</TD>
+            <TD><span id="integration_result" style="font-size: small;">-------------------</span></TD>
+        </tr>
             </TABLE>
         </FORM>
         <h2>Series</h2>
@@ -106,11 +124,83 @@
         </FORM>
         <!-- Section for Limits -->
 
+        <h2>Results</h2>
+
+
+        <FORM>
+            <TABLE border=0 width=100% bgcolor=moccasin>
+                <tr>
+                    <td> <br> </td>
+                </tr>
+
+                <tr>
+                    <TD ALIGN=CENTER><INPUT TYPE="button" class="widebutton" VALUE="Clear" ></TD>
+<TD ALIGN=CENTER><INPUT TYPE="button" class="widebutton" VALUE="Save" ></TD>                </tr>
+            </TABLE>
+        </FORM>
+
 
 
         <!-- Other sections (Differentiation, Integration, Series) can be added in the same format -->
 
     </div>
 </body>
+
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+<script>
+    function get_differential(){
+        eqn = document.getElementById("differentiation_input").value
+        variable = document.getElementById("differentiation_point").value
+        data_dict = {'eqn':eqn,'variable':variable}
+        $.ajax({
+                url: '/uncg_math/differentiation',
+                data: JSON.stringify(data_dict),
+                type: 'POST',
+                contentType: "application/json",
+                dataType: 'json',
+                success: function (data2) {
+                    document.getElementById("differentiation_result").innerText = data2['result'];
+                   return true;
+                },
+                error: function (data2) {
+                    console.log(data2);
+                    return false;
+                }
+            });
+
+
+    }
+
+function get_integration(){
+        eqn = document.getElementById("integration_input").value
+        variable = document.getElementById("integration_point").value
+        lower = document.getElementById("integration_lower").value
+        upper = document.getElementById("integration_upper").value
+
+        data_dict = {'eqn':eqn,'var':variable,'lower':lower,'upper':upper}
+
+
+        $.ajax({
+                url: '/uncg_math/integration',
+                data: JSON.stringify(data_dict),
+                type: 'POST',
+                contentType: "application/json",
+                dataType: 'json',
+                success: function (data2) {
+                    document.getElementById("integration_result").innerText = data2['result'];
+                   return true;
+                },
+                error: function (data2) {
+                    console.log(data2);
+                    return false;
+                }
+            });
+
+
+    }
+
+</script>
 
 </html>

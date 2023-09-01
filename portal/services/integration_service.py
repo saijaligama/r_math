@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, jsonify
-from portal.handlers.differentiation_handler import calculate_differentiation
+from portal.handlers.integration_handler import calculate_integration
 
 # diff_bp = Blueprint('diff_bp', __name__)
 int_bp = Blueprint('int_bp', __name__, url_prefix='/uncg_math',
@@ -10,3 +10,7 @@ int_bp = Blueprint('int_bp', __name__, url_prefix='/uncg_math',
 def integration():
     if request.method == "GET":
         return render_template("integration.html")
+    elif request.method == "POST":
+        data = request.json
+        result = calculate_integration(data)
+        return jsonify({'result':result})
