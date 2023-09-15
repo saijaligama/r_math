@@ -2,10 +2,10 @@ import sympy as sp
 
 
 def calculate_integration(data):
-    expr_str = data['eqn']
-    var_str = data['var']
-    lower_limit = data['lower']
-    upper_limit = data['upper']
+    expr_str = data[0]
+    var_str = data[1]
+    lower_limit = data[2]
+    upper_limit = data[3]
 
     var = sp.symbols(var_str)
     expr = sp.sympify(expr_str)

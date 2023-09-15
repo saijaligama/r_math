@@ -12,7 +12,8 @@ def differentiation():
         return render_template("differentiation.html")
     if request.method == "POST":
         data = request.json
-        result = calculate_differentiation(data)
+        inp = data['eqn'].split(',')
+        result = calculate_differentiation(inp)
 
         return jsonify({'result':result})
 

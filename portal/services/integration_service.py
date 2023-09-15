@@ -12,5 +12,7 @@ def integration():
         return render_template("integration.html")
     elif request.method == "POST":
         data = request.json
-        result = calculate_integration(data)
+        inp = data['eqn'].split(',')
+        print(inp)
+        result = calculate_integration(inp)
         return jsonify({'result':result})
