@@ -30,10 +30,10 @@ bp = Blueprint('view', __name__, url_prefix='/uncg_math', template_folder="./tem
 #         return render_template("calculus.html")
 
 
-@bp.route('/trigonometry', methods=["GET", "POST"])
-def trigonometry():
-    if request.method == "GET":
-        return render_template("trigonometry.html")
+# @bp.route('/trigonometry', methods=["GET", "POST"])
+# def trigonometry():
+#     if request.method == "GET":
+#         return render_template("trigonometry.html")
 
 
 # @bp.route('/differentiation', methods=["GET", "POST"])
