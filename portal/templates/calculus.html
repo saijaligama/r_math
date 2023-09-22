@@ -28,6 +28,37 @@
         <tr>
             <td> <br> </td>
         </tr>
+        </tr>
+                <tr>
+                    <td>
+                        <span>Input Format: function,variable,point,dir </span>
+                    </td>
+
+                </tr>
+         <tr>
+                    <td>
+                        <span>function is the function you want to solve</span>
+                    </td>
+
+                </tr>
+        <tr>
+                    <td>
+                        <span>point is the point to which limit extends</span>
+                    </td>
+
+                </tr>
+        <tr>
+                    <td>
+                        <span>dir is the direction which the limit is approaching, either + or -</span>
+                    </td>
+
+                </tr>
+        <tr>
+                    <td>
+                        <span>eg: 1/x,x,1,+</span>
+                    </td>
+
+                </tr>
         <TR>
             <TD COLSPAN=7 ALIGN=LEFT VALIGN=MIDDLE>
                 <span>Please enter the function:</span><br>
@@ -49,6 +80,24 @@
         <tr>
             <td> <br> </td>
         </tr>
+                <tr>
+                    <td>
+                        <span>Input Format: function,variable eg: x**2,x</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <span>function is the function you want to solve</span>
+                    </td>
+
+                </tr>
+        <tr>
+                    <td>
+                        <span>variable is the variable we want to differentiate with, we can also do partial derivatives by mentioning only a single variable</span>
+                    </td>
+
+                </tr>
         <TR>
             <TD COLSPAN=7 ALIGN=LEFT VALIGN=MIDDLE>
                 <span>Function:</span><br>
@@ -57,8 +106,10 @@
             </TD>
         </TR>
         <tr>
-            <TD ALIGN=CENTER>Result :</TD>
-            <TD><span id="differentiation_result" style="font-size: small;">-------------------</span></TD>
+            <TD>Result :
+            <span id="differentiation_result" style="font-size: small;">-------------------</span>
+            </TD>
+            <TD></TD>
         </tr>
     </TABLE>
 </FORM>
@@ -69,6 +120,11 @@
             <TABLE border=0 width=100% bgcolor=moccasin>
                 <tr>
                     <td> <br> </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Input Format: function,variable,lower_limit, upper_limit eg: x**2,x,0,1</span>
+                    </td>
                 </tr>
                  <TR>
             <TD COLSPAN=7 ALIGN=LEFT VALIGN=MIDDLE>
@@ -82,8 +138,10 @@
            <td>  <INPUT TYPE="button" class="widebutton" VALUE="Calculate" onclick="get_integration()">
 </td> </tr>
                  <tr>
-            <TD ALIGN=CENTER>Result :</TD>
-            <TD><span id="integration_result" style="font-size: small;">-------------------</span></TD>
+            <TD>Result :
+            <span id="integration_result" style="font-size: small;">-------------------</span>
+            </TD>
+            <TD></TD>
         </tr>
             </TABLE>
         </FORM>
