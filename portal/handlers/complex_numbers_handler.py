@@ -5,6 +5,7 @@ import cmath
 
 def complex_numbers_calc(data):
     type = data["type"]
+    print(type)
     complex_expression_ = data["complex_expression_"]
     try:
         message, result = evaluate_complex_expression(complex_expression_)
