@@ -2,6 +2,7 @@ import sympy as sp
 
 
 def calculate_differentiation(data):
+    print(data[0])
     expr_str = data[0]
     var_str = data[1]
     var = sp.symbols(var_str)
