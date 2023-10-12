@@ -377,43 +377,43 @@ def geometry():
 #         return jsonify({"message": message, "result": str(result)})
 
 
-@bp.route('/integer', methods=["GET", "POST"])
-def integer():
-    if request.method == "GET":
-        return render_template("integer.html")
-    if request.method == "POST":
-        data = request.json
-        num_of_questions = int(data['numOfQues'])
-        f_num_digits = int(data['fnumDigits'])
-        s_num_digits = int(data['sNumDigits'])
-        operation = data['ASMD']
-
-        result = {'questions': [], 'answers': []}
-        for i in range(0, num_of_questions):
-            first_num = random.randint(10 ** (f_num_digits - 1), 10 ** f_num_digits - 1)
-            second_num = random.randint(10 ** (s_num_digits - 1), 10 ** s_num_digits - 1)
-
-            if operation == '+':
-                res = first_num + second_num
-            elif operation == '-':
-                res = first_num - second_num
-            elif operation == '*':
-                res = first_num * second_num
-            elif operation == '/':
-                if second_num == 0:
-                    second_num = random.randint(10 ** (s_num_digits - 1), 10 ** s_num_digits - 1)
-                    res = round(first_num // second_num, 2)
-                else:
-                    res = round(first_num // second_num, 2)
-            else:
-                return jsonify({'error': 'Invalid Operation'})
-
-            question = str(first_num) + ' ' + operation + ' ' + str(second_num)
-            result['questions'].append(question)
-            res = round(res, 5)
-            result['answers'].append(str(res))
-
-    return jsonify(result)
+# @bp.route('/integer', methods=["GET", "POST"])
+# def integer():
+#     if request.method == "GET":
+#         return render_template("integer.html")
+#     if request.method == "POST":
+#         data = request.json
+#         num_of_questions = int(data['numOfQues'])
+#         f_num_digits = int(data['fnumDigits'])
+#         s_num_digits = int(data['sNumDigits'])
+#         operation = data['ASMD']
+#
+#         result = {'questions': [], 'answers': []}
+#         for i in range(0, num_of_questions):
+#             first_num = random.randint(10 ** (f_num_digits - 1), 10 ** f_num_digits - 1)
+#             second_num = random.randint(10 ** (s_num_digits - 1), 10 ** s_num_digits - 1)
+#
+#             if operation == '+':
+#                 res = first_num + second_num
+#             elif operation == '-':
+#                 res = first_num - second_num
+#             elif operation == '*':
+#                 res = first_num * second_num
+#             elif operation == '/':
+#                 if second_num == 0:
+#                     second_num = random.randint(10 ** (s_num_digits - 1), 10 ** s_num_digits - 1)
+#                     res = round(first_num // second_num, 2)
+#                 else:
+#                     res = round(first_num // second_num, 2)
+#             else:
+#                 return jsonify({'error': 'Invalid Operation'})
+#
+#             question = str(first_num) + ' ' + operation + ' ' + str(second_num)
+#             result['questions'].append(question)
+#             res = round(res, 5)
+#             result['answers'].append(str(res))
+#
+#     return jsonify(result)
     # return {1:'1234'}
 
 
@@ -423,84 +423,84 @@ def integercheck():
     return jsonify(data)
 
 
-@bp.route('/fraction', methods=["GET", "POST"])
-def fractions():
-    if request.method == "GET":
-        return render_template('fraction.html')
-    if request.method == 'POST':
-        data = request.get_json()
-        num_of_questions = int(data['numOfQues'])
-        first_format = data['fNumberFormat']
-        second_format = data['sNumberFormat']
+# @bp.route('/fraction', methods=["GET", "POST"])
+# def fractions():
+#     if request.method == "GET":
+#         return render_template('fraction.html')
+#     if request.method == 'POST':
+#         data = request.get_json()
+#         num_of_questions = int(data['numOfQues'])
+#         first_format = data['fNumberFormat']
+#         second_format = data['sNumberFormat']
+#
+#         first_digits = [d for d in first_format.split()]
+#         second_digits = [d for d in second_format.split()]
+#
+#         first_numerator = int(first_digits[1].split("/")[0])
+#         second_numerator = int(second_digits[1].split("/")[0])
+#
+#         first_denominator = int(first_digits[1].split("/")[1])
+#         second_denominator = int(second_digits[1].split("/")[1])
+#
+#         op = data['ASMD']
+#
+#         result = {'questions': [], 'answers': []}
+#         for i in range(num_of_questions):
+#             f_num_res = generate_number(int(first_digits[0]), first_numerator, first_denominator)
+#             whole_num1, frac1 = f_num_res.split()
+#
+#             fraction = Fraction(frac1)
+#             # f_num = str(round(float(whole_num1) + fraction.numerator / fraction.denominator, 5))
+#
+#             # s_num_res = generate_number(int(second_digits[0]), second_numerator, second_denominator)
+#             # whole_num2, frac2 = s_num_res.split()
+#
+#             # fraction_2 = Fraction(frac2)
+#             # s_num = str(round(float(whole_num2) + fraction_2.numerator / fraction_2.denominator, 5))
+#
+#             f_num = str(float(whole_num1) + fraction.numerator / fraction.denominator)
+#
+#             s_num_res = generate_number(int(second_digits[0]), second_numerator, second_denominator)
+#             whole_num2, frac2 = s_num_res.split()
+#
+#             fraction_2 = Fraction(frac2)
+#             s_num = str(float(whole_num2) + fraction_2.numerator / fraction_2.denominator)
+#
+#             print(f_num)
+#             print(s_num)
+#
+#             if op == '+':
+#                 res = float(f_num) + float(s_num)
+#             elif op == '-':
+#                 res = float(f_num) - float(s_num)
+#             elif op == '*':
+#                 res = float(f_num) * float(s_num)
+#             elif op == '/':
+#                 res = float(f_num) / float(s_num)
+#             else:
+#                 res = 0
+#             # res_1 = decimal_to_fraction(res)
+#             res_1 = round(res, 5)
+#             # res_1 = res
+#
+#             result['questions'].append(f'{f_num_res} {op} {s_num_res}')
+#             # result['answers'].append(res_1)
+#             result['answers'].append(str(res_1))
+#
+#         return jsonify(result)
 
-        first_digits = [d for d in first_format.split()]
-        second_digits = [d for d in second_format.split()]
 
-        first_numerator = int(first_digits[1].split("/")[0])
-        second_numerator = int(second_digits[1].split("/")[0])
-
-        first_denominator = int(first_digits[1].split("/")[1])
-        second_denominator = int(second_digits[1].split("/")[1])
-
-        op = data['ASMD']
-
-        result = {'questions': [], 'answers': []}
-        for i in range(num_of_questions):
-            f_num_res = generate_number(int(first_digits[0]), first_numerator, first_denominator)
-            whole_num1, frac1 = f_num_res.split()
-
-            fraction = Fraction(frac1)
-            # f_num = str(round(float(whole_num1) + fraction.numerator / fraction.denominator, 5))
-
-            # s_num_res = generate_number(int(second_digits[0]), second_numerator, second_denominator)
-            # whole_num2, frac2 = s_num_res.split()
-
-            # fraction_2 = Fraction(frac2)
-            # s_num = str(round(float(whole_num2) + fraction_2.numerator / fraction_2.denominator, 5))
-
-            f_num = str(float(whole_num1) + fraction.numerator / fraction.denominator)
-
-            s_num_res = generate_number(int(second_digits[0]), second_numerator, second_denominator)
-            whole_num2, frac2 = s_num_res.split()
-
-            fraction_2 = Fraction(frac2)
-            s_num = str(float(whole_num2) + fraction_2.numerator / fraction_2.denominator)
-
-            print(f_num)
-            print(s_num)
-
-            if op == '+':
-                res = float(f_num) + float(s_num)
-            elif op == '-':
-                res = float(f_num) - float(s_num)
-            elif op == '*':
-                res = float(f_num) * float(s_num)
-            elif op == '/':
-                res = float(f_num) / float(s_num)
-            else:
-                res = 0
-            # res_1 = decimal_to_fraction(res)
-            res_1 = round(res, 5)
-            # res_1 = res
-
-            result['questions'].append(f'{f_num_res} {op} {s_num_res}')
-            # result['answers'].append(res_1)
-            result['answers'].append(str(res_1))
-
-        return jsonify(result)
-
-
-def generate_number(base, num_digits, den_digits):
-    whole_number = ''.join(str(random.randint(0, 9)) for _ in range(base))
-    numerator = [random.randint(0, 9) for _ in range(num_digits)]
-    denominator = [random.randint(1, 9) for _ in range(den_digits)]
-
-    if numerator[0] > denominator[0]:
-        numerator[0], denominator[0] = denominator[0], numerator[0]
-
-    numerator = ''.join(str(numerator[0]))
-    denominator = ''.join(str(denominator[0]))
-    return f'{whole_number} {numerator}/{denominator}'
+# def generate_number(base, num_digits, den_digits):
+#     whole_number = ''.join(str(random.randint(0, 9)) for _ in range(base))
+#     numerator = [random.randint(0, 9) for _ in range(num_digits)]
+#     denominator = [random.randint(1, 9) for _ in range(den_digits)]
+#
+#     if numerator[0] > denominator[0]:
+#         numerator[0], denominator[0] = denominator[0], numerator[0]
+#
+#     numerator = ''.join(str(numerator[0]))
+#     denominator = ''.join(str(denominator[0]))
+#     return f'{whole_number} {numerator}/{denominator}'
 
 
 @bp.route('/decimal', methods=["GET", "POST"])
@@ -735,17 +735,17 @@ def eighthmain():
     if request.method == "POST":
         data = request.get_json()
 
-
-@bp.route('/check_answers', methods=["GET", "POST"])
-def checkintdecfracanswers():
-    data = request.get_json()
-    results = {}
-    for question, values in data.items():
-        if values['Answer'] == values['Submission']:
-            results[question] = 'RIGHT'
-        else:
-            results[question] = 'WRONG'
-    return jsonify(results)
+#
+# @bp.route('/check_answers', methods=["GET", "POST"])
+# def checkintdecfracanswers():
+#     data = request.get_json()
+#     results = {}
+#     for question, values in data.items():
+#         if values['Answer'] == values['Submission']:
+#             results[question] = 'RIGHT'
+#         else:
+#             results[question] = 'WRONG'
+#     return jsonify(results)
 # =============================================================================
 # @bp.route('/getpdf', methods=["GET", "POST"])
 # =============================================================================

@@ -12,6 +12,9 @@ from portal.services import equations_inequalities_service
 from portal.services import integration_service
 from portal.services import limits_service
 from portal.services import trigonometry_service
+from portal.services import integer_service
+from portal.services import check_answers
+from portal.services import graphing_service
 
 app = create_app()
 
@@ -27,6 +30,9 @@ app.register_blueprint(equations_inequalities_service.equations_inequalities_bp)
 app.register_blueprint(integration_service.int_bp)
 app.register_blueprint(limits_service.limits_bp)
 app.register_blueprint(trigonometry_service.trigonometry_bp)
+app.register_blueprint(integer_service.integer_bp)
+app.register_blueprint(check_answers.check_answers_bp)
+app.register_blueprint(graphing_service.graphing_bp)
 
 if __name__ == "__main__":
     app.run(port=8003)
