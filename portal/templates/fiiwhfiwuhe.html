@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Calculus</title>
 
     <link rel="stylesheet" type="text/css" href="/uncg_math/static/Geometry_files/mystyle.css">
-    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="/uncg_math/static/Geometry_files/geometry.js"></script>
 </head>
 
 <body>
@@ -15,42 +16,70 @@
 
             <ul style="margin-top: -20px;">
                 <li style="padding-left: 179px;"><a href="/uncg_math">Home</a></li>
+<!--                <li style="padding-left: 179px;"><a href="/uncg_math/algebra">Back</a></li>-->
             </ul>
         </div>
 
         <!-- Section for Limits -->
-        <h2>Graphing</h2>
-        <form>
-            <table border=0 width=100% bgcolor=moccasin>
-                <tr>
-                    <td> <br> </td>
-                </tr>
+        <!-- Section for Limits -->
+<h2>Graphing</h2>
+<FORM>
+    <TABLE border=0 width=100% bgcolor=moccasin>
+        <tr>
+            <td> <br> </td>
+        </tr>
 
-                <tr>
-                    <td colspan=7 align=left valign=middle>
-                        <span>Please enter the function:</span><br>
-                        <input type="text" name="limit_input" id="limit_input" style="padding: 12px; width: 250px;">
-                        <input type="button" class="widebutton" value="Calculate" onclick="get_limit()">
-                    </td>
-                </tr>
-                <tr>
-                    <td align=center>Result :</td>
-                    <td>
-                        <span id="limit_result" style="font-size: small;"></span>
-                    </td>
-                </tr>
-            </table>
-        </form>
 
-        <!-- SVG for graph -->
-        <svg width="400" height="400" id="graph"></svg>
+        <TR>
+            <TD COLSPAN=7 ALIGN=LEFT VALIGN=MIDDLE>
+                <span>Please enter the function:</span><br>
+                <INPUT TYPE=TEXT NAME="limit_input" ID="limit_input" style="padding: 12px; width: 250px;">
+                <INPUT TYPE="button" class="widebutton" VALUE="Calculate" onclick="get_limit()">
+            </TD>
+        </TR>
+        <tr>
+            <TD ALIGN=CENTER>Result :</TD>
+            <TD><span id="limit_result" style="font-size: small;">-------------------</span></TD>
+        </tr>
+    </TABLE>
+</FORM>
+
+        <!-- Other sections (Differentiation, Integration, Series) can be added in the same format -->
+
     </div>
+</body>
+
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 
-    <script>
-        function get_limit() {
-        displayGraph()
+<script>
+function get_limit1(){
+        eqn = document.getElementById("limit_input").value
+
+
+        data_dict = {'eqn':eqn}
+
+
+        $.ajax({
+                url: '/uncg_math/graphing',
+                data: JSON.stringify(data_dict),
+                type: 'POST',
+                contentType: "application/json",
+                dataType: 'json',
+                success: function (data2) {
+                    document.getElementById("limit_result").innerText = data2['result'];
+                   return true;
+                },
+                error: function (data2) {
+                    console.log(data2);
+                    return false;
+                }
+            });
+
+
+    }
+
+function get_limit() {
     eqn = document.getElementById("limit_input").value
     data_dict = {'eqn': eqn}
 
@@ -85,7 +114,9 @@
         }
     });
 }
-function displayGraph() {
+
+
+        function displayGraph() {
             const eqn = document.getElementById("limit_input").value;
 
             // Clear previous graph
@@ -140,6 +171,69 @@ function displayGraph() {
             return data;
         }
 
+        function calculateEquation(equation, x) {
+            try {
+                return eval(equation);
+            } catch (error) {
+                console.error("Invalid equation:", error);
+                return 0; // Default value in case of an error
+            }
+        }
+function displayGraph() {
+            const eqn = document.getElementById("limit_input").value;
+
+            // Clear previous graph
+            const svg = d3.select("#graph");
+            svg.selectAll("*").remove();
+
+            // Create an array of data points for the graph
+            const data = generateData(eqn);
+
+            // Set up the SVG canvas for the graph
+            const margin = { top: 20, right: 20, bottom: 30, left: 20 };
+            const width = +svg.attr("width") - margin.left - margin.right;
+            const height = +svg.attr("height") - margin.top - margin.bottom;
+            const g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+            // Define scales
+            const x = d3.scaleLinear().rangeRound([-width / 2, width / 2]);
+            const y = d3.scaleLinear().rangeRound([-height / 2, height / 2]);
+
+            x.domain(d3.extent(data, d => d.x));
+            y.domain([d3.min(data, d => d.y), d3.max(data, d => d.y)]);
+
+            // Create a line generator
+            const line = d3.line()
+                .x(d => x(d.x))
+                .y(d => y(d.y));
+
+            // Draw the line
+            g.append("path")
+                .datum(data)
+                .attr("fill", "none")
+                .attr("stroke", "steelblue")
+                .attr("stroke-linejoin", "round")
+                .attr("stroke-linecap", "round")
+                .attr("stroke-width", 1.5)
+                .attr("d", line);
+
+            // Add X and Y axes
+            g.append("g")
+                .attr("transform", "translate(0," + height / 2 + ")")
+                .call(d3.axisBottom(x));
+
+            g.append("g")
+                .attr("transform", "translate(" + -width / 2 + ",0)")
+                .call(d3.axisLeft(y));
+        }
+
+        function generateData(equation) {
+            const data = [];
+            for (let x = -10; x <= 10; x += 0.1) {
+                data.push({ x, y: calculateEquation(equation, x) });
+            }
+            return data;
+        }
 
         function calculateEquation(equation, x) {
             try {
@@ -160,9 +254,6 @@ function displayGraph() {
                 return 0;
             }
         }
+ </script>
 
-
-
-    </script>
-</body>
 </html>
