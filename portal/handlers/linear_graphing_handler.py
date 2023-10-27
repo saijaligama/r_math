@@ -112,7 +112,8 @@ def calculate_line_properties(properties):
             "Equation": equation,
             "X-Intercept": x_intercept,
             "Y-Intercept": y_intercept,
-            "Point A": pointB
+            "PointA": pointA,
+            "PointB": pointB
         }
 
     elif slope and y_intercept:
@@ -120,6 +121,7 @@ def calculate_line_properties(properties):
         equation = f"y = {slope}x + {b}"
         x_intercept = -b / slope
         pointB = (x_intercept, 0)
+        pointA = (0,y_intercept)
         distance = math.sqrt((pointB[0] - x_intercept) ** 2 + (pointB[1] - y_intercept) ** 2)
         midpoint = ((pointB[0] + x_intercept) / 2, (pointB[1] + y_intercept) / 2)
 
@@ -130,7 +132,8 @@ def calculate_line_properties(properties):
             "Equation": equation,
             "X-Intercept": x_intercept,
             "Y-Intercept": y_intercept,
-            "Point A": pointB
+            "PointA": pointA,
+            "PointB": pointB
         }
 
     elif x_intercept is not None and y_intercept is not None:
@@ -149,10 +152,10 @@ def calculate_line_properties(properties):
             "Midpoint": midpoint,
             "Slope": slope,
             "Equation": equation,
-            "Point A": pointA,
             "X-Intercept": x_intercept,
             "Y-Intercept": y_intercept,
-            "Point B": pointB
+            "PointA": pointA,
+            "PointB": pointB
         }
 
     elif (pointA and slope) or (pointB and slope):
