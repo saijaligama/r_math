@@ -50,7 +50,7 @@
 
     <script>
         function get_limit() {
-
+        displayGraph()
     eqn = document.getElementById("limit_input").value
     data_dict = {'eqn': eqn}
 
@@ -79,18 +79,14 @@
                             "Symmetric: " + symmetric;
 
             document.getElementById("limit_result").innerText = outputText;
-
-            const eqn = data2.eqn;
-            const vari = data2.var
-            displayGraph(eqn,vari)
         },
         error: function (data2) {
             console.log(data2);
         }
     });
 }
-function displayGraph(eqn,vari) {
-            //const eqn = document.getElementById("limit_input").value;
+function displayGraph() {
+            const eqn = document.getElementById("limit_input").value;
 
             // Clear previous graph
             const svg = d3.select("#graph");
@@ -136,27 +132,26 @@ function displayGraph(eqn,vari) {
                 .call(d3.axisLeft(y));
         }
 
-        function generateData(equation,vari) {
+        function generateData(equation) {
             const data = [];
-            for (let vari = -10; vari <= 10; vari += 0.1) {
-                data.push({ x: vari, y: calculateEquation(equation, vari) });
+            for (let x = -10; x <= 10; x += 0.1) {
+                data.push({ x, y: calculateEquation(equation, x) });
             }
-            console.log(data)
             return data;
         }
 
 
-        function calculateEquation(equation, vari) {
+        function calculateEquation(equation, x) {
             try {
                 // Explicitly define trigonometric functions
                 const sin = Math.sin;
                 const cos = Math.cos;
                 const tan = Math.tan;
-                const cosec = vari => 1 / Math.sin(vari);
-                const cot = vari => 1 / Math.tan(vari);
-                const sec = vari => 1 / Math.cos(vari);
+                const cosec = x => 1 / Math.sin(x);
+                const cot = x => 1 / Math.tan(x);
+                const sec = x => 1 / Math.cos(x);
 
-                const result = eval(equation.replace(/x/g,vari));
+                const result = eval(equation);
 
 
             return Math.abs(result);

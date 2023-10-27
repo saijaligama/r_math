@@ -237,7 +237,15 @@ class TrigonometricCalculator:
         }
 
         angle_str = trig_func.split("(")[1].split(")")[0]
-        angle = int(angle_str)
+        if "pi" in angle_str:
+            angle = eval(angle_str.replace("pi","180"))
+        else:
+            angle = angle_str
+
+        print(angle_str)
+        print("hi")
+
+        angle = int(angle)
         angle = angle % 360
 
         if trig_func.startswith('sin'):

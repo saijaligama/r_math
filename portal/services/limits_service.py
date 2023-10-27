@@ -9,7 +9,7 @@ limits_bp = Blueprint('limits_bp', __name__, url_prefix='/uncg_math',
 def limits():
     if request.method == 'POST':
         data = request.json
-        inp = data['eqn'].split(',')
+        # inp = data['eqn'].split(',')
         limit_object = LimitCalculator()
-        result = limit_object.calculate_limit(inp)
+        result = limit_object.calculate_limit(data['eqn'])
         return jsonify({'result': result})
