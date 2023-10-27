@@ -64,7 +64,10 @@ def calculate_line_properties(properties):
 
     if pointA and pointB:
         # Given point A and point B, calculate the rest of the properties
-        distance = math.sqrt((pointB[0] - pointA[0]) ** 2 + (pointB[1] - pointA[1]) ** 2)
+        if pointA == pointB:
+            distance="0"
+        else:
+            distance = math.sqrt((pointB[0] - pointA[0]) ** 2 + (pointB[1] - pointA[1]) ** 2)
         midpoint = ((pointA[0] + pointB[0]) / 2, (pointA[1] + pointB[1]) / 2)
         if pointB[0] - pointA[0] != 0:
             slope = (pointB[1] - pointA[1]) / (pointB[0] - pointA[0])
@@ -178,7 +181,8 @@ def calculate_line_properties(properties):
             "Equation": equation,
             "X-Intercept": x_intercept,
             "Y-Intercept": y_intercept,
-            "Point A": (x, y)
+            "PointA": (x, y),
+            "PointB": pointB
         }
 
     else:

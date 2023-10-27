@@ -178,9 +178,15 @@ function get_graph(){
     // Check if Y-Intercept is available, and if not, set it to a default value
     var yIntercept = data2['Y-Intercept'] || "N/A";
 
+    var pointa = data2['PointA'] || "N/A";
+
+    var pointb = data2['PointB'] || "N/A";
+
     // Now you can update the HTML elements with the results
 
     // Update the input elements with the results
+    document.getElementById("input1").value = pointa;
+    document.getElementById("input2").value = pointb;
     document.getElementById("input3").value = distance;
     document.getElementById("input4").value = midpoint;
     document.getElementById("input5").value = equation;
