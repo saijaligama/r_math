@@ -138,7 +138,7 @@ function displayGraph(eqn,vari) {
 
         function generateData(equation,vari) {
             const data = [];
-            for (let vari = -10; vari <= 10; vari += 0.1) {
+            for (let vari = -100; vari <= 100; vari += 0.1) {
                 data.push({ x: vari, y: calculateEquation(equation, vari) });
             }
             console.log(data)

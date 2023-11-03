@@ -65,11 +65,12 @@ class TrigonometricCalculator:
             raise ValueError("Invalid trigonometric function")
 
         return str(trig_value)
+
     def trig_fractions(self,trig_func):
 
         sin_vals = {
             0: '0',
-            15: '1/4',
+            15: 'COMPLEX NUMBER',
             30: '1/2',
             45: 'sqrt(2)/2',
             60: 'sqrt(3)/2',
@@ -236,6 +237,19 @@ class TrigonometricCalculator:
             360: 'undefined'
         }
 
+        list_of_trig = [sin_vals,cos_vals,tan_vals,cot_vals,sec_vals,csc_vals]
+
+        for trig in list_of_trig:
+            trig[15] = 'COMPLEX NUMBER'
+            trig[75] = 'COMPLEX NUMBER'
+            trig[105] = 'COMPLEX NUMBER'
+            trig[165] = 'COMPLEX NUMBER'
+            trig[195] = 'COMPLEX NUMBER'
+            trig[255] = 'COMPLEX NUMBER'
+            trig[285] = 'COMPLEX NUMBER'
+            trig[345] = 'COMPLEX NUMBER'
+
+
         angle_str = trig_func.split("(")[1].split(")")[0]
         if "pi" in angle_str:
             angle = eval(angle_str.replace("pi","180"))
@@ -262,6 +276,203 @@ class TrigonometricCalculator:
             return csc_vals[angle]
         else:
             return "Invalid function"
+    # def trig_fractions(self,trig_func):
+    #
+    #     sin_vals = {
+    #         0: '0',
+    #         15: '1/4',
+    #         30: '1/2',
+    #         45: 'sqrt(2)/2',
+    #         60: 'sqrt(3)/2',
+    #         75: 'sqrt(2)/2',
+    #         90: '1',
+    #         105: 'sqrt(2)/2',
+    #         120: 'sqrt(3)/2',
+    #         135: 'sqrt(2)/2',
+    #         150: '1/2',
+    #         165: '1/4',
+    #         180: '0',
+    #         195: '-1/4',
+    #         210: '-1/2',
+    #         225: '-sqrt(2)/2',
+    #         240: '-sqrt(3)/2',
+    #         255: '-sqrt(2)/2',
+    #         270: '-1',
+    #         285: '-sqrt(2)/2',
+    #         300: '-sqrt(3)/2',
+    #         315: '-sqrt(2)/2',
+    #         330: '-1/2',
+    #         345: '-1/4',
+    #         360: '0'
+    #     }
+    #
+    #     cos_vals = {
+    #         0: '1',
+    #         15: 'sqrt(3)/4',
+    #         30: 'sqrt(3)/2',
+    #         45: 'sqrt(2)/2',
+    #         60: '1/2',
+    #         75: '1/2',
+    #         90: '0',
+    #         105: '-1/2',
+    #         120: '-1/2',
+    #         135: '-sqrt(2)/2',
+    #         150: '-sqrt(3)/2',
+    #         165: '-sqrt(3)/4',
+    #         180: '-1',
+    #         195: '-sqrt(3)/4',
+    #         210: '-sqrt(3)/2',
+    #         225: '-sqrt(2)/2',
+    #         240: '-1/2',
+    #         255: '-1/2',
+    #         270: '0',
+    #         285: '1/2',
+    #         300: '1/2',
+    #         315: 'sqrt(2)/2',
+    #         330: 'sqrt(3)/2',
+    #         345: 'sqrt(3)/4',
+    #         360: '1'
+    #     }
+    #
+    #     tan_vals = {
+    #         0: 'undefined',
+    #         15: '1/sqrt(3)',
+    #         30: 'sqrt(3)/3',
+    #         45: '1',
+    #         60: 'sqrt(3)',
+    #         75: 'sqrt(2)',
+    #         90: 'undefined',
+    #         105: '-sqrt(2)',
+    #         120: '-sqrt(3)',
+    #         135: '-1',
+    #         150: '-1/sqrt(3)',
+    #         165: '-1/sqrt(3)',
+    #         180: '0',
+    #         195: '1/sqrt(3)',
+    #         210: 'sqrt(3)/3',
+    #         225: '1',
+    #         240: 'sqrt(3)',
+    #         255: 'sqrt(2)',
+    #         270: 'undefined',
+    #         285: '-sqrt(2)',
+    #         300: '-sqrt(3)',
+    #         315: '-1',
+    #         330: '-1/sqrt(3)',
+    #         345: '-1/sqrt(3)',
+    #         360: 'undefined'
+    #     }
+    #
+    #     # Manually defined dictionaries for cot, sec, and csc values in strings
+    #     cot_vals = {
+    #         0: 'undefined',
+    #         15: '1/sqrt(3)',
+    #         30: 'sqrt(3)/3',
+    #         45: '1',
+    #         60: 'sqrt(3)',
+    #         75: 'sqrt(2)',
+    #         90: 'undefined',
+    #         105: '-sqrt(2)',
+    #         120: '-sqrt(3)',
+    #         135: '-1',
+    #         150: '-1/sqrt(3)',
+    #         165: '-1/sqrt(3)',
+    #         180: '0',
+    #         195: '1/sqrt(3)',
+    #         210: 'sqrt(3)/3',
+    #         225: '1',
+    #         240: 'sqrt(3)',
+    #         255: 'sqrt(2)',
+    #         270: 'undefined',
+    #         285: '-sqrt(2)',
+    #         300: '-sqrt(3)',
+    #         315: '-1',
+    #         330: '-1/sqrt(3)',
+    #         345: '-1/sqrt(3)',
+    #         360: 'undefined'
+    #     }
+    #
+    #     sec_vals = {
+    #         0: '1',
+    #         15: '2',
+    #         30: 'sqrt(3)',
+    #         45: 'sqrt(2)',
+    #         60: 'sqrt(3)/3',
+    #         75: '1',
+    #         90: 'undefined',
+    #         105: '-1',
+    #         120: '-sqrt(3)/3',
+    #         135: '-sqrt(2)',
+    #         150: '-sqrt(3)',
+    #         165: '-2',
+    #         180: 'undefined',
+    #         195: '2',
+    #         210: 'sqrt(3)',
+    #         225: 'sqrt(2)',
+    #         240: 'sqrt(3)/3',
+    #         255: '1',
+    #         270: '1',
+    #         285: '1',
+    #         300: '1',
+    #         315: '1',
+    #         330: '2',
+    #         345: 'undefined',
+    #         360: '1'
+    #     }
+    #
+    #     csc_vals = {
+    #         0: 'undefined',
+    #         15: '2',
+    #         30: '2*sqrt(3)',
+    #         45: '2*sqrt(2)',
+    #         60: '2',
+    #         75: '2/sqrt(2)',
+    #         90: 'undefined',
+    #         105: '-2/sqrt(2)',
+    #         120: '-2',
+    #         135: '-2*sqrt(2)',
+    #         150: '-2*sqrt(3)',
+    #         165: '-2*sqrt(3)',
+    #         180: 'undefined',
+    #         195: '2*sqrt(3)',
+    #         210: '2',
+    #         225: '2/sqrt(2)',
+    #         240: '2',
+    #         255: '2*sqrt(2)',
+    #         270: '2*sqrt(3)',
+    #         285: '2*sqrt(3)',
+    #         300: '2*sqrt(3)',
+    #         315: '2*sqrt(3)',
+    #         330: '2*sqrt(3)',
+    #         345: '2*sqrt(2)',
+    #         360: 'undefined'
+    #     }
+    #
+    #     angle_str = trig_func.split("(")[1].split(")")[0]
+    #     if "pi" in angle_str:
+    #         angle = eval(angle_str.replace("pi","180"))
+    #     else:
+    #         angle = angle_str
+    #
+    #     print(angle_str)
+    #     print("hi")
+    #
+    #     angle = int(angle)
+    #     angle = angle % 360
+    #
+    #     if trig_func.startswith('sin'):
+    #         return sin_vals[angle]
+    #     elif trig_func.startswith('cos'):
+    #         return cos_vals[angle]
+    #     elif trig_func.startswith('tan'):
+    #         return tan_vals[angle]
+    #     elif trig_func.startswith('cot'):
+    #         return cot_vals[angle]
+    #     elif trig_func.startswith('sec'):
+    #         return sec_vals[angle]
+    #     elif trig_func.startswith('cosec'):
+    #         return csc_vals[angle]
+    #     else:
+    #         return "Invalid function"
 
 
 

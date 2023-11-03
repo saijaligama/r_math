@@ -94,10 +94,21 @@
                     <label for="input8">Slope m:</label>
                     <input type="text" id="input8" name="input8">
                 </td>
-                <td>
+
+            </tr>
+                <tr>
+                    <td>
+                    <label for="input9">Slope-Intercept</label>
+                    <input type="text" id="input9" name="input9">
+                </td>
+                    <td>
+                    <label for="input10">Theta</label>
+                    <input type="text" id="input10" name="input10">
+                </td>
+                    <td>
                     <INPUT TYPE="button" class="widebutton" value="Calculate" onclick="get_graph()">
                 </td>
-            </tr>
+                </tr>
 
 <!--                <tr>-->
 <!--                <th><label for="input1">Label 1:</label></th>-->
@@ -148,6 +159,8 @@ function get_graph(){
         xint = document.getElementById("input6").value
         yint = document.getElementById("input7").value
         slope = document.getElementById("input8").value
+        slope-intercept = document.getElementById("input9").value
+        theta = document.getElementById("input10").value
 
 
         data_dict = {'PointA':pointa,'PointB':pointb,'XIntercept':xint,'YIntercept':yint,'Slope':slope}
@@ -181,6 +194,8 @@ function get_graph(){
     var pointa = data2['PointA'] || "N/A";
 
     var pointb = data2['PointB'] || "N/A";
+
+    var
 
     // Now you can update the HTML elements with the results
 

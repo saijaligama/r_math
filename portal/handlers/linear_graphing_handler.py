@@ -16,6 +16,24 @@ def x_y_intercept_worker(val):
         return int(val)
 
 
+def slope_intercept_from_trig_function(function, value):
+    if function == 'sin':
+        angle = math.asin(value)
+    elif function == 'cos':
+        angle = math.acos(value)
+    elif function == 'tan':
+        angle = math.atan(value)
+    elif function == 'cot':
+        angle = math.atan(1 / value)
+    elif function == 'cosec':
+        angle = math.asin(1 / value)
+    elif function == 'sec':
+        angle = math.acos(1 / value)
+    else:
+        return "Invalid function. Please use 'sin', 'cos', 'tan', 'cot', 'cosec', or 'sec'"
+
+    slope = math.tan(angle)
+    return f"y = {slope} * x"
 
 def calculate_line_properties(properties):
     pointA_str = properties.get("PointA")
@@ -157,7 +175,16 @@ def calculate_line_properties(properties):
             "PointA": pointA,
             "PointB": pointB
         }
-
+    elif slope_str != '':
+        if '**' in slope_str:
+            trig_func, val = slope_str.split('**')
+            slope = x_y_intercept_worker(val)
+            equation = slope_intercept_from_trig_function(trig_func, slope)
+            return {
+                "Slope": slope,
+                "Equation": equation,
+                # other properties you might want to return
+            }
     elif (pointA and slope) or (pointB and slope):
         if pointA:
             x = pointA[0]
