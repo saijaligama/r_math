@@ -1,5 +1,48 @@
 import sympy as sp
+import numpy as np
+from fractions import Fraction
 
+
+def calculate_line_properties(m, c):
+    m_fraction = Fraction(m).limit_denominator()
+    c_fraction = Fraction(c).limit_denominator()
+    return m_fraction, c_fraction
+
+
+def slope_intercept_from_trig_function(func, x_val):
+    if func == 'sin':
+        slope = np.cos(x_val)
+        intercept = -np.sin(x_val)
+    # Additional cases for other trig functions
+    # elif func == 'cos':
+    #     ...
+    # elif func == 'tan':
+    #     ...
+    # Add cases for other trig functions as needed
+    else:
+        slope = None
+        intercept = None
+
+    return slope, intercept
+
+
+def plot_function_with_line(expression, x_min, x_max, points=1000):
+    x = np.linspace(x_min, x_max, points)
+    data = {
+        "x_points": x.tolist(),
+        "y_points": []
+    }
+    try:
+        y = [eval(expression, {'x': x_val, 'sin': np.sin, 'cos': np.cos, 'tan': np.tan, 'cot': lambda x: 1 / np.tan(x),
+                               'cosec': lambda x: 1 / np.sin(x), 'sec': lambda x: 1 / np.cos(x), 'exp': np.exp}) for
+             x_val in x]
+
+        data["y_points"] = y
+        return data
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return None
 def analyze_graph(data):
     # Define the variable symbol
     variable = 'x'
@@ -47,6 +90,10 @@ def analyze_graph(data):
         minima = "N/A"
     if maxima is None:
         maxima = "N/A"
+    data_x = np.linspace(-2*np.pi, 2*np.pi, 1000)
+    data_y = [eval(data['eqn'], {'x': x_val, 'sin': np.sin, 'cos': np.cos, 'tan': np.tan, 'cot': lambda x: 1 / np.tan(x),
+                               'cosec': lambda x: 1 / np.sin(x), 'sec': lambda x: 1 / np.cos(x), 'exp': np.exp}) for
+             x_val in data_x]
 
     return {
         "Domain": domain,
@@ -54,8 +101,16 @@ def analyze_graph(data):
         "Period": float(period) if period else "N/A",
         "Maxima": maxima,
         "Minima": minima,
-        "Symmetric": is_symmetric
+        "Symmetric": is_symmetric,
+        "x_values": data_x.tolist(),
+        "y_values":data_y
     }
+
+
+# if __name__=="__main__":
+#     data={}
+#     data['eqn'] = "5*x+4"
+#     print(analyze_graph(data))
 
 
 # import sympy as sp

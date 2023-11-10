@@ -44,6 +44,7 @@
 
         <!-- SVG for graph -->
         <svg width="400" height="400" id="graph"></svg>
+        <canvas id="myChart" width="400" height="400"></canvas>
     </div>
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
@@ -70,6 +71,8 @@
             var maxima = result['Maxima'] || "N/A";
             var minima = result['Minima'] || "N/A";
             var symmetric = result['Symmetric'] ? "Yes" : "No";
+            var xval = result['x_values']
+            var yval = result['y_values]
 
             var outputText = "Domain: " + domain + "\n" +
                             "Range: " + range + "\n" +
@@ -82,89 +85,127 @@
 
             const eqn = data2.eqn;
             const vari = data2.var
-            displayGraph(eqn,vari)
+            displayGraph(eqn,vari,xval,yval)
         },
         error: function (data2) {
             console.log(data2);
         }
     });
 }
-function displayGraph(eqn,vari) {
-            //const eqn = document.getElementById("limit_input").value;
+function displayGraph(equation, variable, xValues, yValues) {
+    const data = {
+        labels: xValues,
+        datasets: [{
+            label: equation,
+            data: yValues,
+            fill: false,
+            borderColor: 'blue',
+            tension: 0.1
+        }]
+    };
 
-            // Clear previous graph
-            const svg = d3.select("#graph");
-            svg.selectAll("*").remove();
-
-            // Create an array of data points for the graph
-            const data = generateData(eqn);
-
-            // Set up the SVG canvas for the graph
-            const margin = { top: 20, right: 20, bottom: 30, left: 40 };
-            const width = +svg.attr("width") - margin.left - margin.right;
-            const height = +svg.attr("height") - margin.top - margin.bottom;
-            const g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-            // Define scales
-            const x = d3.scaleLinear().rangeRound([0, width]);
-            const y = d3.scaleLinear().rangeRound([height, 0]);
-
-            x.domain(d3.extent(data, d => d.x));
-            y.domain([0, d3.max(data, d => d.y)]);
-
-            // Create a line generator
-            const line = d3.line()
-                .x(d => x(d.x))
-                .y(d => y(d.y));
-
-            // Draw the line
-            g.append("path")
-                .datum(data)
-                .attr("fill", "none")
-                .attr("stroke", "steelblue")
-                .attr("stroke-linejoin", "round")
-                .attr("stroke-linecap", "round")
-                .attr("stroke-width", 1.5)
-                .attr("d", line);
-
-            // Add X and Y axes
-            g.append("g")
-                .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(x));
-
-            g.append("g")
-                .call(d3.axisLeft(y));
-        }
-
-        function generateData(equation,vari) {
-            const data = [];
-            for (let vari = -100; vari <= 100; vari += 0.1) {
-                data.push({ x: vari, y: calculateEquation(equation, vari) });
-            }
-            console.log(data)
-            return data;
-        }
-
-
-        function calculateEquation(equation, vari) {
-            try {
-                // Explicitly define trigonometric functions
-                const sin = Math.sin;
-                const cos = Math.cos;
-                const tan = Math.tan;
-                const cosec = vari => 1 / Math.sin(vari);
-                const cot = vari => 1 / Math.tan(vari);
-                const sec = vari => 1 / Math.cos(vari);
-
-                const result = eval(equation.replace(/x/g,vari));
-
-
-            return Math.abs(result);
-            } catch (error) {
-                console.error("Invalid equation:", error);
-                return 0;
+    const config = {
+        type: 'line',
+        data: data,
+        options: {
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'bottom',
+                    title: {
+                        display: true,
+                        text: variable // Display the variable name on the x-axis
+                    },
+                    min: -5, // Set minimum x-axis value
+                    max: 5   // Set maximum x-axis value
+                },
+                y: {
+                    type: 'linear',
+                    position: 'left',
+                    title: {
+                        display: true,
+                        text: 'f(' + variable + ')' // Display the function notation on the y-axis
+                    },
+                    min: -5, // Set minimum y-axis value
+                    max: 5   // Set maximum y-axis value
+                }
             }
         }
+    };
+
+    // Find the canvas element where you want to display the graph
+    const canvas = document.getElementById('myChart');
+
+    // Check if the chart already exists and destroy it before creating a new one
+    if (window.myChart !== undefined) {
+        window.myChart.destroy();
+    }
+
+    // Create the chart
+    window.myChart = new Chart(canvas, config);
+}
+
+
+<!--function displayGraph(eqn, vari, dataPoints) {-->
+<!--    const svg = d3.select("#graph");-->
+<!--    svg.selectAll("*").remove();-->
+
+<!--    const margin = { top: 20, right: 20, bottom: 30, left: 40 };-->
+<!--    const width = +svg.attr("width") - margin.left - margin.right;-->
+<!--    const height = +svg.attr("height") - margin.top - margin.bottom;-->
+<!--    const g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");-->
+
+<!--    const x = d3.scaleLinear().rangeRound([0, width]);-->
+<!--    const y = d3.scaleLinear().rangeRound([height, 0]);-->
+
+<!--    x.domain(d3.extent(dataPoints, d => d.x));-->
+<!--    y.domain([0, d3.max(dataPoints, d => d.y)]);-->
+
+<!--    const line = d3.line()-->
+<!--        .x(d => x(d.x))-->
+<!--        .y(d => y(d.y));-->
+
+<!--    g.append("path")-->
+<!--        .datum(dataPoints)-->
+<!--        .attr("fill", "none")-->
+<!--        .attr("stroke", "steelblue")-->
+<!--        .attr("stroke-linejoin", "round")-->
+<!--        .attr("stroke-linecap", "round")-->
+<!--        .attr("stroke-width", 1.5)-->
+<!--        .attr("d", line);-->
+
+<!--    g.append("g")-->
+<!--        .attr("transform", "translate(0," + height + ")")-->
+<!--        .call(d3.axisBottom(x));-->
+
+<!--    g.append("g")-->
+<!--        .call(d3.axisLeft(y));-->
+<!--}-->
+
+<!--function get_limit() {-->
+<!--    eqn = document.getElementById("limit_input").value;-->
+<!--    data_dict = {'eqn': eqn};-->
+
+<!--    $.ajax({-->
+<!--        url: '/uncg_math/graphing',-->
+<!--        data: JSON.stringify(data_dict),-->
+<!--        type: 'POST',-->
+<!--        contentType: "application/json",-->
+<!--        dataType: 'json',-->
+<!--        success: function (data) {-->
+<!--            const eqn = data.eqn;-->
+<!--            const vari = data.var;-->
+
+<!--            // DataPoints from Python-->
+<!--            const dataPoints = data.result.dataPoints;-->
+
+<!--            displayGraph(eqn, vari, dataPoints);-->
+<!--        },-->
+<!--        error: function (data) {-->
+<!--            console.log(data);-->
+<!--        }-->
+<!--    });-->
+<!--}-->
 
 
 
