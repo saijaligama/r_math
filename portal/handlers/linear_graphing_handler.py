@@ -1,6 +1,22 @@
 import math
 from fractions import Fraction
 
+def slope_intercept_form(theta, yc, xc=None):
+    print(theta, type(yc), type(xc))
+    yc = float(yc)
+
+    if theta % 360 == 90 or theta % 360 == 270:  # 90 in degrees
+        print("1")
+        if xc is not None:
+            return {"Equation": f"x={xc}", "x_intercept": f"{xc}"}
+    elif theta % 360 == 0 or theta % 360 == 180:  # 0 degrees
+        print("2")
+        return {"Equation": f"y={yc}", "y_intercept": f"{yc}"}
+    else:
+        print("3")
+        m = math.tan(theta)
+        return {"Equation": f"y={m:.3f}x+{yc}", "x_intercept": f"{-1 * yc / m}"}
+
 def parse_point(point_str):
     try:
         x, y = map(float, point_str.split(","))
@@ -43,6 +59,8 @@ def calculate_line_properties(properties):
     x_intercept_str = properties.get("XIntercept")
     y_intercept_str = properties.get("YIntercept")
     equation = properties.get("Equation")
+    slope_intercept = properties.get("slopeIntercept")
+    theta = properties.get("theta")
 
     # Parse point strings to coordinates
     if pointA_str != '':
@@ -214,6 +232,14 @@ def calculate_line_properties(properties):
             "PointA": (x, y),
             "PointB": pointB
         }
+
+    elif theta and slope_intercept:
+        final_result = slope_intercept_form(theta, slope_intercept)
+        print(equation)
+        print("--------> ", equation)
+        return {"Equation": final_result["Equation"],
+                "X-Intercept": final_result["x_intercept"]}
+
 
     else:
         return {"Message": "Insufficient information. Please provide more details."}
