@@ -17,6 +17,7 @@ from portal.services import check_answers
 from portal.services import graphing_service
 from portal.services import linear_graphing_service
 from portal.services import triangles_service
+from portal.services import conic_sections_service
 
 app = create_app()
 
@@ -37,6 +38,7 @@ app.register_blueprint(check_answers.check_answers_bp)
 app.register_blueprint(graphing_service.graphing_bp)
 app.register_blueprint(linear_graphing_service.linear_graphing_bp)
 app.register_blueprint(triangles_service.triangles_bp)
+app.register_blueprint(conic_sections_service.conic_sections_bp)
 
 if __name__ == "__main__":
     app.run(port=8003)
