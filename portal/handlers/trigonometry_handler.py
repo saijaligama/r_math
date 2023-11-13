@@ -276,6 +276,7 @@ class TrigonometricCalculator:
             return csc_vals[angle]
         else:
             return "Invalid function"
+
     # def trig_fractions(self,trig_func):
     #
     #     sin_vals = {

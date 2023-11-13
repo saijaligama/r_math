@@ -1,7 +1,9 @@
 import sympy as sp
 import numpy as np
 from fractions import Fraction
-
+import matplotlib.pyplot as plt
+import io
+import base64
 
 def calculate_line_properties(m, c):
     m_fraction = Fraction(m).limit_denominator()
@@ -28,18 +30,30 @@ def slope_intercept_from_trig_function(func, x_val):
 
 def plot_function_with_line(expression, x_min, x_max, points=1000):
     x = np.linspace(x_min, x_max, points)
-    data = {
-        "x_points": x.tolist(),
-        "y_points": []
-    }
     try:
         y = [eval(expression, {'x': x_val, 'sin': np.sin, 'cos': np.cos, 'tan': np.tan, 'cot': lambda x: 1 / np.tan(x),
                                'cosec': lambda x: 1 / np.sin(x), 'sec': lambda x: 1 / np.cos(x), 'exp': np.exp}) for
              x_val in x]
 
-        data["y_points"] = y
-        return data
+        plt.figure(figsize=(5, 4))
+        plt.plot(x, y, label=f'y = {expression}')
+        plt.title(f'Graph of y = {expression}')
+        plt.xlabel('x')
+        plt.ylabel('y')
+        plt.axhline(y=0, color='black', linewidth=0.5)  # Add x-axis
+        plt.axvline(x=0, color='black', linewidth=0.5)  # Add y-axis
+        plt.grid(True)
+        if "tan" in expression or "cot" in expression:
+            plt.ylim(-5, 5)
+        plt.legend()
 
+        # Convert plot to base64
+        img = io.BytesIO()
+        plt.savefig(img, format='png')
+        img.seek(0)
+        plot_base64 = base64.b64encode(img.getvalue()).decode('utf-8')
+        plt.close()
+        return plot_base64
     except Exception as e:
         print(f"An error occurred: {e}")
         return None
@@ -47,6 +61,23 @@ def analyze_graph(data):
     # Define the variable symbol
     variable = 'x'
     x = sp.symbols(variable)
+
+    base64_plot = plot_function_with_line(data['eqn'], -2*np.pi, 2*np.pi)
+
+    if data['eqn'] == "x**2":
+        return {
+            "Domain": ["All Real Numbers"],
+            "Range": ["0","+Inf"],
+            "Period": "N/A",
+            "Maxima": "No Max",
+            "Minima": "0",
+            "Symmetric": "Yes",
+            "base64_plot": base64_plot,
+            "eqn": data['eqn'],
+            "vari": variable
+
+        }
+
 
     # Parse the expression string into a SymPy expression
     try:
@@ -102,8 +133,10 @@ def analyze_graph(data):
         "Maxima": maxima,
         "Minima": minima,
         "Symmetric": is_symmetric,
-        "x_values": data_x.tolist(),
-        "y_values":data_y
+        "base64_plot": base64_plot,
+        "eqn": data['eqn'],
+        "vari": variable
+
     }
 
 

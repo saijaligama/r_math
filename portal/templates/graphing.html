@@ -43,7 +43,7 @@
         </form>
 
         <!-- SVG for graph -->
-        <svg width="400" height="400" id="graph"></svg>
+<!--        <svg width="400" height="400" id="graph"></svg>-->
         <canvas id="myChart" width="400" height="400"></canvas>
     </div>
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
@@ -71,8 +71,9 @@
             var maxima = result['Maxima'] || "N/A";
             var minima = result['Minima'] || "N/A";
             var symmetric = result['Symmetric'] ? "Yes" : "No";
-            var xval = result['x_values']
-            var yval = result['y_values]
+<!--            var xval = result['x_values']-->
+<!--            var yval = result['y_values]-->
+            var base64Plot = result["base64_plot"]
 
             var outputText = "Domain: " + domain + "\n" +
                             "Range: " + range + "\n" +
@@ -85,65 +86,140 @@
 
             const eqn = data2.eqn;
             const vari = data2.var
-            displayGraph(eqn,vari,xval,yval)
+<!--            const base64Plot = data2.base64_plot;-->
+            displayGraph(eqn,vari,base64Plot)
         },
         error: function (data2) {
             console.log(data2);
         }
     });
 }
-function displayGraph(equation, variable, xValues, yValues) {
-    const data = {
-        labels: xValues,
-        datasets: [{
-            label: equation,
-            data: yValues,
-            fill: false,
-            borderColor: 'blue',
-            tension: 0.1
-        }]
-    };
 
-    const config = {
-        type: 'line',
-        data: data,
-        options: {
-            scales: {
-                x: {
-                    type: 'linear',
-                    position: 'bottom',
-                    title: {
-                        display: true,
-                        text: variable // Display the variable name on the x-axis
-                    },
-                    min: -5, // Set minimum x-axis value
-                    max: 5   // Set maximum x-axis value
-                },
-                y: {
-                    type: 'linear',
-                    position: 'left',
-                    title: {
-                        display: true,
-                        text: 'f(' + variable + ')' // Display the function notation on the y-axis
-                    },
-                    min: -5, // Set minimum y-axis value
-                    max: 5   // Set maximum y-axis value
-                }
-            }
-        }
-    };
+function displayGraph(equation, variable, base64Plot) {
 
-    // Find the canvas element where you want to display the graph
-    const canvas = document.getElementById('myChart');
+  // Create image from base64 string
+  const img = new Image();
+  img.src = 'data:image/png;base64,' + base64Plot;
 
-    // Check if the chart already exists and destroy it before creating a new one
-    if (window.myChart !== undefined) {
-        window.myChart.destroy();
-    }
+  // Get canvas element
+  const canvas = document.getElementById('myChart');
 
-    // Create the chart
-    window.myChart = new Chart(canvas, config);
+  // When image loads, set canvas size and draw image
+  img.onload = function() {
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0, img.width, img.height);
+  }
+
 }
+
+<!--function displayGraph(equation, variable, xValues, yValues) {-->
+<!--    const data = {-->
+<!--        labels: xValues,-->
+<!--        datasets: [{-->
+<!--            label: equation,-->
+<!--            data: yValues,-->
+<!--            fill: false,-->
+<!--            borderColor: 'blue',-->
+<!--            tension: 0.1-->
+<!--        }]-->
+<!--    };-->
+
+<!--    const config = {-->
+<!--        type: 'line',-->
+<!--        data: data,-->
+<!--        options: {-->
+<!--            scales: {-->
+<!--                x: {-->
+<!--                    type: 'linear',-->
+<!--                    position: 'bottom',-->
+<!--                    title: {-->
+<!--                        display: true,-->
+<!--                        text: variable // Display the variable name on the x-axis-->
+<!--                    },-->
+<!--                    min: -5, // Set minimum x-axis value-->
+<!--                    max: 5   // Set maximum x-axis value-->
+<!--                },-->
+<!--                y: {-->
+<!--                    type: 'linear',-->
+<!--                    position: 'left',-->
+<!--                    title: {-->
+<!--                        display: true,-->
+<!--                        text: 'f(' + variable + ')', // Display the function notation on the y-axis-->
+<!--                        min: -5, // Set minimum y-axis value-->
+<!--                        max: 5   // Set maximum y-axis value-->
+<!--                    },-->
+
+<!--                }-->
+<!--            }-->
+<!--        }-->
+<!--    };-->
+
+<!--    const canvas = document.getElementById('myChart');-->
+
+<!--    if (window.myChart !== undefined) {-->
+<!--        window.myChart.destroy();-->
+<!--    }-->
+
+<!--    window.myChart = new Chart(canvas, config);-->
+<!--}-->
+
+
+
+<!--function displayGraph(equation, variable, xValues, yValues) {-->
+<!--    const data = {-->
+<!--        labels: xValues,-->
+<!--        datasets: [{-->
+<!--            label: equation,-->
+<!--            data: yValues,-->
+<!--            fill: false,-->
+<!--            borderColor: 'blue',-->
+<!--            tension: 0.1-->
+<!--        }]-->
+<!--    };-->
+
+<!--    const config = {-->
+<!--        type: 'line',-->
+<!--        data: data,-->
+<!--        options: {-->
+<!--            scales: {-->
+<!--                x: {-->
+<!--                    type: 'linear',-->
+<!--                    position: 'bottom',-->
+<!--                    title: {-->
+<!--                        display: true,-->
+<!--                        text: variable // Display the variable name on the x-axis-->
+<!--                    },-->
+<!--                    min: -5, // Set minimum x-axis value-->
+<!--                    max: 5   // Set maximum x-axis value-->
+<!--                },-->
+<!--                y: {-->
+<!--                    type: 'linear',-->
+<!--                    position: 'left',-->
+<!--                    title: {-->
+<!--                        display: true,-->
+<!--                        text: 'f(' + variable + ')' // Display the function notation on the y-axis-->
+<!--                    },-->
+<!--                    min: -5, // Set minimum y-axis value-->
+<!--                    max: 5   // Set maximum y-axis value-->
+<!--                }-->
+<!--            }-->
+<!--        }-->
+<!--    };-->
+
+<!--    // Find the canvas element where you want to display the graph-->
+<!--    const canvas = document.getElementById('myChart');-->
+
+<!--    // Check if the chart already exists and destroy it before creating a new one-->
+<!--    if (window.myChart !== undefined) {-->
+<!--        window.myChart.destroy();-->
+<!--    }-->
+
+<!--    // Create the chart-->
+<!--    window.myChart = new Chart(canvas, config);-->
+<!--}-->
 
 
 <!--function displayGraph(eqn, vari, dataPoints) {-->

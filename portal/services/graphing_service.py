@@ -7,7 +7,7 @@ graphing_bp = Blueprint('graphing_bp', __name__, url_prefix='/uncg_math',
 @graphing_bp.route('/graphing', methods=["GET", "POST"])
 def graphing():
     if request.method == "GET":
-        return render_template("temp.html")
+        return render_template("graphing.html")
     else:
         data = request.json
         result = analyze_graph(data)
