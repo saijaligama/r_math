@@ -4,6 +4,7 @@ from fractions import Fraction
 def slope_intercept_form(theta, yc, xc=None):
     print(theta, type(yc), type(xc))
     yc = float(yc)
+    theta = float(theta)
 
     if theta % 360 == 90 or theta % 360 == 270:  # 90 in degrees
         print("1")
@@ -59,8 +60,10 @@ def calculate_line_properties(properties):
     x_intercept_str = properties.get("XIntercept")
     y_intercept_str = properties.get("YIntercept")
     equation = properties.get("Equation")
-    slope_intercept = properties.get("slopeIntercept")
+    slope_intercept = properties.get("slope-intercept")
     theta = properties.get("theta")
+    print(theta)
+    print(slope_intercept)
 
     # Parse point strings to coordinates
     if pointA_str != '':
