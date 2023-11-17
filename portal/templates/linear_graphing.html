@@ -195,6 +195,10 @@ function get_graph(){
 
     var pointb = data2['PointB'] || "N/A";
 
+    var theta = data2['theta'] || "N/A";
+
+    var slope_intercept = data2['slope_intercept'] || "N/A";
+
 
 
     // Now you can update the HTML elements with the results
@@ -208,6 +212,7 @@ function get_graph(){
     document.getElementById("input6").value = xIntercept;
     document.getElementById("input7").value = yIntercept;
     document.getElementById("input8").value = slope;
+    document.getElementById("input10").value = theta;
 },
                 error: function (data2) {
                     console.log(data2);

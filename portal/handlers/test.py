@@ -61,7 +61,7 @@ def calculate_line_properties(properties):
     y_intercept_str = properties.get("YIntercept")
     equation = properties.get("Equation")
     slope_intercept = properties.get("slope-intercept")
-    theta =''
+    theta = properties.get("theta")
     # print(theta)
     # print(slope_intercept)
 
@@ -120,7 +120,6 @@ def calculate_line_properties(properties):
         if slope != "Vertical line":
             x_intercept = -b / slope
             y_intercept = b
-            theta = math.degrees(math.atan(slope))
         else:
             x_intercept = "No x-intercept (vertical line)"
             y_intercept = pointA[1]
@@ -131,10 +130,7 @@ def calculate_line_properties(properties):
             "Slope": slope,
             "Equation": equation,
             "X-Intercept": x_intercept,
-            "Y-Intercept": y_intercept,
-            "theta":theta,
-            "PointA": pointA,
-            "PointB": pointB
+            "Y-Intercept": y_intercept
         }
 
     # elif single_point:
@@ -147,7 +143,7 @@ def calculate_line_properties(properties):
         pointB = (0, y_intercept)
         distance = math.sqrt((pointB[0] - x_intercept) ** 2 + (pointB[1] - y_intercept) ** 2)
         midpoint = ((pointB[0] + x_intercept) / 2, (pointB[1] + y_intercept) / 2)
-        theta = math.degrees(math.atan(slope))
+
         return {
             "Distance": distance,
             "Midpoint": midpoint,
@@ -156,8 +152,7 @@ def calculate_line_properties(properties):
             "X-Intercept": x_intercept,
             "Y-Intercept": y_intercept,
             "PointA": pointA,
-            "PointB": pointB,
-            'theta':theta
+            "PointB": pointB
         }
 
     elif slope and y_intercept:
@@ -168,7 +163,7 @@ def calculate_line_properties(properties):
         pointA = (0,y_intercept)
         distance = math.sqrt((pointB[0] - x_intercept) ** 2 + (pointB[1] - y_intercept) ** 2)
         midpoint = ((pointB[0] + x_intercept) / 2, (pointB[1] + y_intercept) / 2)
-        theta = math.degrees(math.atan(slope))
+
         return {
             "Distance": distance,
             "Midpoint": midpoint,
@@ -177,8 +172,7 @@ def calculate_line_properties(properties):
             "X-Intercept": x_intercept,
             "Y-Intercept": y_intercept,
             "PointA": pointA,
-            "PointB": pointB,
-            'theta':theta
+            "PointB": pointB
         }
 
     elif x_intercept is not None and y_intercept is not None:
@@ -191,7 +185,7 @@ def calculate_line_properties(properties):
         pointB = (x_intercept, 0)
         distance = math.sqrt((pointB[0] - pointA[0]) ** 2 + (pointB[1] - pointA[1]) ** 2)
         midpoint = ((pointB[0] + pointA[0]) / 2, (pointB[1] + pointA[1]) / 2)
-        theta = math.degrees(math.atan(slope))
+
         return {
             "Distance": distance,
             "Midpoint": midpoint,
@@ -200,8 +194,7 @@ def calculate_line_properties(properties):
             "X-Intercept": x_intercept,
             "Y-Intercept": y_intercept,
             "PointA": pointA,
-            "PointB": pointB,
-            'theta':theta
+            "PointB": pointB
         }
     elif slope_str != '':
         if '**' in slope_str:
@@ -231,7 +224,7 @@ def calculate_line_properties(properties):
         pointB = (0, y_intercept)
         distance = math.sqrt((pointB[0] - x_intercept) ** 2 + (pointB[1] - y_intercept) ** 2)
         midpoint = ((pointB[0] + x_intercept) / 2, (pointB[1] + y_intercept) / 2)
-        theta = math.degrees(math.atan(slope))
+
         return {
             "Distance": distance,
             "Midpoint": midpoint,
@@ -240,16 +233,15 @@ def calculate_line_properties(properties):
             "X-Intercept": x_intercept,
             "Y-Intercept": y_intercept,
             "PointA": (x, y),
-            "PointB": pointB,
-            'theta':theta
+            "PointB": pointB
         }
 
-    # elif theta and slope_intercept:
-    #     final_result = slope_intercept_form(theta, slope_intercept)
-    #     print(equation)
-    #     print("--------> ", equation)
-    #     return {"Equation": final_result["Equation"],
-    #             "X-Intercept": final_result["x_intercept"]}
+    elif theta and slope_intercept:
+        final_result = slope_intercept_form(theta, slope_intercept)
+        print(equation)
+        print("--------> ", equation)
+        return {"Equation": final_result["Equation"],
+                "X-Intercept": final_result["x_intercept"]}
 
 
     else:

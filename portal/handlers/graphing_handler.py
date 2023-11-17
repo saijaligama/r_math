@@ -4,6 +4,7 @@ from fractions import Fraction
 import matplotlib.pyplot as plt
 import io
 import base64
+from sympy import Abs
 
 def calculate_line_properties(m, c):
     m_fraction = Fraction(m).limit_denominator()
@@ -32,7 +33,8 @@ def plot_function_with_line(expression, x_min, x_max, points=1000):
     x = np.linspace(x_min, x_max, points)
     try:
         y = [eval(expression, {'x': x_val, 'sin': np.sin, 'cos': np.cos, 'tan': np.tan, 'cot': lambda x: 1 / np.tan(x),
-                               'cosec': lambda x: 1 / np.sin(x), 'sec': lambda x: 1 / np.cos(x), 'exp': np.exp}) for
+                               'cosec': lambda x: 1 / np.sin(x), 'sec': lambda x: 1 / np.cos(x), 'exp': np.exp
+                               ,'Abs': np.abs}) for
              x_val in x]
 
         plt.figure(figsize=(5, 4))
