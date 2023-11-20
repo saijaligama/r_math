@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title> Conic Sections</title>
+
+    <link rel="stylesheet" type="text/css" href="/uncg_math/static/Geometry_files/mystyle.css">
+    <meta name="description" content="Regular polygon, Trangle,
+              Quadrilateral, Rectangle, Rombus, Trapezoid,
+              Circle, Circular Segment/Sector, Prism, Pyramid,
+              Cylinder, Cone, Sperical Cap/Sector">
+    <script src="/uncg_math/static/Geometry_files/geometry.js"></script>
+</head>
+<style>
+     .required_{
+     visibility:hidden;
+     }
+    .text_box_st {
+        padding: 1px !important;
+        width: 90px !important;
+    }
+
+    .text_box_st2 {
+        padding: 3px !important;
+        width: 90px !important;
+    }
+</style>
+
+
+<body>
+    <div class="example" style="height: 100% !important;">
+        <div id="nav" style="clear:both;">
+            <h1 style="color: white;text-align: center;"> Conic Sections </h1>
+
+            <ul style="margin-top: -20px;">
+                <li style="padding-left: 179px;"><a href="/uncg_math">Home</a></li>
+                <li style="padding-left: 179px;"><a href="/uncg_math/algebra">Back</a></li>
+
+            </ul>
+<!--            <ul>-->
+<!--                <li><a style="width: 208px;" href="#Arithmetic_Or_Geometric_Sequence">Arithmetic Or Geometric-->
+<!--                        Sequence.</a></li>-->
+<!--                <li><a style="width: 200px;" href="#Get_Arithmetic_Geometric">Get Arithmetic Or Geometric </a></li>-->
+<!--            </ul>-->
+        </div>
+
+
+
+
+        <h2> <a id="Get_Arithmetic_Geometric">Ellipse</a></h2>
+
+        <FORM>
+            <TABLE border=0 width=100% bgcolor=moccasin>
+                <tr>
+                    <td> <br> </td>
+                </tr>
+
+                <tr>
+                <td>
+                    <label for="input1">Standard Equation:</label>
+                    <input type="text" id="input1" name="input1">
+                </td>
+
+            </tr>
+                <tr>
+                    <td>
+                        <input type="button" class="widebutton" value="Calculate" onclick="get_triangle()">
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        center
+                        <span id="center" style="font-size: small;">-----------------</span>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        major_axis
+                        <span id="major_axis" style="font-size: small;">-----------------</span>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        minor_axis
+                        <span id="minor_axis" style="font-size: small;">-----------------</span>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        foci
+                        <span id="foci" style="font-size: small;">-----------------</span>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        focus
+                        <span id="focus" style="font-size: small;">-----------------</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td> <br> </td>
+                </tr>
+
+            </TABLE>
+        </FORM>
+
+         <h2> <a id="Get_Arithmetic_Geomtric">Hyperbola</a></h2>
+
+        <FORM>
+            <TABLE border=0 width=100% bgcolor=moccasin>
+                <tr>
+                    <td> <br> </td>
+                </tr>
+
+                <tr>
+                <td>
+                    <label for="input1">Standard Equation:</label>
+                    <input type="text" id="input2" name="input1">
+                </td>
+
+            </tr>
+                <tr>
+                    <td>
+                        <input type="button" class="widebutton" value="Calculate" onclick="get_hyper()">
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        center
+                        <span id="center_hyper" style="font-size: small;">-----------------</span>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        form
+                        <span id="form" style="font-size: small;">-----------------</span>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        distance_vertices
+                        <span id="distance_vertices" style="font-size: small;">-----------------</span>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        distance_foci
+                        <span id="distance_foci" style="font-size: small;">-----------------</span>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        foci
+                        <span id="focihyper" style="font-size: small;">-----------------</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td> <br> </td>
+                </tr>
+
+            </TABLE>
+        </FORM>
+
+         <h2> <a id="Get_Arithmetic_Geric">Parabola</a></h2>
+
+        <FORM>
+            <TABLE border=0 width=100% bgcolor=moccasin>
+                <tr>
+                    <td> <br> </td>
+                </tr>
+
+                <tr>
+                <td>
+                    <label for="input1">Standard Equation:</label>
+                    <input type="text" id="input3" name="input1">
+                </td>
+
+            </tr>
+                <tr>
+                    <td>
+                        <input type="button" class="widebutton" value="Calculate" onclick="get_para()">
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        Vertex
+                        <span id="vertex" style="font-size: small;">-----------------</span>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        form
+                        <span id="formpara" style="font-size: small;">-----------------</span>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        focus
+                        <span id="focuspara" style="font-size: small;">-----------------</span>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        directrix
+                        <span id="directrix" style="font-size: small;">-----------------</span>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        axis
+                        <span id="axis" style="font-size: small;">-----------------</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td> <br> </td>
+                </tr>
+
+            </TABLE>
+        </FORM>
+
+
+    </div>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+<script>
+
+
+function get_triangle(){
+        pointa = document.getElementById("input1").value
+
+
+        data_dict = {'eqn':pointa,'type':'ellipse'}
+
+
+        $.ajax({
+                url: '/uncg_math/conic_section',
+                data: JSON.stringify(data_dict),
+                type: 'POST',
+                contentType: "application/json",
+                dataType: 'json',
+                success: function (data2) {
+                    document.getElementById("center").innerText = data2['center'];
+                    document.getElementById("major_axis").innerText = data2['major_axis'];
+                    document.getElementById("minor_axis").innerText = data2['minor_axis'];
+                    document.getElementById("foci").innerText = data2['foci'];
+                    document.getElementById("focus").innerText = data2['focus'];
+
+},
+                error: function (data2) {
+                    console.log(data2);
+                    return false;
+                }
+            });
+
+
+    }
+
+ function get_hyper(){
+        pointa = document.getElementById("input2").value
+
+
+        data_dict = {'eqn':pointa,'type':'hyper'}
+
+
+        $.ajax({
+                url: '/uncg_math/conic_section',
+                data: JSON.stringify(data_dict),
+                type: 'POST',
+                contentType: "application/json",
+                dataType: 'json',
+                success: function (data2) {
+                    document.getElementById("center_hyper").innerText = data2['center'];
+                    document.getElementById("form").innerText = data2['form'];
+                    document.getElementById("distance_foci").innerText = data2['distance_foci'];
+                    document.getElementById("distance_vertices").innerText = data2['distance_vertices'];
+                    document.getElementById("focihyper").innerText = data2['foci'];
+
+},
+                error: function (data2) {
+                    console.log(data2);
+                    return false;
+                }
+            });
+
+
+    }
+
+ function get_para(){
+        pointa = document.getElementById("input3").value
+
+
+        data_dict = {'eqn':pointa,'type':'para'}
+
+
+        $.ajax({
+                url: '/uncg_math/conic_section',
+                data: JSON.stringify(data_dict),
+                type: 'POST',
+                contentType: "application/json",
+                dataType: 'json',
+                success: function (data2) {
+                    document.getElementById("vertex").innerText = data2['vertex'];
+                    document.getElementById("formpara").innerText = data2['form'];
+                    document.getElementById("focuspara").innerText = data2['focus'];
+                    document.getElementById("directrix").innerText = data2['directrix'];
+                    document.getElementById("axis").innerText = data2['axis'];
+
+},
+                error: function (data2) {
+                    console.log(data2);
+                    return false;
+                }
+            });
+
+
+    }
+</script>
+
+
+</body>
+
+</html>

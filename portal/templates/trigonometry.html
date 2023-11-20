@@ -64,14 +64,17 @@
 <!--                    <TD ALIGN=CENTER>Repeated Fractions</TD>-->
 
                 </TR>
-                <TR>
+                <tr>
                     <TD><INPUT CLASS="widebutton" TYPE=TEXT ID=trigonometry_input style="padding: 12px; width: 250px;"></TD>
-                    <td><input type="radio" name="option" value="degrees" onclick="storeType(this.value)"> Degrees </td>
-                    <td><input type="radio" name="option" value="radians" onclick="storeType(this.value)"> Radians </td>
+                </tr>
+<!--                <TR>-->
+<!--                    <TD><INPUT CLASS="widebutton" TYPE=TEXT ID=trigonometry_input style="padding: 12px; width: 250px;"></TD>-->
+<!--                    <td><input type="radio" name="option" value="degrees" onclick="storeType(this.value)"> Degrees </td>-->
+<!--                    <td><input type="radio" name="option" value="radians" onclick="storeType(this.value)"> Radians </td>-->
 
 
 
-                </TR>
+<!--                </TR>-->
                 <TR>
                     <TD>
                         <INPUT TYPE="button" class="widebutton" value="Convert" onclick="get_trigonometry()">
@@ -104,18 +107,13 @@
     <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 
 <script>
-    var angle_type = "";
-    function storeType(value){
-    angle_type = value
-    console.log(angle_type);
-    }
 
-console.log(angle_type);
-    function get_trigonometry(){
+
+function get_trigonometry(){
         eqn = document.getElementById("trigonometry_input").value
-        console.log(angle_type);
 
-        data_dict = {'exp':eqn, 'unit':angle_type}
+
+        data_dict = {'exp':eqn}
 
 
         $.ajax({
@@ -136,8 +134,6 @@ console.log(angle_type);
 
 
     }
-
-
 </script>
 
 

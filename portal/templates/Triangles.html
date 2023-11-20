@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title> Triangles</title>
+
+    <link rel="stylesheet" type="text/css" href="/uncg_math/static/Geometry_files/mystyle.css">
+    <meta name="description" content="Regular polygon, Trangle,
+              Quadrilateral, Rectangle, Rombus, Trapezoid,
+              Circle, Circular Segment/Sector, Prism, Pyramid,
+              Cylinder, Cone, Sperical Cap/Sector">
+    <script src="/uncg_math/static/Geometry_files/geometry.js"></script>
+</head>
+<style>
+     .required_{
+     visibility:hidden;
+     }
+    .text_box_st {
+        padding: 1px !important;
+        width: 90px !important;
+    }
+
+    .text_box_st2 {
+        padding: 3px !important;
+        width: 90px !important;
+    }
+</style>
+
+
+<body>
+    <div class="example" style="height: 100% !important;">
+        <div id="nav" style="clear:both;">
+            <h1 style="color: white;text-align: center;"> Triangles </h1>
+
+            <ul style="margin-top: -20px;">
+                <li style="padding-left: 179px;"><a href="/uncg_math">Home</a></li>
+                <li style="padding-left: 179px;"><a href="/uncg_math/algebra">Back</a></li>
+
+            </ul>
+<!--            <ul>-->
+<!--                <li><a style="width: 208px;" href="#Arithmetic_Or_Geometric_Sequence">Arithmetic Or Geometric-->
+<!--                        Sequence.</a></li>-->
+<!--                <li><a style="width: 200px;" href="#Get_Arithmetic_Geometric">Get Arithmetic Or Geometric </a></li>-->
+<!--            </ul>-->
+        </div>
+
+
+
+
+        <h2> <a id="Get_Arithmetic_Geometric">Triangles</a></h2>
+
+        <FORM>
+            <TABLE border=0 width=100% bgcolor=moccasin>
+                <tr>
+                    <td> <br> </td>
+                </tr>
+
+                <tr>
+                <td>
+                    <label for="input1">Point A:</label>
+                    <input type="text" id="input1" name="input1">
+                </td>
+                <td>
+                    <label for="input2">Point B:</label>
+                    <input type="text" id="input2" name="input2">
+                </td>
+                <td>
+                    <label for="input3">Point C:</label>
+                    <input type="text" id="input3" name="input3">
+                </td>
+            </tr>
+                <tr>
+                    <td>
+                        <input type="button" class="widebutton" value="Calculate" onclick="get_triangle()">
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        a
+                        <span id="a" style="font-size: small;">-----------------</span>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        b
+                        <span id="b" style="font-size: small;">-----------------</span>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        c
+                        <span id="c" style="font-size: small;">-----------------</span>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        Angle at A
+                        <span id="anglea" style="font-size: small;">-----------------</span>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        Angle at B
+                        <span id="angleb" style="font-size: small;">-----------------</span>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        Angle at C
+                        <span id="anglec" style="font-size: small;">-----------------</span>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        Area
+                        <span id="area" style="font-size: small;">-----------------</span>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        Circumference
+                        <span id="circumference" style="font-size: small;">-----------------</span>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        Type
+                        <span id="type" style="font-size: small;">-----------------</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td> <br> </td>
+                </tr>
+
+            </TABLE>
+        </FORM>
+
+
+
+    </div>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+<script>
+
+
+function get_triangle(){
+        pointa = document.getElementById("input1").value
+        pointb = document.getElementById("input2").value
+        pointc = document.getElementById("input3").value
+
+
+
+
+        data_dict = {'pointa':pointa,'pointb':pointb,'pointc':pointc}
+
+
+        $.ajax({
+                url: '/uncg_math/triangles',
+                data: JSON.stringify(data_dict),
+                type: 'POST',
+                contentType: "application/json",
+                dataType: 'json',
+                success: function (data2) {
+                    document.getElementById("a").innerText = data2['Dist12'];
+                    document.getElementById("b").innerText = data2['Dist23'];
+                    document.getElementById("c").innerText = data2['Dist13'];
+                    document.getElementById("anglea").innerText = data2['Angle1'];
+                    document.getElementById("angleb").innerText = data2['Angle2'];
+                    document.getElementById("anglec").innerText = data2['Angle3'];
+                    document.getElementById("circumference").innerText = data2['Circumference'];
+                    document.getElementById("area").innerText = data2['Area'];
+                    document.getElementById("type").innerText = data2['Type'];
+},
+                error: function (data2) {
+                    console.log(data2);
+                    return false;
+                }
+            });
+
+
+    }
+</script>
+
+
+</body>
+
+</html>

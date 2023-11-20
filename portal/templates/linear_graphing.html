@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title> Linear Graphing</title>
+
+    <link rel="stylesheet" type="text/css" href="/uncg_math/static/Geometry_files/mystyle.css">
+    <meta name="description" content="Regular polygon, Trangle,
+              Quadrilateral, Rectangle, Rombus, Trapezoid,
+              Circle, Circular Segment/Sector, Prism, Pyramid,
+              Cylinder, Cone, Sperical Cap/Sector">
+    <script src="/uncg_math/static/Geometry_files/geometry.js"></script>
+</head>
+<style>
+     .required_{
+     visibility:hidden;
+     }
+    .text_box_st {
+        padding: 1px !important;
+        width: 90px !important;
+    }
+
+    .text_box_st2 {
+        padding: 3px !important;
+        width: 90px !important;
+    }
+</style>
+
+
+<body>
+    <div class="example" style="height: 100% !important;">
+        <div id="nav" style="clear:both;">
+            <h1 style="color: white;text-align: center;"> Linear Graphing </h1>
+
+            <ul style="margin-top: -20px;">
+                <li style="padding-left: 179px;"><a href="/uncg_math">Home</a></li>
+                <li style="padding-left: 179px;"><a href="/uncg_math/algebra">Back</a></li>
+
+            </ul>
+<!--            <ul>-->
+<!--                <li><a style="width: 208px;" href="#Arithmetic_Or_Geometric_Sequence">Arithmetic Or Geometric-->
+<!--                        Sequence.</a></li>-->
+<!--                <li><a style="width: 200px;" href="#Get_Arithmetic_Geometric">Get Arithmetic Or Geometric </a></li>-->
+<!--            </ul>-->
+        </div>
+
+
+
+
+        <h2> <a id="Get_Arithmetic_Geometric">Linear Graphing</a></h2>
+
+        <FORM>
+            <TABLE border=0 width=100% bgcolor=moccasin>
+                <tr>
+                    <td> <br> </td>
+                </tr>
+
+                <tr>
+                <td>
+                    <label for="input1">Point A:</label>
+                    <input type="text" id="input1" name="input1">
+                </td>
+                <td>
+                    <label for="input2">Point B:</label>
+                    <input type="text" id="input2" name="input2">
+                </td>
+                <td>
+                    <label for="input3">DIST(A,B):</label>
+                    <input type="text" id="input3" name="input3">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="input4">MID(A,B):</label>
+                    <input type="text" id="input4" name="input4">
+                </td>
+                <td>
+                    <label for="input5">Equation:</label>
+                    <input type="text" id="input5" name="input5">
+                </td>
+                <td>
+                    <label for="input6">X-Intercept:</label>
+                    <input type="text" id="input6" name="input6">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="input7">Y-Intercept:</label>
+                    <input type="text" id="input7" name="input7">
+                </td>
+                <td>
+                    <label for="input8">Slope m:</label>
+                    <input type="text" id="input8" name="input8">
+                </td>
+
+            </tr>
+                <tr>
+                    <td>
+                    <label for="input9">Slope-Intercept</label>
+                    <input type="text" id="input9" name="input9">
+                </td>
+                    <td>
+                    <label for="input10">Theta</label>
+                    <input type="text" id="input10" name="input10">
+                </td>
+                    <td>
+                    <INPUT TYPE="button" class="widebutton" value="Calculate" onclick="get_graph()">
+                </td>
+                </tr>
+
+<!--                <tr>-->
+<!--                <th><label for="input1">Label 1:</label></th>-->
+<!--                <td><input type="text" id="input1" name="input1"></td>-->
+<!--                <th><label for="input2">Label 2:</label></th>-->
+<!--                <td><input type="text" id="input2" name="input2"></td>-->
+<!--                <th><label for="input3">Label 3:</label></th>-->
+<!--                <td><input type="text" id="input3" name="input3"></td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <th><label for="input4">Label 4:</label></th>-->
+<!--                <td><input type="text" id="input4" name="input4"></td>-->
+<!--                <th><label for="input5">Label 5:</label></th>-->
+<!--                <td><input type="text" id="input5" name="input5"></td>-->
+<!--                <th><label for="input6">Label 6:</label></th>-->
+<!--                <td><input type="text" id="input6" name="input6"></td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <th><label for="input7">Label 7:</label></th>-->
+<!--                <td><input type="text" id="input7" name="input7"></td>-->
+<!--                <th><label for="input8">Label 8:</label></th>-->
+<!--                <td><input type="text" id="input8" name="input8"></td>-->
+<!--                <td><input type="submit" value="Submit"></td>-->
+<!--            </tr>-->
+
+                <tr>
+                    <td> <br> </td>
+                </tr>
+
+            </TABLE>
+        </FORM>
+
+
+
+    </div>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+<script>
+
+
+function get_graph(){
+        pointa = document.getElementById("input1").value
+        pointb = document.getElementById("input2").value
+        dist = document.getElementById("input3").value
+        mid = document.getElementById("input4").value
+        eqn = document.getElementById("input5").value
+        xint = document.getElementById("input6").value
+        yint = document.getElementById("input7").value
+        slope = document.getElementById("input8").value
+        slope_intercept = document.getElementById("input9").value
+        theta = document.getElementById("input10").value
+
+
+        data_dict = {'PointA':pointa,'PointB':pointb,'XIntercept':xint,'YIntercept':yint,'Slope':slope,'slope-intercept':slope_intercept,'theta':theta}
+
+
+        $.ajax({
+                url: '/uncg_math/linear_graphing',
+                data: JSON.stringify(data_dict),
+                type: 'POST',
+                contentType: "application/json",
+                dataType: 'json',
+                success: function (data2) {
+    // Check if Distance is available, and if not, set it to a default value
+    var distance = data2.Distance || "N/A";
+
+    // Check if Midpoint is available, and if not, set it to a default value
+    var midpoint = data2.Midpoint || "N/A";
+
+    // Check if Slope is available, and if not, set it to a default value
+    var slope = data2.Slope || "N/A";
+
+    // Check if Equation is available, and if not, set it to a default value
+    var equation = data2.Equation || "N/A";
+
+    // Check if X-Intercept is available, and if not, set it to a default value
+    var xIntercept = data2['X-Intercept'] || "N/A";
+
+    // Check if Y-Intercept is available, and if not, set it to a default value
+    var yIntercept = data2['Y-Intercept'] || "N/A";
+
+    var pointa = data2['PointA'] || "N/A";
+
+    var pointb = data2['PointB'] || "N/A";
+
+    var theta = data2['theta'] || "N/A";
+
+    var slope_intercept = data2['slope_intercept'] || "N/A";
+
+
+
+    // Now you can update the HTML elements with the results
+
+    // Update the input elements with the results
+    document.getElementById("input1").value = pointa;
+    document.getElementById("input2").value = pointb;
+    document.getElementById("input3").value = distance;
+    document.getElementById("input4").value = midpoint;
+    document.getElementById("input5").value = equation;
+    document.getElementById("input6").value = xIntercept;
+    document.getElementById("input7").value = yIntercept;
+    document.getElementById("input8").value = slope;
+    document.getElementById("input10").value = theta;
+},
+                error: function (data2) {
+                    console.log(data2);
+                    return false;
+                }
+            });
+
+
+    }
+</script>
+
+
+</body>
+
+</html>

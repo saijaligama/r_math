@@ -55,7 +55,7 @@
                 </tr>
         <tr>
                     <td>
-                        <span>eg: 1/x,x,1,+</span>
+                        <span>eg: 1/x, x->1+</span>
                     </td>
 
                 </tr>
@@ -132,6 +132,10 @@
                 <INPUT TYPE=TEXT NAME="limit_input" ID="integration_input" style="padding: 12px;width: 250px;">
                </TD>
         </TR>
+                <tr>
+                                    <td><input type="radio" name="option" value="Definite" onclick="storeType(this.value)"> Indefinite </td>
+                    <td><input type="radio" name="option" value="Indefinite" onclick="storeType(this.value)"> Definite </td>
+                </tr>
 
 
         <tr>
@@ -194,6 +198,7 @@
     <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 
 <script>
+
 function get_limit(){
         eqn = document.getElementById("limit_input").value
 
@@ -242,10 +247,14 @@ function get_limit(){
 
     }
 
+var type = "";
+    function storeType(value){
+    type = value
+    }
 function get_integration(){
         eqn = document.getElementById("integration_input").value
 
-        data_dict = {'eqn':eqn}
+        data_dict = {'eqn':eqn,'type':type}
 
 
         $.ajax({

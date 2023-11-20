@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Calculus</title>
+
+    <link rel="stylesheet" type="text/css" href="/uncg_math/static/Geometry_files/mystyle.css">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+</head>
+
+<body>
+    <div class="example" style="height: 100% !important;">
+        <div id="nav" style="clear:both;">
+            <h1 style="color: white;text-align: center;"> Graphing</h1>
+
+            <ul style="margin-top: -20px;">
+                <li style="padding-left: 179px;"><a href="/uncg_math">Home</a></li>
+            </ul>
+        </div>
+
+        <!-- Section for Limits -->
+        <h2>Graphing</h2>
+        <form>
+            <table border=0 width=100% bgcolor=moccasin>
+                <tr>
+                    <td> <br> </td>
+                </tr>
+
+                <tr>
+                    <td colspan=7 align=left valign=middle>
+                        <span>Please enter the function:</span><br>
+                        <input type="text" name="limit_input" id="limit_input" style="padding: 12px; width: 250px;">
+                        <input type="button" class="widebutton" value="Calculate" onclick="get_limit()">
+                    </td>
+                </tr>
+                <tr>
+                    <td align=center>Result :</td>
+                    <td>
+                        <span id="limit_result" style="font-size: small;"></span>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+        <!-- SVG for graph -->
+<!--        <svg width="400" height="400" id="graph"></svg>-->
+        <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+    <script>
+        function get_limit() {
+
+    eqn = document.getElementById("limit_input").value
+    data_dict = {'eqn': eqn}
+
+    $.ajax({
+        url: '/uncg_math/graphing',
+        data: JSON.stringify(data_dict),
+        type: 'POST',
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (data2) {
+            var result = data2['result'];
+
+            // Format and display the values from the result object
+            var domain = result['Domain'].join(', '); // Join array elements into a string
+            var range = result['Range'][0] + " to " + result['Range'][1];
+            var period = result['Period'] || "N/A";
+            var maxima = result['Maxima'] || "N/A";
+            var minima = result['Minima'] || "N/A";
+            var symmetric = result['Symmetric'] ? "Yes" : "No";
+<!--            var xval = result['x_values']-->
+<!--            var yval = result['y_values]-->
+            var base64Plot = result["base64_plot"]
+
+            var outputText = "Domain: " + domain + "\n" +
+                            "Range: " + range + "\n" +
+                            "Period: " + period + "\n" +
+                            "Maxima: " + maxima + "\n" +
+                            "Minima: " + minima + "\n" +
+                            "Symmetric: " + symmetric;
+
+            document.getElementById("limit_result").innerText = outputText;
+
+            const eqn = data2.eqn;
+            const vari = data2.var
+<!--            const base64Plot = data2.base64_plot;-->
+            displayGraph(eqn,vari,base64Plot)
+        },
+        error: function (data2) {
+            console.log(data2);
+        }
+    });
+}
+
+function displayGraph(equation, variable, base64Plot) {
+
+  // Create image from base64 string
+  const img = new Image();
+  img.src = 'data:image/png;base64,' + base64Plot;
+
+  // Get canvas element
+  const canvas = document.getElementById('myChart');
+
+  // When image loads, set canvas size and draw image
+  img.onload = function() {
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0, img.width, img.height);
+  }
+
+}
+
+<!--function displayGraph(equation, variable, xValues, yValues) {-->
+<!--    const data = {-->
+<!--        labels: xValues,-->
+<!--        datasets: [{-->
+<!--            label: equation,-->
+<!--            data: yValues,-->
+<!--            fill: false,-->
+<!--            borderColor: 'blue',-->
+<!--            tension: 0.1-->
+<!--        }]-->
+<!--    };-->
+
+<!--    const config = {-->
+<!--        type: 'line',-->
+<!--        data: data,-->
+<!--        options: {-->
+<!--            scales: {-->
+<!--                x: {-->
+<!--                    type: 'linear',-->
+<!--                    position: 'bottom',-->
+<!--                    title: {-->
+<!--                        display: true,-->
+<!--                        text: variable // Display the variable name on the x-axis-->
+<!--                    },-->
+<!--                    min: -5, // Set minimum x-axis value-->
+<!--                    max: 5   // Set maximum x-axis value-->
+<!--                },-->
+<!--                y: {-->
+<!--                    type: 'linear',-->
+<!--                    position: 'left',-->
+<!--                    title: {-->
+<!--                        display: true,-->
+<!--                        text: 'f(' + variable + ')', // Display the function notation on the y-axis-->
+<!--                        min: -5, // Set minimum y-axis value-->
+<!--                        max: 5   // Set maximum y-axis value-->
+<!--                    },-->
+
+<!--                }-->
+<!--            }-->
+<!--        }-->
+<!--    };-->
+
+<!--    const canvas = document.getElementById('myChart');-->
+
+<!--    if (window.myChart !== undefined) {-->
+<!--        window.myChart.destroy();-->
+<!--    }-->
+
+<!--    window.myChart = new Chart(canvas, config);-->
+<!--}-->
+
+
+
+<!--function displayGraph(equation, variable, xValues, yValues) {-->
+<!--    const data = {-->
+<!--        labels: xValues,-->
+<!--        datasets: [{-->
+<!--            label: equation,-->
+<!--            data: yValues,-->
+<!--            fill: false,-->
+<!--            borderColor: 'blue',-->
+<!--            tension: 0.1-->
+<!--        }]-->
+<!--    };-->
+
+<!--    const config = {-->
+<!--        type: 'line',-->
+<!--        data: data,-->
+<!--        options: {-->
+<!--            scales: {-->
+<!--                x: {-->
+<!--                    type: 'linear',-->
+<!--                    position: 'bottom',-->
+<!--                    title: {-->
+<!--                        display: true,-->
+<!--                        text: variable // Display the variable name on the x-axis-->
+<!--                    },-->
+<!--                    min: -5, // Set minimum x-axis value-->
+<!--                    max: 5   // Set maximum x-axis value-->
+<!--                },-->
+<!--                y: {-->
+<!--                    type: 'linear',-->
+<!--                    position: 'left',-->
+<!--                    title: {-->
+<!--                        display: true,-->
+<!--                        text: 'f(' + variable + ')' // Display the function notation on the y-axis-->
+<!--                    },-->
+<!--                    min: -5, // Set minimum y-axis value-->
+<!--                    max: 5   // Set maximum y-axis value-->
+<!--                }-->
+<!--            }-->
+<!--        }-->
+<!--    };-->
+
+<!--    // Find the canvas element where you want to display the graph-->
+<!--    const canvas = document.getElementById('myChart');-->
+
+<!--    // Check if the chart already exists and destroy it before creating a new one-->
+<!--    if (window.myChart !== undefined) {-->
+<!--        window.myChart.destroy();-->
+<!--    }-->
+
+<!--    // Create the chart-->
+<!--    window.myChart = new Chart(canvas, config);-->
+<!--}-->
+
+
+<!--function displayGraph(eqn, vari, dataPoints) {-->
+<!--    const svg = d3.select("#graph");-->
+<!--    svg.selectAll("*").remove();-->
+
+<!--    const margin = { top: 20, right: 20, bottom: 30, left: 40 };-->
+<!--    const width = +svg.attr("width") - margin.left - margin.right;-->
+<!--    const height = +svg.attr("height") - margin.top - margin.bottom;-->
+<!--    const g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");-->
+
+<!--    const x = d3.scaleLinear().rangeRound([0, width]);-->
+<!--    const y = d3.scaleLinear().rangeRound([height, 0]);-->
+
+<!--    x.domain(d3.extent(dataPoints, d => d.x));-->
+<!--    y.domain([0, d3.max(dataPoints, d => d.y)]);-->
+
+<!--    const line = d3.line()-->
+<!--        .x(d => x(d.x))-->
+<!--        .y(d => y(d.y));-->
+
+<!--    g.append("path")-->
+<!--        .datum(dataPoints)-->
+<!--        .attr("fill", "none")-->
+<!--        .attr("stroke", "steelblue")-->
+<!--        .attr("stroke-linejoin", "round")-->
+<!--        .attr("stroke-linecap", "round")-->
+<!--        .attr("stroke-width", 1.5)-->
+<!--        .attr("d", line);-->
+
+<!--    g.append("g")-->
+<!--        .attr("transform", "translate(0," + height + ")")-->
+<!--        .call(d3.axisBottom(x));-->
+
+<!--    g.append("g")-->
+<!--        .call(d3.axisLeft(y));-->
+<!--}-->
+
+<!--function get_limit() {-->
+<!--    eqn = document.getElementById("limit_input").value;-->
+<!--    data_dict = {'eqn': eqn};-->
+
+<!--    $.ajax({-->
+<!--        url: '/uncg_math/graphing',-->
+<!--        data: JSON.stringify(data_dict),-->
+<!--        type: 'POST',-->
+<!--        contentType: "application/json",-->
+<!--        dataType: 'json',-->
+<!--        success: function (data) {-->
+<!--            const eqn = data.eqn;-->
+<!--            const vari = data.var;-->
+
+<!--            // DataPoints from Python-->
+<!--            const dataPoints = data.result.dataPoints;-->
+
+<!--            displayGraph(eqn, vari, dataPoints);-->
+<!--        },-->
+<!--        error: function (data) {-->
+<!--            console.log(data);-->
+<!--        }-->
+<!--    });-->
+<!--}-->
+
+
+
+    </script>
+</body>
+</html>
