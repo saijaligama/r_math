@@ -18,6 +18,7 @@ from portal.services import graphing_service
 from portal.services import linear_graphing_service
 from portal.services import triangles_service
 from portal.services import conic_sections_service
+from portal.services import one_point_service
 
 app = create_app()
 
@@ -39,6 +40,7 @@ app.register_blueprint(graphing_service.graphing_bp)
 app.register_blueprint(linear_graphing_service.linear_graphing_bp)
 app.register_blueprint(triangles_service.triangles_bp)
 app.register_blueprint(conic_sections_service.conic_sections_bp)
+app.register_blueprint(one_point_service.one_point_bp)
 
 if __name__ == "__main__":
     app.run(port=8003)
