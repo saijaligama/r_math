@@ -19,6 +19,311 @@ import re
 bp = Blueprint('view', __name__, url_prefix='/uncg_math', template_folder="./templates", static_folder="./static")
 
 
+################gayatri function##############################
+@bp.route('/inequalities_new', methods=['GET', 'POST'])
+def inequalities_new():
+    if request.method == 'GET':
+        return render_template("inequality_new.html")
+
+ #-------------------------------------------------------------
+@bp.route('/equations_new', methods=['GET', 'POST'])
+def equation_service():
+    if request.method == "GET":
+        return render_template("equations_new.html")
+    else:
+        data = request.json
+        result = calculate_equation(data['eqn'])
+        return jsonify({'result': result})
+
+import sympy as sp
+
+def calculate_equation(equation_or_inequality_str):
+    # print(eqn)
+    x = sp.symbols('x')
+    if '=' in equation_or_inequality_str:
+        sides = equation_or_inequality_str.split('=')
+        left_side = sp.sympify(sides[0].strip())
+        right_side = sp.sympify(sides[1].strip())
+        equation = sp.Eq(left_side, right_side)
+        solutions = sp.solve(equation, x)
+    else:
+        inequality = sp.sympify(equation_or_inequality_str)
+        solutions = sp.solve_univariate_inequality(inequality, x, relational=False)
+
+    return str(solutions)
+
+#-------------------------------------------------------------
+
+@bp.route('/rationals', methods=["GET", "POST"])
+def rationals():
+    if request.method == "GET":
+        return render_template("rationals.html")
+    else:
+        data = request.json
+        result = simplify_expression(data['eqn'])
+        return jsonify({'result': result})
+
+def simplify_expression(expression):
+    try:
+        # Define symbolic variables
+        a = sp.symbols('a')
+        b = sp.symbols('b')
+
+        # Parse the input expression using SymPy
+        parsed_expression = sp.sympify(expression)
+
+        # Simplify the parsed expression
+        simplified_expression = sp.simplify(parsed_expression)
+
+        return str(simplified_expression)
+    except sp.SympifyError:
+        return "Invalid input"
+
+#-------------------------------------------------------------
+@bp.route('repeated_to_fraction', methods=["GET", "POST"])
+def repeated_to_fraction():
+    if request.method == "POST":
+        data = request.json
+        result = repeated_fraction_handler(data['fraction'])
+        return jsonify({'result': result})
+
+def repeated_fraction_handler(decimal_str):
+    # Split the decimal string into integer and fractional parts
+    integer_part, fractional_part = decimal_str.split('.')
+
+    # Initialize the numerator and denominator
+    numerator = 0
+    denominator = 1
+
+    # Process the integer part
+    if integer_part:
+        numerator = int(integer_part)
+
+    # Process the fractional part
+    if '(' in fractional_part:
+        non_repeating, repeating = fractional_part.split('(')
+        repeating = repeating.rstrip(')')
+        non_repeating_len = len(non_repeating)
+        repeating_len = len(repeating)
+
+        numerator *= 10 ** non_repeating_len + int(non_repeating + repeating) - int(non_repeating)
+        denominator *= (10 ** non_repeating_len * (10 ** repeating_len - 1))
+    else:
+        denominator *= 10 ** len(fractional_part)
+        numerator = int(fractional_part)
+
+    # Simplify the fraction
+    common_divisor = sp.gcd(numerator, denominator)
+    numerator //= common_divisor
+    denominator //= common_divisor
+
+    return "{}/{}".format(numerator, denominator)
+
+#-------------------------------------------------------------
+@bp.route('/factorization', methods=["GET", "POST"])
+def factoring():
+    if request.method == "GET":
+        return render_template("factorization.html")
+    else:
+        data = request.json
+        result = factor_handler(data['fraction'])
+        return jsonify({'result': result})
+
+def factor_handler(expression):
+    try:
+        expression = expression.replace("^", "**")
+        # Parse the expression using sympy
+        expr = sp.sympify(expression)
+
+        # Factor the expression
+        factored_expr = sp.factor(expr)
+
+        return str(factored_expr)
+    except sp.SympifyError:
+        return "Invalid expression"
+#-------------------------------------------------------------
+import shunting_yard as sy
+import math
+
+def convert_to_mixed_fraction(decimal):
+    # Convert the decimal to a fraction
+    fraction = Fraction(decimal).limit_denominator()
+
+    # Extract the whole number and the fractional part
+    whole_number = fraction.numerator // fraction.denominator
+    fractional_part = fraction - whole_number
+
+    return f"{whole_number} {fractional_part.numerator}/{fraction.denominator}"
+
+
+
+@bp.route('/arithmetic_new', methods=["GET", "POST"])
+def arithmetic_new():
+    if request.method == "GET":
+        return render_template("arithmetic_new.html")
+    if request.method == "POST":
+        data = request.json
+        # result = eval(data['eqn'])
+        result = sy.compute(data['eqn'])
+        if data['radioValue'] == "integer":
+            result = convert_to_mixed_fraction(result)
+        return jsonify({'result': result})
+
+#-------------------------------------------------------------
+
+#-------------------------------------------------------------
+from sympy import symbols, expand, sympify
+def simplify_step_by_step(data):
+    # var = symbols(data[1])
+    equations = data[0]
+
+    if len(data) > 1:
+        var_str = data[1]
+        var = symbols(var_str)
+    else:
+        var = symbols("x")
+
+    if not isinstance(equations, list):
+        equations = [equations]
+
+    simplified_equation = None
+
+    for eq_index, equation in enumerate(equations, 1):
+        results = []
+        # Convert string equation to sympy expression
+        equation = sympify(equation)
+
+        print(f"\n--- Simplifying equation {eq_index} ---")
+
+        args = equation.args
+
+        if not args:
+            print(f"Equation is a single term: {equation}")
+
+            continue
+
+        print("Step 1: Identify the terms.")
+        results.append("Step 1: Identify the terms.")
+        for i, term in enumerate(args, 1):
+            print(f"Term {i}: {term}")
+            results.append(f"Term {i}: {term}")
+
+        print("\nStep 2: Combine the terms.")
+        combined_equation = expand(equation)
+        print(f"Combined result: {combined_equation}")
+        results.append(f"Combined result: {combined_equation}")
+
+        print("\nStep 3: Combine like terms (if any).")
+        simplified_equation = expand(combined_equation)
+        results.append(f"Simplified equation: {simplified_equation}")
+    # return f"Simplified equation: {simplified_equation}"
+    return results
+
+@bp.route('/polynomials', methods=["GET", "POST"])
+def polynomial_simplification():
+    if request.method == 'GET':
+        return render_template('polynomial.html')
+    elif request.method == 'POST':
+        data = request.json
+        inp = data['eqn'].split(',')
+        result = simplify_step_by_step(inp)
+        return jsonify({'result': result})
+
+#-------------------------------------------------------------
+import inflect
+from word2number import w2n
+
+def number_to_words(num):
+    p = inflect.engine()
+    whole, decimal = str(num).split('.') if '.' in str(num) else (str(num), None)
+
+    word_representation = p.number_to_words(whole)
+
+    if decimal:
+        word_representation += " point " + " ".join(p.number_to_words(int(digit)) for digit in decimal)
+
+    return word_representation
+
+
+# print(number_to_words(921.31))
+def round_to_nearest_10th(num):
+    return round(num, -1)
+
+def extract_places(data):
+    num = float(data['decimal_to_convert'])
+    place = data['show_digit_num']
+    num_str = str(num)
+    if '.' in num_str:
+        whole, decimal = num_str.split('.')
+    else:
+        whole, decimal = num_str, '0'
+
+    # Dynamically generate place names
+    place_names = {
+        0: '1st',
+        1: '10th',
+        2: '100th',
+        3: '1000th',  # This can be extended further if needed
+    }
+    for i in range(4, len(whole)):
+        place_names[i] = f'{10**i}th'
+
+    places_dict = {}
+    for i, digit in enumerate(reversed(whole)):
+        places_dict[f'{place_names[i]}'] = int(digit)
+
+    places_dict['decimal_place'] = int(decimal)
+
+    return places_dict[place]
+
+
+def text_to_decimal(text):
+    try:
+        decimal_value = w2n.word_to_num(text)
+        return decimal_value
+    except ValueError:
+        return None
+
+@bp.route('/decimal_conversion', methods=["GET", "POST"])
+def decimal_conversion():
+    if request.method == 'GET':
+        return render_template('decimal_conversion.html')
+
+    if request.method == 'POST':
+        data = request.json
+
+        if data['type'] == 'text_dec_dec_text':
+            result = ""
+            dec_to_convert = data.get("decimal")
+            text_to_convert = data.get("text")
+
+            if dec_to_convert:
+                result = number_to_words(dec_to_convert)
+                return {'decimal':dec_to_convert,'text':result}
+            elif text_to_convert:
+                result = text_to_decimal(text_to_convert)
+                return jsonify({'decimal':result,'text':text_to_convert})
+        else:
+
+            if data['operation'] == 'round_to':
+                # Implement the 'round_to_nearest_10th()' function for rounding
+                result = round_to_nearest_10th(float(data['decimal_to_convert']))
+            else:
+                # Implement the 'extract_places()' function for specific extraction
+                result = extract_places(data)
+            return jsonify({'result':result})
+#-------------------------------------------------------------
+
+
+#-------------------------------------------------------------
+
+
+#-------------------------------------------------------------
+
+################gayatri_function_ends########################
+
+
+
 # @bp.route('/', methods=["GET", "POST"])
 # def login():
 #     if request.method == "GET":

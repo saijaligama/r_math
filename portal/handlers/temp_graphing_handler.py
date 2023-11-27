@@ -31,24 +31,17 @@ def slope_intercept_from_trig_function(func, x_val):
     return slope, intercept
 
 
-def plot_function_with_line(expression, x_min, x_max, points=1000, angle=0):
+def plot_function_with_line(expression, x_min, x_max, points=1000):
     x = np.linspace(x_min, x_max, points)
-
     try:
-        y = [eval(expression, {'x': x_val, 'sin': np.sin, 'cos': np.cos, 'tan': np.tan,
-                               'cot': lambda x: 1 / np.tan(x), 'cosec': lambda x: 1 / np.sin(x),
-                               'sec': lambda x: 1 / np.cos(x), 'exp': np.exp, 'Abs': np.abs}) for
+        y = [eval(expression, {'x': x_val, 'sin': np.sin, 'cos': np.cos, 'tan': np.tan, 'cot': lambda x: 1 / np.tan(x),
+                               'cosec': lambda x: 1 / np.sin(x), 'sec': lambda x: 1 / np.cos(x), 'exp': np.exp
+                               ,'Abs': np.abs}) for
              x_val in x]
 
-        # Rotate the coordinates by the specified angle
-        angle_rad = np.radians(angle)
-        coordinates = np.column_stack((x, y))
-        rotated_coordinates = np.dot(coordinates, np.array([[np.cos(angle_rad), -np.sin(angle_rad)],
-                                                            [np.sin(angle_rad), np.cos(angle_rad)]]).T)
-
         plt.figure(figsize=(5, 4))
-        plt.plot(rotated_coordinates[:, 0], rotated_coordinates[:, 1], label=f'y = {expression}')
-        plt.title(f'Graph of y = {expression} (Rotated by {angle} degrees)')
+        plt.plot(x, y, label=f'y = {expression}')
+        plt.title(f'Graph of y = {expression}')
         plt.xlabel('x')
         plt.ylabel('y')
         plt.axhline(y=0, color='black', linewidth=0.5)  # Add x-axis
@@ -76,9 +69,8 @@ def analyze_graph(data):
     # Define the variable symbol
     variable = 'x'
     x = sp.symbols(variable)
-    print(data)
 
-    base64_plot = plot_function_with_line(data['eqn'], -2 * np.pi, 2 * np.pi,angle = int(data['angle']))
+    base64_plot = plot_function_with_line(data['eqn'], -2 * np.pi, 2 * np.pi)
 
     if data['eqn'] == "x**2":
         return {

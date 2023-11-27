@@ -116,6 +116,25 @@ the content or design. Without your permission, your email
     <h2> <a id="Ar">Arithmetic </a> </h2>          
 <FORM>
 <TABLE border=0 width=100% bgcolor=moccasin>
+  <tr>
+        <td>
+            <h2>Arithmetic Expressions</h2>
+        </td>
+    </tr>
+    <TR>
+            <TD COLSPAN=7 ALIGN=LEFT VALIGN=MIDDLE>
+                <span>Function:</span><br>
+                <INPUT TYPE=TEXT NAME="limit_input" ID="differentiation_input" style="padding: 12px;width: 250px;">
+                 <input type="checkbox" id="checkboxOption" value="integer"> Integer
+                <INPUT TYPE="button" class="widebutton" VALUE="Calculate" onclick="get_polynomial()">
+
+            </TD>
+        </TR>
+        <tr>
+            <TD ALIGN=CENTER>Result :</TD>
+            <TD><span id="differentiation_result" style="font-size: small;">-------------------</span></TD>
+        </tr>
+
     <tr> <td> <br> </td> </tr>
     <tr><td COLSPAN=7 ALIGN=left > Please fill in the first two boxes and then click the operation,
             and the result shows in the third box.</td></tr>
@@ -184,7 +203,14 @@ the content or design. Without your permission, your email
 <TD> <INPUT TYPE= number NAME=val1 onFocus="value='';"></TD>
 <TD><INPUT TYPE="button"  class="widebutton"  VALUE="Calculate" onclick="rate(this.form)"></TD>
 </TR>
-
+<tr>
+    <td>
+      <h3><a href="/uncg_math/decimal_conversion" style="width: 200px; height: 20px">Decimal Conv</a></h3>
+    </td>
+    <td>
+      <h3><a href="/uncg_math/fraction_conversion" style="width: 200px; height: 20px">Fraction Conv</a></h3>
+    </td>
+  </tr>
 
   <tr>
     <td>
@@ -196,23 +222,7 @@ the content or design. Without your permission, your email
     </td>
   </tr>
   
- <tr>
-   <td>
-     <h3><a href="/uncg_math/random_" style="width: 200px; height: 20px">Fraction</a></h3>
-   </td>
-   <td>
-     <h3><a href="/uncg_math/eogma" style="width: 200px; height: 20px">Factorization</a></h3>
-   </td>
- </tr>
- 
-   <tr>
-    <td>
-      <h3><a href="/uncg_math/differentiation" style="width: 200px; height: 20px">Differentiation</a></h3>
-    </td>
-    <td>
-      <h3><a href="/uncg_math/integration" style="width: 200px; height: 20px">Integration</a></h3>
-    </td>
-  </tr>
+
 
    <tr>
     <td>
@@ -886,5 +896,44 @@ document.forms[k].val7.factor = 0.00273791;
 
 </section>    
         </div>
+
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    <script>
+        function get_polynomial(){
+        var eqn = document.getElementById("differentiation_input").value
+        var checkboxElement = document.getElementById("checkboxOption");
+
+// Check if the checkbox is checked
+if (checkboxElement.checked) {
+    // If checked, get the value
+    var checkboxValue = "integer";
+    console.log("Selected value:", checkboxValue);
+} else {
+    // If not checked, set a default value (e.g., "dec")
+    var checkboxValue = "dec";
+    console.log("Default value:", checkboxValue);
+}
+        data_dict = {'eqn':eqn,
+        'radioValue': checkboxValue}
+        $.ajax({
+                url: '/uncg_math/arithmetic_new',
+                data: JSON.stringify(data_dict),
+                type: 'POST',
+                contentType: "application/json",
+                dataType: 'json',
+                success: function (data2) {
+                    document.getElementById("differentiation_result").innerText = data2['result'];
+                   return true;
+                },
+                error: function (data2) {
+                    console.log(data2);
+                    return false;
+                }
+            });
+
+
+    }
+    </script>
     </body>
 </html>

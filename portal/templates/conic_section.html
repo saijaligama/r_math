@@ -106,6 +106,21 @@
                 </tr>
 
                 <tr>
+
+                    <td>
+                        area
+                        <span id="area_ell" style="font-size: small;">-----------------</span>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        circumference
+                        <span id="circumference_ell" style="font-size: small;">-----------------</span>
+                    </td>
+                </tr>
+
+                <tr>
                     <td> <br> </td>
                 </tr>
 
@@ -165,6 +180,21 @@
                     <td>
                         foci
                         <span id="focihyper" style="font-size: small;">-----------------</span>
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <td>
+                        area
+                        <span id="area_hyper" style="font-size: small;">-----------------</span>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        circumference
+                        <span id="circumference_hyper" style="font-size: small;">-----------------</span>
                     </td>
                 </tr>
 
@@ -265,6 +295,8 @@ function get_triangle(){
                     document.getElementById("minor_axis").innerText = data2['minor_axis'];
                     document.getElementById("foci").innerText = data2['foci'];
                     document.getElementById("focus").innerText = data2['focus'];
+                    document.getElementById("area_ell").innerText = data2['area'];
+                    document.getElementById("circumference_ell").innerText = data2['cicumference'];
 
 },
                 error: function (data2) {
@@ -295,6 +327,8 @@ function get_triangle(){
                     document.getElementById("distance_foci").innerText = data2['distance_foci'];
                     document.getElementById("distance_vertices").innerText = data2['distance_vertices'];
                     document.getElementById("focihyper").innerText = data2['foci'];
+                    document.getElementById("area_hyper").innerText = data2['area'];
+                    document.getElementById("circumference_hyper").innerText = data2['cicumference'];
 
 },
                 error: function (data2) {

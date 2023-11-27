@@ -30,7 +30,14 @@
                     <td colspan=7 align=left valign=middle>
                         <span>Please enter the function:</span><br>
                         <input type="text" name="limit_input" id="limit_input" style="padding: 12px; width: 250px;">
+
                         <input type="button" class="widebutton" value="Calculate" onclick="get_limit()">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    <span>Enter Rotation angle, if empty it is 0 by default</span>
+                        <input type="text" id="angle" style="padding: 12px; width: 25px;">
                     </td>
                 </tr>
                 <tr>
@@ -51,9 +58,13 @@
 
     <script>
         function get_limit() {
+        angle = document.getElementById("angle").value
 
+        if (angle === ''){
+        angle=0
+        }
     eqn = document.getElementById("limit_input").value
-    data_dict = {'eqn': eqn}
+    data_dict = {'eqn': eqn,'angle':angle}
 
     $.ajax({
         url: '/uncg_math/graphing',
