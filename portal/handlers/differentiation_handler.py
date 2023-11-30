@@ -4,6 +4,9 @@ import sympy as sp
 def calculate_differentiation(data):
     print(data[0])
     expr_str = data[0]
+
+
+
     if len(data) > 1:
         var_str = data[1]
         var = sp.symbols(var_str)
@@ -12,8 +15,12 @@ def calculate_differentiation(data):
     # var_str = data[1]
     # var = sp.symbols(var_str)
 
+    expr_str = expr_str.replace('cosec', '1/sin')
+
     # Parse the expression
     expr = sp.sympify(expr_str)
+
+
 
     # Differentiate
     diff_expr = sp.diff(expr, var)

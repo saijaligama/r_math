@@ -2,6 +2,7 @@ import sympy as sp
 import numpy as np
 from fractions import Fraction
 import matplotlib.pyplot as plt
+from sympy.parsing.sympy_parser import parse_expr
 import io
 import base64
 from sympy import Abs
@@ -72,6 +73,62 @@ def plot_function_with_line(expression, x_min, x_max, points=1000, angle=0):
 import numpy as np
 import sympy as sp
 
+
+# def analyze_graph(data):
+#
+#     variable = 'x'
+#     x = sp.symbols(variable)
+#
+#     # Parse the expression string into a SymPy expression
+#     y = parse_expr(data['eqn'])
+#
+#     base64_plot = plot_function_with_line(data['eqn'], -2 * np.pi, 2 * np.pi, angle=int(data['angle']))
+#
+#     dy_dx = sp.diff(y, x)
+#
+#     # Find the domain (where the function is defined)
+#     domain = sp.solveset(sp.denom(dy_dx) != 0, x)
+#     domain_values = [float(value) for value in domain if value.is_real]
+#
+#     # Find the critical points for periodic functions
+#     critical_points = sp.solveset(dy_dx, x)
+#     print(critical_points)
+#
+#     # Initialize minima and maxima as None
+#     minima = None
+#     maxima = None
+#
+#     # Check if there are critical points before finding min and max
+#     if critical_points:
+#         critical_values = [float(y.subs(x, p)) for p in critical_points]  # Convert to float
+#         minima = min(critical_values)
+#         maxima = max(critical_values)
+#
+#     # Check for symmetry
+#     is_symmetric = y.equals(y.subs(x, -x))
+#
+#     # Calculate the period for periodic functions
+#     period = sp.periodicity(y, x)
+#
+#     # Set default values for minima and maxima when no critical points found
+#     if minima is None:
+#         minima = "N/A"
+#     if maxima is None:
+#         maxima = "N/A"
+#
+#     return {
+#         "Domain": domain_values,
+#         "Range": (minima, maxima),
+#         "Period": float(period) if period is not None else "N/A",
+#         "Maxima": maxima,
+#         "Minima": minima,
+#         "Symmetric": is_symmetric,
+#         "base64_plot": base64_plot,
+#         "eqn": data['eqn'],
+#         "vari": variable
+#     }
+
+
 def analyze_graph(data):
     # Define the variable symbol
     variable = 'x'
@@ -112,8 +169,11 @@ def analyze_graph(data):
     if 'tan' in str(y):
         critical_points = [float(n * np.pi / 2) for n in range(-5, 6, 2)]  # Odd multiples of pi/2
     else:
-        critical_points = sp.solve(dy_dx, x)
-        critical_points = [float(point) for point in critical_points]  # Convert to float
+        try:
+            critical_points = sp.solve(dy_dx, x)
+            critical_points = [float(point) for point in critical_points]
+        except NotImplementedError:
+            critical_points = [] # Convert to float
 
     # Initialize minima and maxima as None
     minima = None

@@ -46,5 +46,6 @@ def calculate_integration(data):
     else:
         var = sp.symbols("x")
 
+    expr_str = expr_str.replace('cosec', '1/sin')
     expr = sp.sympify(expr_str)
     return str(sp.integrate(expr,var))

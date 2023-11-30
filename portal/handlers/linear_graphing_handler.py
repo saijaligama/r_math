@@ -96,6 +96,8 @@ def calculate_line_properties(properties):
     else:
         theta = None
 
+    print(slope,pointA)
+
 
     # pointA = properties.get("PointA")
     # pointB = properties.get("PointB")
@@ -157,6 +159,8 @@ def calculate_line_properties(properties):
         y_intercept = b
 
         pointB = (0, y_intercept)
+
+        pointA = (x_intercept, 0)
 
         distance = math.sqrt((pointB[0] - x_intercept) ** 2 + (pointB[1] - y_intercept) ** 2)
 
@@ -283,39 +287,33 @@ def calculate_line_properties(properties):
         }
 
 
-    elif slope_str != '':
+    # elif slope_str != '':
+    #
+    #     if '**' in slope_str:
+    #         trig_func, val = slope_str.split('**')
+    #
+    #         slope = x_y_intercept_worker(val)
+    #
+    #         equation = slope_intercept_from_trig_function(trig_func, slope)
+    #
+    #         return {
+    #
+    #             "Slope": slope,
+    #
+    #             "Equation": equation,
+    #
+    #             # other properties you might want to return
+    #
+    #         }
 
-        if '**' in slope_str:
-            trig_func, val = slope_str.split('**')
 
-            slope = x_y_intercept_worker(val)
+    elif pointA and slope:
+        print('inside pointa and slope')
 
-            equation = slope_intercept_from_trig_function(trig_func, slope)
+        x = pointA[0]
 
-            return {
+        y = pointA[1]
 
-                "Slope": slope,
-
-                "Equation": equation,
-
-                # other properties you might want to return
-
-            }
-
-
-    elif (pointA and slope) or (pointB and slope):
-
-        if pointA:
-
-            x = pointA[0]
-
-            y = pointA[1]
-
-        else:
-
-            x = pointB[0]
-
-            y = pointB[1]
 
         equation_slope_intercept = f"y = {slope}x + {y - slope * x}"
 
@@ -338,6 +336,8 @@ def calculate_line_properties(properties):
         midpoint = ((pointB[0] + x_intercept) / 2, (pointB[1] + y_intercept) / 2)
 
         theta = math.degrees(math.atan(slope))
+
+
 
         return {
 
@@ -362,6 +362,59 @@ def calculate_line_properties(properties):
             'theta': theta
 
         }
+    elif pointB and slope:
+
+        x = pointB[0]
+
+        y = pointB[1]
+
+        equation_slope_intercept = f"y = {slope}x + {y - slope * x}"
+
+        equation_standard = f"{-slope}x + {1}y = {y - slope * x}"
+
+        if slope != 0:
+
+            x_intercept = -y / slope
+
+        else:
+
+            x_intercept = "No x-intercept (horizontal line)"
+
+        y_intercept = y
+
+        pointB = (0, y_intercept)
+
+        distance = math.sqrt((pointB[0] - x_intercept) ** 2 + (pointB[1] - y_intercept) ** 2)
+
+        midpoint = ((pointB[0] + x_intercept) / 2, (pointB[1] + y_intercept) / 2)
+
+        theta = math.degrees(math.atan(slope))
+
+
+        return {
+
+            "Distance": distance,
+
+            "Midpoint": midpoint,
+
+            "Slope": slope,
+
+            "slope_intercept": equation_slope_intercept,
+
+            "Equation": equation_standard,
+
+            "X-Intercept": x_intercept,
+
+            "Y-Intercept": y_intercept,
+
+            "PointA": (x, y),
+
+            "PointB": pointB,
+
+            'theta': theta
+
+        }
+
 
 
     elif pointA and theta:
