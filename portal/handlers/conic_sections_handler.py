@@ -145,6 +145,9 @@ def hyperbola_parameters(equation):
     focus1 = (h + c, k)
     focus2 = (h - c, k)
 
+    area = math.pi * a * b
+    circumference = 2 * math.pi * math.sqrt((a ** 2 + b ** 2) / 2)
+
     # Return the results
     return {
         "center": center,
@@ -153,7 +156,9 @@ def hyperbola_parameters(equation):
         "distance_foci": distance_foci,
         "Focus1": focus1,
         "Focus2": focus2,
-        "foci": str((focus1,focus2))
+        "foci": str((focus1,focus2)),
+        "area":area,
+        "circumference":circumference
     }
 
 ###############################################################################################
@@ -202,6 +207,9 @@ def ellipse_parameters(equation):
     major_axis = 2 * a
     minor_axis = 2 * b
 
+    area = math.pi * a * b
+    circumference = 2 * math.pi * math.sqrt((a ** 2 + b ** 2) / 2)
+
     # Return the results
     return {
         "center": center,
@@ -214,7 +222,9 @@ def ellipse_parameters(equation):
         "Directrix2": directrix2,
         "major_axis": major_axis,
         "minor_axis": minor_axis,
-        "RightHandSideCoefficient": rhs_coefficient
+        "RightHandSideCoefficient": rhs_coefficient,
+        "area": area,
+        "circumference": circumference
     }
 
 # # Example usage with the provided ellipse equation
