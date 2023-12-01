@@ -41,6 +41,21 @@
                     </td>
                 </tr>
                 <tr>
+                    <td colspan=7 align=left valign=middle>
+                        <span>Please enter the function:</span><br>
+                        <input type="text" name="limit_input" id="limit_input1" style="padding: 12px; width: 250px;">
+
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan=7 align=left valign=middle>
+                        <span>Please enter the function:</span><br>
+                        <input type="text" name="limit_input" id="limit_input2" style="padding: 12px; width: 250px;">
+
+                        <input type="button" class="widebutton" value="Calculate" onclick="get_limit2()">
+                    </td>
+                </tr>
+                <tr>
                     <td align=center>Result :</td>
                     <td>
                         <span id="limit_result" style="font-size: small;"></span>
@@ -126,175 +141,55 @@ function displayGraph(equation, variable, base64Plot) {
 
 }
 
-<!--function displayGraph(equation, variable, xValues, yValues) {-->
-<!--    const data = {-->
-<!--        labels: xValues,-->
-<!--        datasets: [{-->
-<!--            label: equation,-->
-<!--            data: yValues,-->
-<!--            fill: false,-->
-<!--            borderColor: 'blue',-->
-<!--            tension: 0.1-->
-<!--        }]-->
-<!--    };-->
+function get_limit2() {
+        angle = document.getElementById("angle").value
 
-<!--    const config = {-->
-<!--        type: 'line',-->
-<!--        data: data,-->
-<!--        options: {-->
-<!--            scales: {-->
-<!--                x: {-->
-<!--                    type: 'linear',-->
-<!--                    position: 'bottom',-->
-<!--                    title: {-->
-<!--                        display: true,-->
-<!--                        text: variable // Display the variable name on the x-axis-->
-<!--                    },-->
-<!--                    min: -5, // Set minimum x-axis value-->
-<!--                    max: 5   // Set maximum x-axis value-->
-<!--                },-->
-<!--                y: {-->
-<!--                    type: 'linear',-->
-<!--                    position: 'left',-->
-<!--                    title: {-->
-<!--                        display: true,-->
-<!--                        text: 'f(' + variable + ')', // Display the function notation on the y-axis-->
-<!--                        min: -5, // Set minimum y-axis value-->
-<!--                        max: 5   // Set maximum y-axis value-->
-<!--                    },-->
+        if (angle === ''){
+        angle=0
+        }
+    eqn = document.getElementById("limit_input1").value
+    eqn2 = document.getElementById("limit_input2").value
+    data_dict = {'eqn1': eqn,'eqn2':eqn2,'angle':angle}
 
-<!--                }-->
-<!--            }-->
-<!--        }-->
-<!--    };-->
+    $.ajax({
+        url: '/uncg_math/graphing',
+        data: JSON.stringify(data_dict),
+        type: 'POST',
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (data2) {
+            var result = data2['result'];
 
-<!--    const canvas = document.getElementById('myChart');-->
+<!--            // Format and display the values from the result object-->
+<!--            var domain = result['Domain'].join(', '); // Join array elements into a string-->
+<!--            var range = result['Range'][0] + " to " + result['Range'][1];-->
+<!--            var period = result['Period'] || "N/A";-->
+<!--            var maxima = result['Maxima'] || "N/A";-->
+<!--            var minima = result['Minima'] || "N/A";-->
+<!--            var symmetric = result['Symmetric'] ? "Yes" : "No";-->
+<!--            var xval = result['x_values']-->
+<!--            var yval = result['y_values]-->
+            var base64Plot = result["base64_plot"]
 
-<!--    if (window.myChart !== undefined) {-->
-<!--        window.myChart.destroy();-->
-<!--    }-->
+<!--            var outputText = "Domain: " + domain + "\n" +-->
+<!--                            "Range: " + range + "\n" +-->
+<!--                            "Period: " + period + "\n" +-->
+<!--                            "Maxima: " + maxima + "\n" +-->
+<!--                            "Minima: " + minima + "\n" +-->
+<!--                            "Symmetric: " + symmetric;-->
 
-<!--    window.myChart = new Chart(canvas, config);-->
-<!--}-->
+<!--            document.getElementById("limit_result").innerText = outputText;-->
 
-
-
-<!--function displayGraph(equation, variable, xValues, yValues) {-->
-<!--    const data = {-->
-<!--        labels: xValues,-->
-<!--        datasets: [{-->
-<!--            label: equation,-->
-<!--            data: yValues,-->
-<!--            fill: false,-->
-<!--            borderColor: 'blue',-->
-<!--            tension: 0.1-->
-<!--        }]-->
-<!--    };-->
-
-<!--    const config = {-->
-<!--        type: 'line',-->
-<!--        data: data,-->
-<!--        options: {-->
-<!--            scales: {-->
-<!--                x: {-->
-<!--                    type: 'linear',-->
-<!--                    position: 'bottom',-->
-<!--                    title: {-->
-<!--                        display: true,-->
-<!--                        text: variable // Display the variable name on the x-axis-->
-<!--                    },-->
-<!--                    min: -5, // Set minimum x-axis value-->
-<!--                    max: 5   // Set maximum x-axis value-->
-<!--                },-->
-<!--                y: {-->
-<!--                    type: 'linear',-->
-<!--                    position: 'left',-->
-<!--                    title: {-->
-<!--                        display: true,-->
-<!--                        text: 'f(' + variable + ')' // Display the function notation on the y-axis-->
-<!--                    },-->
-<!--                    min: -5, // Set minimum y-axis value-->
-<!--                    max: 5   // Set maximum y-axis value-->
-<!--                }-->
-<!--            }-->
-<!--        }-->
-<!--    };-->
-
-<!--    // Find the canvas element where you want to display the graph-->
-<!--    const canvas = document.getElementById('myChart');-->
-
-<!--    // Check if the chart already exists and destroy it before creating a new one-->
-<!--    if (window.myChart !== undefined) {-->
-<!--        window.myChart.destroy();-->
-<!--    }-->
-
-<!--    // Create the chart-->
-<!--    window.myChart = new Chart(canvas, config);-->
-<!--}-->
-
-
-<!--function displayGraph(eqn, vari, dataPoints) {-->
-<!--    const svg = d3.select("#graph");-->
-<!--    svg.selectAll("*").remove();-->
-
-<!--    const margin = { top: 20, right: 20, bottom: 30, left: 40 };-->
-<!--    const width = +svg.attr("width") - margin.left - margin.right;-->
-<!--    const height = +svg.attr("height") - margin.top - margin.bottom;-->
-<!--    const g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");-->
-
-<!--    const x = d3.scaleLinear().rangeRound([0, width]);-->
-<!--    const y = d3.scaleLinear().rangeRound([height, 0]);-->
-
-<!--    x.domain(d3.extent(dataPoints, d => d.x));-->
-<!--    y.domain([0, d3.max(dataPoints, d => d.y)]);-->
-
-<!--    const line = d3.line()-->
-<!--        .x(d => x(d.x))-->
-<!--        .y(d => y(d.y));-->
-
-<!--    g.append("path")-->
-<!--        .datum(dataPoints)-->
-<!--        .attr("fill", "none")-->
-<!--        .attr("stroke", "steelblue")-->
-<!--        .attr("stroke-linejoin", "round")-->
-<!--        .attr("stroke-linecap", "round")-->
-<!--        .attr("stroke-width", 1.5)-->
-<!--        .attr("d", line);-->
-
-<!--    g.append("g")-->
-<!--        .attr("transform", "translate(0," + height + ")")-->
-<!--        .call(d3.axisBottom(x));-->
-
-<!--    g.append("g")-->
-<!--        .call(d3.axisLeft(y));-->
-<!--}-->
-
-<!--function get_limit() {-->
-<!--    eqn = document.getElementById("limit_input").value;-->
-<!--    data_dict = {'eqn': eqn};-->
-
-<!--    $.ajax({-->
-<!--        url: '/uncg_math/graphing',-->
-<!--        data: JSON.stringify(data_dict),-->
-<!--        type: 'POST',-->
-<!--        contentType: "application/json",-->
-<!--        dataType: 'json',-->
-<!--        success: function (data) {-->
-<!--            const eqn = data.eqn;-->
-<!--            const vari = data.var;-->
-
-<!--            // DataPoints from Python-->
-<!--            const dataPoints = data.result.dataPoints;-->
-
-<!--            displayGraph(eqn, vari, dataPoints);-->
-<!--        },-->
-<!--        error: function (data) {-->
-<!--            console.log(data);-->
-<!--        }-->
-<!--    });-->
-<!--}-->
-
-
+            const eqn = 'x';
+            const vari = 'data2.var'
+<!--            const base64Plot = data2.base64_plot;-->
+            displayGraph(eqn,vari,base64Plot)
+        },
+        error: function (data2) {
+            console.log(data2);
+        }
+    });
+}
 
     </script>
 </body>
